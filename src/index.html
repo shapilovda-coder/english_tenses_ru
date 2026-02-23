@@ -1537,7 +1537,19 @@ checkAnswerWithValue(userAnswer){
 const q=state.session.questions[state.session.currentIndex];
 if(!userAnswer)return;
 // Normalize answers for comparison: lowercase, remove punctuation, extra spaces
-const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+// Also handle forms without apostrophe: isnt → isn't, wasnt → wasn't
+const normalize=(s)={
+    let normalized=s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+    normalized=normalized.replace(/\bisnt\b/,"isn't");
+    normalized=normalized.replace(/\barent\b/,"aren't");
+    normalized=normalized.replace(/\bwasnt\b/,"wasn't");
+    normalized=normalized.replace(/\bwerent\b/,"weren't");
+    normalized=normalized.replace(/\bdont\b/,"don't");
+    normalized=normalized.replace(/\bdoesnt\b/,"doesn't");
+    normalized=normalized.replace(/\bdidnt\b/,"didn't");
+    normalized=normalized.replace(/\bwont\b/,"won't");
+    return normalized;
+};
 // For negative questions, accept only the verb part (e.g., "was")
 // since '(not)' is already shown in the question
 let correct=false;
@@ -1607,7 +1619,19 @@ userAnswer=document.getElementById('answerInput').value.trim();
 }
 if(!userAnswer)return;
 // Normalize answers for comparison: lowercase, remove punctuation, extra spaces
-const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+// Also handle forms without apostrophe: isnt → isn't, wasnt → wasn't
+const normalize=(s)={
+    let normalized=s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+    normalized=normalized.replace(/\bisnt\b/,"isn't");
+    normalized=normalized.replace(/\barent\b/,"aren't");
+    normalized=normalized.replace(/\bwasnt\b/,"wasn't");
+    normalized=normalized.replace(/\bwerent\b/,"weren't");
+    normalized=normalized.replace(/\bdont\b/,"don't");
+    normalized=normalized.replace(/\bdoesnt\b/,"doesn't");
+    normalized=normalized.replace(/\bdidnt\b/,"didn't");
+    normalized=normalized.replace(/\bwont\b/,"won't");
+    return normalized;
+};
 // For negative questions, accept both verb part ("was") and full form ("was not")
 // since '(not)' is shown in the question but user might type either
 let correct=false;
