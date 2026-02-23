@@ -1550,12 +1550,18 @@ const normalize=(s)={
     normalized=normalized.replace(/\bwont\b/,"won't");
     return normalized;
 };
-// For negative questions, accept only the verb part (e.g., "was")
+// For negative questions, accept only the verb part (e.g., "is", "am", "are", "was", "were")
 // since '(not)' is already shown in the question
 let correct=false;
 if(q.type==='negative'){
-    const verbPart=q.correctAnswer.split(' ')[0];
-    correct=normalize(userAnswer)===normalize(verbPart);
+    const verbPart=q.correctAnswer.split(' ')[0]; // "is" from "is not", "was" from "was not"
+    const normalizedUser=normalize(userAnswer);
+    // Accept: is, am, are, was, were (and their apostrophe forms)
+    correct=normalizedUser===normalize(verbPart);
+    // Also accept full form if they type "is not" instead of just "is"
+    if(!correct){
+        correct=normalizedUser===normalize(q.correctAnswer);
+    }
 }else{
     correct=normalize(userAnswer)===normalize(q.correctAnswer);
     if(!correct && q.short){
@@ -1687,7 +1693,7 @@ const box=document.getElementById('feedbackBox');
 box.classList.remove('hidden','correct','wrong');
 box.classList.add(correct?'correct':'wrong');
 box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div>
-<div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.type==='negative'?q.correctAnswer.split(' ')[0]+' (или '+q.correctAnswer+')':q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
+<div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.type==='negative'?q.correctAnswer.split(' ')[0]:q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
 },
 showHint(){
 const q=state.session.questions[state.session.currentIndex];
