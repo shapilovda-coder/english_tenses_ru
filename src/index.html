@@ -793,7 +793,7 @@ wordOrder:[
 {words:['He','doesn\'t','watch','TV'],answer:'He doesn\'t watch TV.'}],
 multipleChoice:[
 {question:'I ___ football every day.',options:['play','plays','playing'],answer:'play',hint:'I → без окончания'},
-{question:'She ___ to school.',options:['go','goes','going'],answer:'goes',hint:'She → добавляем -es'}],
+{question:'She ___ to school every day.',options:['go','goes','going'],answer:'goes',hint:'She → добавляем -es'}],
 makeQuestion:[
 {sentence:'You play games.',answer:'Do you play games?',hint:'Do + подлежащее + глагол?'},
 {sentence:'He likes pizza.',answer:'Does he like pizza?',hint:'Does + he/she/it + глагол?'}],
@@ -832,7 +832,7 @@ makeQuestion:[{sentence:'You played games.',answer:'Did you play games?',hint:'D
 makeNegative:[{sentence:'I went to school.',answer:'I didn\'t go to school.',hint:'didn\'t + V1'}],
 fillBlank:[
 {sentence:'We ___ football yesterday.',answer:'played',hint:'Правильный глагол → +ed'},
-{sentence:'___ she go home?',answer:'Did',hint:'Вопрос → Did'}],
+{sentence:'___ she go home yesterday?',answer:'Did',hint:'Вопрос в Past Simple → Did'}],
 findError:[{sentence:'I didn\'t went to school.',correct:'I didn\'t go to school.',hint:'didn\'t + V1 (не V2!)'}]
 }},
 future_simple:{
@@ -854,7 +854,7 @@ wordOrder:[
 {words:['Will','you','go','to','school','?'],answer:'Will you go to school?'}],
 multipleChoice:[
 {question:'I ___ play tomorrow.',options:['will','would','wills'],answer:'will',hint:'will для всех'},
-{question:'She ___ to school.',options:['won\'t go','willn\'t go','not will go'],answer:'won\'t go',hint:'won\'t = will not'}],
+{question:'She ___ to school tomorrow.',options:['won\'t go','willn\'t go','not will go'],answer:'won\'t go',hint:'won\'t = will not'}],
 makeQuestion:[{sentence:'You will play games.',answer:'Will you play games?',hint:'Will + подлежащее + V1?'}],
 makeNegative:[{sentence:'I will go to school.',answer:'I won\'t go to school.',hint:'won\'t = will not'}],
 fillBlank:[
@@ -882,7 +882,7 @@ wordOrder:[
 {words:['Are','you','watching','TV','?'],answer:'Are you watching TV?'}],
 multipleChoice:[
 {question:'I ___ playing now.',options:['am','is','are'],answer:'am',hint:'I → am'},
-{question:'She ___ watching TV.',options:['am','is','are'],answer:'is',hint:'she → is'}],
+{question:'She ___ watching TV now.',options:['am','is','are'],answer:'is',hint:'she → is'}],
 makeQuestion:[{sentence:'You are playing games.',answer:'Are you playing games?',hint:'Are + подлежащее + V-ing?'}],
 makeNegative:[{sentence:'I am playing games.',answer:'I\'m not playing games.',hint:'I\'m not'}],
 fillBlank:[
@@ -909,8 +909,8 @@ wordOrder:[
 {words:['I','was','playing','at','5'],answer:'I was playing at 5.'},
 {words:['Were','you','watching','TV','?'],answer:'Were you watching TV?'}],
 multipleChoice:[
-{question:'I ___ playing at 5.',options:['was','were','am'],answer:'was',hint:'I → was'},
-{question:'They ___ studying.',options:['was','were','are'],answer:'were',hint:'they → were'}],
+{question:'I ___ playing at 5 yesterday.',options:['was','were','am'],answer:'was',hint:'I → was'},
+{question:'They ___ studying yesterday.',options:['was','were','are'],answer:'were',hint:'they → were'}],
 makeQuestion:[{sentence:'You were playing games.',answer:'Were you playing games?',hint:'Were + подлежащее + V-ing?'}],
 makeNegative:[{sentence:'I was playing games.',answer:'I wasn\'t playing games.',hint:'wasn\'t'}],
 fillBlank:[
@@ -1521,8 +1521,75 @@ builder.classList.remove('filled');
 }
 },
 onOptionClick(el){
-document.querySelectorAll('.option-btn').forEach(btn=>btn.classList.remove('selected'));
+// Сразу проверяем ответ при выборе
+const q=state.session.questions[state.session.currentIndex];
+const userAnswer=el.dataset.answer;
+
+// Выделяем выбранную кнопку
 el.classList.add('selected');
+
+// Сразу проверяем
+this.checkAnswerWithValue(userAnswer);
+},
+checkAnswerWithValue(userAnswer){
+const q=state.session.questions[state.session.currentIndex];
+if(!userAnswer)return;
+// Normalize answers for comparison: lowercase, remove punctuation, extra spaces
+const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+// For negative questions, accept only the verb part (e.g., "was")
+// since '(not)' is already shown in the question
+let correct=false;
+if(q.type==='negative'){
+    const verbPart=q.correctAnswer.split(' ')[0];
+    correct=normalize(userAnswer)===normalize(verbPart);
+}else{
+    correct=normalize(userAnswer)===normalize(q.correctAnswer);
+    if(!correct && q.short){
+        correct=normalize(userAnswer)===normalize(q.short);
+    }
+}
+this.showFeedback(correct,q);
+state.stats.totalQuestions++;
+state.tobeStats.total++;
+if(correct){
+state.session.correct++;
+state.stats.correctAnswers++;
+state.tobeStats.correct++;
+state.session.consecutiveErrors=0;
+}else{
+state.session.wrong++;
+state.session.consecutiveErrors++;
+if(q.tense&&q.tense!=='tobe'){
+helpers.recordWeakItem(q.subtype||q.type,q.tense);
+}
+if(q.type==='tobe'){
+const subject=q.question.match(/^(I|you|he|she|it|we|they)\b/i)?.[1];
+if(subject)helpers.recordToBeWeak(subject.toLowerCase(),q.correctAnswer);
+}
+if(state.session.consecutiveErrors>=2&&q.tense){
+this.showMiniCheat(q.tense);
+}
+}
+storage.save();
+// Скрываем кнопки и показываем "Дальше"
+document.getElementById('checkBtn').classList.add('hidden');
+document.getElementById('hintBtn').classList.add('hidden');
+document.getElementById('nextBtn').classList.remove('hidden');
+// Блокируем кнопки опций и показываем правильный ответ
+if(q.options){
+document.querySelectorAll('.option-btn').forEach(btn=>{
+btn.disabled=true;
+if(btn.dataset.answer===q.correctAnswer){
+btn.classList.add('correct');
+}else if(btn.classList.contains('selected')){
+btn.classList.add('wrong');
+}
+});
+}
+// Автопереход через 1.5 секунды
+setTimeout(()=>{
+this.nextQuestion();
+},1500);
 },
 checkAnswer(){
 const q=state.session.questions[state.session.currentIndex];
@@ -1539,17 +1606,17 @@ userAnswer=document.getElementById('answerInput').value.trim();
 if(!userAnswer)return;
 // Normalize answers for comparison: lowercase, remove punctuation, extra spaces
 const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
-// Check against correctAnswer and short form (if exists)
-// For negative questions, also accept the verb form without 'not' 
+// For negative questions, accept only the verb part (e.g., "was")
 // since '(not)' is already shown in the question
-let correct=normalize(userAnswer)===normalize(q.correctAnswer);
-if(!correct && q.short){
-    correct=normalize(userAnswer)===normalize(q.short);
-}
-// For negative type, also accept just the verb part (e.g., "was" for "was not")
-if(!correct && q.type==='negative'){
+let correct=false;
+if(q.type==='negative'){
     const verbPart=q.correctAnswer.split(' ')[0]; // "was" from "was not"
     correct=normalize(userAnswer)===normalize(verbPart);
+}else{
+    correct=normalize(userAnswer)===normalize(q.correctAnswer);
+    if(!correct && q.short){
+        correct=normalize(userAnswer)===normalize(q.short);
+    }
 }
 this.showFeedback(correct,q);
 state.stats.totalQuestions++;
@@ -1592,7 +1659,7 @@ showFeedback(correct,q){
 const box=document.getElementById('feedbackBox');
 box.classList.remove('hidden','correct','wrong');
 box.classList.add(correct?'correct':'wrong');
-box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div><div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.correctAnswer}</strong>${q.short?` / ${q.short}`:''}`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
+box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div><div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.type==='negative'?q.correctAnswer.split(' ')[0]:q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
 },
 showHint(){
 const q=state.session.questions[state.session.currentIndex];
