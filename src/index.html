@@ -1539,7 +1539,11 @@ userAnswer=document.getElementById('answerInput').value.trim();
 if(!userAnswer)return;
 // Normalize answers for comparison: lowercase, remove punctuation, extra spaces
 const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
-const correct=normalize(userAnswer)===normalize(q.correctAnswer);
+// Check against correctAnswer and short form (if exists)
+let correct=normalize(userAnswer)===normalize(q.correctAnswer);
+if(!correct && q.short){
+    correct=normalize(userAnswer)===normalize(q.short);
+}
 this.showFeedback(correct,q);
 state.stats.totalQuestions++;
 state.tobeStats.total++;
@@ -1581,7 +1585,7 @@ showFeedback(correct,q){
 const box=document.getElementById('feedbackBox');
 box.classList.remove('hidden','correct','wrong');
 box.classList.add(correct?'correct':'wrong');
-box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div><div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
+box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div><div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.correctAnswer}</strong>${q.short?` / ${q.short}`:''}`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
 },
 showHint(){
 const q=state.session.questions[state.session.currentIndex];
