@@ -1,0 +1,12 @@
+{
+  "name": "english_tenses_ru",
+  "version": "1.0.0",
+  "description": "Tense Trainer — Бесплатный тренажер английских времён",
+  "scripts": {
+    "build": "mkdir -p frontend/build && cp src/index.html frontend/build/",
+    "start": "npx serve frontend/build"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
