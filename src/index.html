@@ -1554,11 +1554,12 @@ const normalize=(s)={
 // since '(not)' is already shown in the question
 let correct=false;
 if(q.type==='negative'){
-    const verbPart=q.correctAnswer.split(' ')[0]; // "is" from "is not", "was" from "was not"
+    const verbPart=q.correctAnswer.split(' ')[0]; // "is" from "is not"
     const normalizedUser=normalize(userAnswer);
-    // Accept: is, am, are, was, were (and their apostrophe forms)
-    correct=normalizedUser===normalize(verbPart);
-    // Also accept full form if they type "is not" instead of just "is"
+    const normalizedVerb=normalize(verbPart);
+    // Accept: is, am, are, was, were (case insensitive)
+    correct=normalizedUser===normalizedVerb;
+    // Also accept full form
     if(!correct){
         correct=normalizedUser===normalize(q.correctAnswer);
     }
