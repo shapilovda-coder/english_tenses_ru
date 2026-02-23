@@ -1608,12 +1608,13 @@ userAnswer=document.getElementById('answerInput').value.trim();
 if(!userAnswer)return;
 // Normalize answers for comparison: lowercase, remove punctuation, extra spaces
 const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
-// For negative questions, accept only the verb part (e.g., "was")
-// since '(not)' is already shown in the question
+// For negative questions, accept both verb part ("was") and full form ("was not")
+// since '(not)' is shown in the question but user might type either
 let correct=false;
 if(q.type==='negative'){
     const verbPart=q.correctAnswer.split(' ')[0]; // "was" from "was not"
-    correct=normalize(userAnswer)===normalize(verbPart);
+    const normalizedUser=normalize(userAnswer);
+    correct=normalizedUser===normalize(verbPart) || normalizedUser===normalize(q.correctAnswer);
 }else{
     correct=normalize(userAnswer)===normalize(q.correctAnswer);
     if(!correct && q.short){
@@ -1661,7 +1662,8 @@ showFeedback(correct,q){
 const box=document.getElementById('feedbackBox');
 box.classList.remove('hidden','correct','wrong');
 box.classList.add(correct?'correct':'wrong');
-box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div><div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.type==='negative'?q.correctAnswer.split(' ')[0]:q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
+box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div>
+<div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.type==='negative'?q.correctAnswer.split(' ')[0]+' (или '+q.correctAnswer+')':q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
 },
 showHint(){
 const q=state.session.questions[state.session.currentIndex];
