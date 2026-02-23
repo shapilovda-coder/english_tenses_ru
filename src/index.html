@@ -1540,9 +1540,16 @@ if(!userAnswer)return;
 // Normalize answers for comparison: lowercase, remove punctuation, extra spaces
 const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
 // Check against correctAnswer and short form (if exists)
+// For negative questions, also accept the verb form without 'not' 
+// since '(not)' is already shown in the question
 let correct=normalize(userAnswer)===normalize(q.correctAnswer);
 if(!correct && q.short){
     correct=normalize(userAnswer)===normalize(q.short);
+}
+// For negative type, also accept just the verb part (e.g., "was" for "was not")
+if(!correct && q.type==='negative'){
+    const verbPart=q.correctAnswer.split(' ')[0]; // "was" from "was not"
+    correct=normalize(userAnswer)===normalize(verbPart);
 }
 this.showFeedback(correct,q);
 state.stats.totalQuestions++;
