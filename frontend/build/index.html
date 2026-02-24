@@ -1188,8 +1188,9 @@ const planContent=document.getElementById('todayPlanContent');
 const weakCard=document.getElementById('weakItemsHome');
 const weakContent=document.getElementById('weakItemsHomeContent');
 const streakDisplay=document.getElementById('streakDisplay');
-if(state.stats.streak>0){
-streakDisplay.innerHTML=`🔥 Дней подряд: <strong>${state.stats.streak}</strong>`;
+const stats=state.stats||{streak:0};
+if(stats.streak>0){
+streakDisplay.innerHTML=`🔥 Дней подряд: <strong>${stats.streak}</strong>`;
 }else{
 streakDisplay.innerHTML='Начни учиться сегодня! 🚀';
 }
