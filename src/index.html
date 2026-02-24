@@ -1063,28 +1063,9 @@ weakPairs:{}
 };
 
 const storage={
-load(){
-try{
-const plan=localStorage.getItem('tenseTrainer_todayPlan');
-const stats=localStorage.getItem('tenseTrainer_stats');
-const tobe=localStorage.getItem('tenseTrainer_tobeStats');
-const theme=localStorage.getItem('tenseTrainer_theme');
-if(plan)state.todayPlan=JSON.parse(plan);
-if(stats)state.stats=JSON.parse(stats);
-if(tobe)state.tobeStats=JSON.parse(tobe);
-if(theme)document.documentElement.setAttribute('data-theme',theme);
-}catch(e){console.error('Storage load error:',e);}
-},
-save(){
-try{
-localStorage.setItem('tenseTrainer_todayPlan',JSON.stringify(state.todayPlan));
-localStorage.setItem('tenseTrainer_stats',JSON.stringify(state.stats));
-localStorage.setItem('tenseTrainer_tobeStats',JSON.stringify(state.tobeStats));
-}catch(e){console.error('Storage save error:',e);}
-},
-saveTheme(theme){
-localStorage.setItem('tenseTrainer_theme',theme);
-}
+load(){/* localStorage disabled for file:// compatibility */},
+save(){/* disabled */},
+saveTheme(theme){document.documentElement.setAttribute('data-theme',theme);}
 };
 
 const helpers={
@@ -1326,7 +1307,6 @@ statsContent.innerHTML+=`<div style="margin-top:16px;"><h5 style="margin-bottom:
 
 const app={
 init(){
-storage.load();
 this.navigate('home');
 },
 navigate(view){
@@ -1399,7 +1379,6 @@ date:helpers.getToday(),
 tenses:tenses,
 toBeWarmup:toBeWarmup
 };
-storage.save();
 this.navigate('home');
 },
 startTraining(tenses=null){
@@ -1579,7 +1558,6 @@ if(state.session.consecutiveErrors>=2&&q.tense){
 this.showMiniCheat(q.tense);
 }
 }
-storage.save();
 // Скрываем кнопки и показываем "Дальше"
 document.getElementById('checkBtn').classList.add('hidden');
 document.getElementById('hintBtn').classList.add('hidden');
@@ -1662,7 +1640,6 @@ if(state.session.consecutiveErrors>=2&&q.tense){
 this.showMiniCheat(q.tense);
 }
 }
-storage.save();
 document.getElementById('checkBtn').classList.add('hidden');
 document.getElementById('hintBtn').classList.add('hidden');
 document.getElementById('nextBtn').classList.remove('hidden');
@@ -1723,7 +1700,6 @@ state.stats.dailyStats[today].total+=total;
 state.stats.dailyStats[today].correct+=correct;
 const newStars=Math.floor(correct/10);
 if(newStars>0)helpers.addStars(newStars);
-storage.save();
 document.getElementById('resultScore').textContent=percentage+'%';
 let message='';
 if(percentage>=90)message='Отлично! Ты молодец! 🎉';
@@ -1780,7 +1756,6 @@ dailyStats:{},
 weakItems:{}
 };
 state.tobeStats={total:0,correct:0,weakPairs:{}};
-storage.save();
 this.navigate('stats');
 }
 }
