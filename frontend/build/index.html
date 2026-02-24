@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta Tags -->
-    <title>Tense Trainer — Бесплатный тренажер английских времён для детей</title>
-    <meta name="title" content="Tense Trainer — Бесплатный тренажер английских времён для детей">
-    <meta name="description" content="Бесплатное приложение для изучения английских времён. Тренировки для детей 10-12 лет: Present Simple, Past Simple, Future Simple и другие. Упражнения, статистика, мотивация.">
-    <meta name="keywords" content="английские времена, изучение английского, тренажер английского, present simple, past simple, future simple, упражнения по английскому, английский для детей">
+    <title>Английские времена — тренажер и таблица с упражнениями | Tense Trainer</title>
+    <meta name="title" content="Английские времена — тренажер и таблица с упражнениями">
+    <meta name="description" content="Бесплатный тренажер английских времён с таблицей, упражнениями и тестами. Изучай Present Simple, Past Simple, Future Simple, Present Perfect онлайн. Для детей, школьников и начинающих. Практика всех 12 времён английского языка!">
+    <meta name="keywords" content="английские времена, таблица английских времен, тренажер английских времен, упражнения на времена, present simple, past simple, future simple, английский для детей, изучение английского">
     <meta name="author" content="Tense Trainer">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tensetrainer.ru/">
-    <meta property="og:title" content="Tense Trainer — Бесплатный тренажер английских времён">
-    <meta property="og:description" content="Бесплатное приложение для изучения английских времён. Тренировки для детей 10-12 лет.">
+    <meta property="og:title" content="Английские времена — тренажер и таблица с упражнениями">
+    <meta property="og:description" content="Тренажёр английских времён с таблицей и упражнениями. Present Simple, Past Simple, Future Simple, Present Perfect. Бесплатно!">
     <meta property="og:image" content="https://tensetrainer.ru/og-image.png">
 
     <!-- Twitter -->
@@ -495,6 +495,7 @@
         <header class="header">
             <div class="header-top">
                 <div>
+                    <div style="font-size:0.8rem;color:var(--primary);font-weight:600;margin-bottom:4px">🌐 временаванглийском.рф</div>
                     <h1>🎯 Tense Trainer — Тренажер английских времён</h1>
                     <p>Изучаем английские времена легко и весело! Бесплатные упражнения для детей 10-12 лет</p>
                 </div>
@@ -502,19 +503,6 @@
             </div>
             <div id="streakDisplay" style="font-size: 0.9rem; opacity: 0.9;"></div>
         </header>
-
-        <!-- Ad Banner -->
-        <div class="ad-banner" style="background:var(--card);padding:10px;text-align:center;border-radius:var(--radius);margin-bottom:16px;border:1px dashed var(--border);">
-            <p style="color:var(--text-muted);font-size:0.85rem;">📢 Место для рекламы</p>
-            <!-- AdSense ad unit will go here -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-                 data-ad-slot="YOUR_AD_SLOT"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
 
         <nav class="nav">
             <button class="nav-btn active" data-view="home" onclick="app.navigate('home')">🏠 Главная</button>
@@ -623,9 +611,10 @@
                         <tr><th></th><th>I</th><th>you/we/they</th><th>he/she/it</th></tr>
                         <tr><td><strong>Present</strong></td><td>am</td><td>are</td><td>is</td></tr>
                         <tr><td><strong>Past</strong></td><td>was</td><td>were</td><td>was</td></tr>
+                        <tr><td><strong>Future</strong></td><td colspan="3">will be</td></tr>
                     </table>
                     <p style="margin-top: 12px; font-size: 0.9rem;">
-                        💡 <strong>Правило:</strong> I → am, he/she/it → is, you/we/they → are
+                        💡 <strong>Правило:</strong> I → am, he/she/it → is, you/we/they → are | Future → will be (для всех)
                     </p>
                 </div>
                 <div class="flex gap-2 mb-2">
@@ -793,7 +782,7 @@ wordOrder:[
 {words:['He','doesn\'t','watch','TV'],answer:'He doesn\'t watch TV.'}],
 multipleChoice:[
 {question:'I ___ football every day.',options:['play','plays','playing'],answer:'play',hint:'I → без окончания'},
-{question:'She ___ to school.',options:['go','goes','going'],answer:'goes',hint:'She → добавляем -es'}],
+{question:'She ___ to school every day.',options:['go','goes','going'],answer:'goes',hint:'She → добавляем -es'}],
 makeQuestion:[
 {sentence:'You play games.',answer:'Do you play games?',hint:'Do + подлежащее + глагол?'},
 {sentence:'He likes pizza.',answer:'Does he like pizza?',hint:'Does + he/she/it + глагол?'}],
@@ -832,7 +821,7 @@ makeQuestion:[{sentence:'You played games.',answer:'Did you play games?',hint:'D
 makeNegative:[{sentence:'I went to school.',answer:'I didn\'t go to school.',hint:'didn\'t + V1'}],
 fillBlank:[
 {sentence:'We ___ football yesterday.',answer:'played',hint:'Правильный глагол → +ed'},
-{sentence:'___ she go home?',answer:'Did',hint:'Вопрос → Did'}],
+{sentence:'___ she go home yesterday?',answer:'Did',hint:'Вопрос в Past Simple → Did'}],
 findError:[{sentence:'I didn\'t went to school.',correct:'I didn\'t go to school.',hint:'didn\'t + V1 (не V2!)'}]
 }},
 future_simple:{
@@ -854,7 +843,7 @@ wordOrder:[
 {words:['Will','you','go','to','school','?'],answer:'Will you go to school?'}],
 multipleChoice:[
 {question:'I ___ play tomorrow.',options:['will','would','wills'],answer:'will',hint:'will для всех'},
-{question:'She ___ to school.',options:['won\'t go','willn\'t go','not will go'],answer:'won\'t go',hint:'won\'t = will not'}],
+{question:'She ___ to school tomorrow.',options:['won\'t go','willn\'t go','not will go'],answer:'won\'t go',hint:'won\'t = will not'}],
 makeQuestion:[{sentence:'You will play games.',answer:'Will you play games?',hint:'Will + подлежащее + V1?'}],
 makeNegative:[{sentence:'I will go to school.',answer:'I won\'t go to school.',hint:'won\'t = will not'}],
 fillBlank:[
@@ -882,7 +871,7 @@ wordOrder:[
 {words:['Are','you','watching','TV','?'],answer:'Are you watching TV?'}],
 multipleChoice:[
 {question:'I ___ playing now.',options:['am','is','are'],answer:'am',hint:'I → am'},
-{question:'She ___ watching TV.',options:['am','is','are'],answer:'is',hint:'she → is'}],
+{question:'She ___ watching TV now.',options:['am','is','are'],answer:'is',hint:'she → is'}],
 makeQuestion:[{sentence:'You are playing games.',answer:'Are you playing games?',hint:'Are + подлежащее + V-ing?'}],
 makeNegative:[{sentence:'I am playing games.',answer:'I\'m not playing games.',hint:'I\'m not'}],
 fillBlank:[
@@ -909,8 +898,8 @@ wordOrder:[
 {words:['I','was','playing','at','5'],answer:'I was playing at 5.'},
 {words:['Were','you','watching','TV','?'],answer:'Were you watching TV?'}],
 multipleChoice:[
-{question:'I ___ playing at 5.',options:['was','were','am'],answer:'was',hint:'I → was'},
-{question:'They ___ studying.',options:['was','were','are'],answer:'were',hint:'they → were'}],
+{question:'I ___ playing at 5 yesterday.',options:['was','were','am'],answer:'was',hint:'I → was'},
+{question:'They ___ studying yesterday.',options:['was','were','are'],answer:'were',hint:'they → were'}],
 makeQuestion:[{sentence:'You were playing games.',answer:'Were you playing games?',hint:'Were + подлежащее + V-ing?'}],
 makeNegative:[{sentence:'I was playing games.',answer:'I wasn\'t playing games.',hint:'wasn\'t'}],
 fillBlank:[
@@ -1521,8 +1510,94 @@ builder.classList.remove('filled');
 }
 },
 onOptionClick(el){
-document.querySelectorAll('.option-btn').forEach(btn=>btn.classList.remove('selected'));
+// Сразу проверяем ответ при выборе
+const q=state.session.questions[state.session.currentIndex];
+const userAnswer=el.dataset.answer;
+
+// Выделяем выбранную кнопку
 el.classList.add('selected');
+
+// Сразу проверяем
+this.checkAnswerWithValue(userAnswer);
+},
+checkAnswerWithValue(userAnswer){
+const q=state.session.questions[state.session.currentIndex];
+if(!userAnswer)return;
+// Normalize answers for comparison: lowercase, remove punctuation, extra spaces
+// Also handle forms without apostrophe: isnt → isn't, wasnt → wasn't
+const normalize=(s)={
+    let normalized=s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+    normalized=normalized.replace(/\bisnt\b/,"isn't");
+    normalized=normalized.replace(/\barent\b/,"aren't");
+    normalized=normalized.replace(/\bwasnt\b/,"wasn't");
+    normalized=normalized.replace(/\bwerent\b/,"weren't");
+    normalized=normalized.replace(/\bdont\b/,"don't");
+    normalized=normalized.replace(/\bdoesnt\b/,"doesn't");
+    normalized=normalized.replace(/\bdidnt\b/,"didn't");
+    normalized=normalized.replace(/\bwont\b/,"won't");
+    return normalized;
+};
+// For negative questions, accept only the verb part (e.g., "is", "am", "are", "was", "were")
+// since '(not)' is already shown in the question
+let correct=false;
+if(q.type==='negative'){
+    const verbPart=q.correctAnswer.split(' ')[0]; // "is" from "is not"
+    const normalizedUser=normalize(userAnswer);
+    const normalizedVerb=normalize(verbPart);
+    // Accept: is, am, are, was, were (case insensitive)
+    correct=normalizedUser===normalizedVerb;
+    // Also accept full form
+    if(!correct){
+        correct=normalizedUser===normalize(q.correctAnswer);
+    }
+}else{
+    correct=normalize(userAnswer)===normalize(q.correctAnswer);
+    if(!correct && q.short){
+        correct=normalize(userAnswer)===normalize(q.short);
+    }
+}
+this.showFeedback(correct,q);
+state.stats.totalQuestions++;
+state.tobeStats.total++;
+if(correct){
+state.session.correct++;
+state.stats.correctAnswers++;
+state.tobeStats.correct++;
+state.session.consecutiveErrors=0;
+}else{
+state.session.wrong++;
+state.session.consecutiveErrors++;
+if(q.tense&&q.tense!=='tobe'){
+helpers.recordWeakItem(q.subtype||q.type,q.tense);
+}
+if(q.type==='tobe'){
+const subject=q.question.match(/^(I|you|he|she|it|we|they)\b/i)?.[1];
+if(subject)helpers.recordToBeWeak(subject.toLowerCase(),q.correctAnswer);
+}
+if(state.session.consecutiveErrors>=2&&q.tense){
+this.showMiniCheat(q.tense);
+}
+}
+storage.save();
+// Скрываем кнопки и показываем "Дальше"
+document.getElementById('checkBtn').classList.add('hidden');
+document.getElementById('hintBtn').classList.add('hidden');
+document.getElementById('nextBtn').classList.remove('hidden');
+// Блокируем кнопки опций и показываем правильный ответ
+if(q.options){
+document.querySelectorAll('.option-btn').forEach(btn=>{
+btn.disabled=true;
+if(btn.dataset.answer===q.correctAnswer){
+btn.classList.add('correct');
+}else if(btn.classList.contains('selected')){
+btn.classList.add('wrong');
+}
+});
+}
+// Автопереход через 1.5 секунды
+setTimeout(()=>{
+this.nextQuestion();
+},1500);
 },
 checkAnswer(){
 const q=state.session.questions[state.session.currentIndex];
@@ -1538,8 +1613,32 @@ userAnswer=document.getElementById('answerInput').value.trim();
 }
 if(!userAnswer)return;
 // Normalize answers for comparison: lowercase, remove punctuation, extra spaces
-const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
-const correct=normalize(userAnswer)===normalize(q.correctAnswer);
+// Also handle forms without apostrophe: isnt → isn't, wasnt → wasn't
+const normalize=(s)={
+    let normalized=s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+    normalized=normalized.replace(/\bisnt\b/,"isn't");
+    normalized=normalized.replace(/\barent\b/,"aren't");
+    normalized=normalized.replace(/\bwasnt\b/,"wasn't");
+    normalized=normalized.replace(/\bwerent\b/,"weren't");
+    normalized=normalized.replace(/\bdont\b/,"don't");
+    normalized=normalized.replace(/\bdoesnt\b/,"doesn't");
+    normalized=normalized.replace(/\bdidnt\b/,"didn't");
+    normalized=normalized.replace(/\bwont\b/,"won't");
+    return normalized;
+};
+// For negative questions, accept both verb part ("was") and full form ("was not")
+// since '(not)' is shown in the question but user might type either
+let correct=false;
+if(q.type==='negative'){
+    const verbPart=q.correctAnswer.split(' ')[0]; // "was" from "was not"
+    const normalizedUser=normalize(userAnswer);
+    correct=normalizedUser===normalize(verbPart) || normalizedUser===normalize(q.correctAnswer);
+}else{
+    correct=normalize(userAnswer)===normalize(q.correctAnswer);
+    if(!correct && q.short){
+        correct=normalize(userAnswer)===normalize(q.short);
+    }
+}
 this.showFeedback(correct,q);
 state.stats.totalQuestions++;
 state.tobeStats.total++;
@@ -1581,7 +1680,8 @@ showFeedback(correct,q){
 const box=document.getElementById('feedbackBox');
 box.classList.remove('hidden','correct','wrong');
 box.classList.add(correct?'correct':'wrong');
-box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div><div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
+box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div>
+<div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.type==='negative'?q.correctAnswer.split(' ')[0]:q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
 },
 showHint(){
 const q=state.session.questions[state.session.currentIndex];
@@ -1687,5 +1787,16 @@ this.navigate('stats');
 
 document.addEventListener('DOMContentLoaded',()=>app.init());
 </script>
+
+<!-- Footer with contact info -->
+<footer style="background:var(--card-bg);border-top:1px solid var(--border);padding:1.5rem 1rem;margin-top:2rem;text-align:center;color:var(--muted)">
+<div style="max-width:800px;margin:0 auto">
+<p style="margin:0 0 0.5rem;font-weight:600;color:var(--text)">📧 Реклама на сайте</p>
+<p style="margin:0 0 0.5rem">Телефон: <a href="tel:+79055529581" style="color:var(--primary);text-decoration:none">+7 (905) 552-95-81</a></p>
+<p style="margin:0;font-size:0.875rem">© 2026 Tense Trainer — бесплатный тренажёр английских времён</p>
+<p style="margin-top:8px;font-size:0.875rem;"><a href="/tablitsa-vremen.html" style="color:var(--primary);text-decoration:none;">📊 Таблица всех времён</a></p>
+</div>
+</footer>
+
 </body>
 </html>

@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO: Title -->
+    <title>Интерактивная таблица английских времён — все 12 времён с примерами</title>
+    
+    <!-- SEO: Meta Description -->
+    <meta name="description" content="Интерактивная таблица всех 12 английских времён: Present, Past, Future Simple, Continuous, Perfect, Perfect Continuous. Формулы, примеры, сигнальные слова. Утвердительная, отрицательная, вопросительная формы.">
+    
+    <!-- SEO: Keywords -->
+    <meta name="keywords" content="таблица английских времен, интерактивная таблица времен, все времена английского языка, английские времена с примерами, present simple таблица, past simple таблица, future simple таблица, формулы времён английского">
+    
+    <!-- SEO: Canonical -->
+    <link rel="canonical" href="https://временаванглийском.рф/tablitsa-vremen.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://временаванглийском.рф/tablitsa-vremen.html">
+    <meta property="og:title" content="Интерактивная таблица английских времён">
+    <meta property="og:description" content="Все 12 времён английского языка: формулы, примеры, фильтры. Бесплатно!">
+    <meta property="og:image" content="https://временаванглийском.рф/og-table.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Интерактивная таблица английских времён">
+    <meta property="twitter:description" content="Все 12 времён с примерами и фильтрами">
+    
+    <!-- Structured Data: Table -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "Интерактивная таблица английских времён",
+        "description": "Полная таблица всех 12 английских времён с формулами, примерами и интерактивными фильтрами",
+        "educationalLevel": "beginner",
+        "learningResourceType": "reference",
+        "inLanguage": "ru",
+        "about": {
+            "@type": "Thing",
+            "name": "Английская грамматика"
+        },
+        "teaches": [
+            "Present Simple", "Past Simple", "Future Simple",
+            "Present Continuous", "Past Continuous", "Future Continuous",
+            "Present Perfect", "Past Perfect", "Future Perfect",
+            "Present Perfect Continuous", "Past Perfect Continuous", "Future Perfect Continuous"
+        ]
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --accent: #f59e0b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { 
+            text-align: center; 
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        
+        /* Simple Tenses Table */
+        .tense-section {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f8fafc; }
+        tr:hover { background: #eef2ff; }
+        
+        .form-col { width: 35%; }
+        .formula-col { width: 40%; }
+        .example-col { width: 25%; }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .badge-pos { background: #dcfce7; color: #166534; }
+        .badge-neg { background: #fee2e2; color: #991b1b; }
+        .badge-q { background: #fef3c7; color: #92400e; }
+        
+        .formula { 
+            font-family: 'Courier New', monospace; 
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .example-en { color: var(--text); font-weight: 500; }
+        .example-ru { color: var(--text-muted); font-size: 0.9rem; }
+        
+        .signals {
+            margin-top: 12px;
+            padding: 12px;
+            background: #fef3c7;
+            border-radius: 8px;
+        }
+        .signals-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+        .signal-word {
+            display: inline-block;
+            padding: 4px 10px;
+            background: white;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .usage {
+            margin-top: 12px;
+            padding: 12px;
+            background: #dbeafe;
+            border-radius: 8px;
+        }
+        .usage-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+        
+        /* Compact Overview Table */
+        .overview-table th { background: var(--secondary); }
+        .overview-table .tense-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .filter-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        .filter-btn.clear {
+            background: var(--bg);
+            border-color: var(--text-muted);
+            color: var(--text-muted);
+        }
+        .tense-section.hidden {
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            table { font-size: 0.85rem; }
+            th, td { padding: 8px; }
+            .formula { font-size: 0.8rem; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SEO: H1 Title -->
+        <h1>📊 Интерактивная таблица английских времён</h1>
+        <p class="subtitle">Все 12 времён английского языка: формулы, примеры, сигнальные слова. Утвердительная (+), отрицательная (−), вопросительная (?) формы.</p>
+        
+        <!-- SEO: Intro Text -->
+        <div class="seo-intro" style="background: var(--card); padding: 20px; border-radius: var(--radius); margin-bottom: 24px; box-shadow: var(--shadow);">
+            <p style="margin-bottom: 12px;"><strong>Изучайте английские времена с интерактивной таблицей!</strong> Здесь собраны <strong>все 12 времён</strong> английского языка: <em>Present Simple, Past Simple, Future Simple, Present Continuous, Past Continuous, Future Continuous, Present Perfect, Past Perfect, Future Perfect, Present Perfect Continuous, Past Perfect Continuous, Future Perfect Continuous</em>.</p>
+            <p style="margin-bottom: 12px;">Каждое время представлено с <strong>формулами построения</strong>, <strong>примерами предложений</strong> и <strong>сигнальными словами</strong>. Используйте фильтры, чтобы выбрать конкретную группу времён или время (Present, Past, Future).</p>
+            
+            <p><a href="/" style="color: var(--primary); text-decoration: none; font-weight: 500;">→ Перейти к тренажёру для практики</a></p>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item"><span class="badge badge-pos">+</span> Утвердительная</div>
+            <div class="legend-item"><span class="badge badge-neg">−</span> Отрицательная</div>
+            <div class="legend-item"><span class="badge badge-q">?</span> Вопросительная</div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters">
+            <div class="filter-group">
+                <span class="filter-label">Группа времени</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn" data-filter="simple">🟢 Simple</button>
+                    <button class="filter-btn" data-filter="continuous">🔵 Continuous</button>
+                    <button class="filter-btn" data-filter="perfect">🟣 Perfect</button>
+                    <button class="filter-btn" data-filter="perfect-continuous">🟠 Perfect Continuous</button>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">Время</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn" data-filter="present">Present</button>
+                    <button class="filter-btn" data-filter="past">Past</button>
+                    <button class="filter-btn" data-filter="future">Future</button>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">Действие</span>
+                <div class="filter-buttons">
+                    <button class="filter-btn clear" onclick="clearFilters()">✕ Сбросить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIMPLE TENSES -->
+        <div class="tense-section" data-groups="simple" data-times="present,past,future">
+            <h2 class="section-title">🟢 Simple — Простые времена</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="form-col">Форма</th>
+                        <th class="formula-col">Формула</th>
+                        <th class="example-col">Пример</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Present Simple -->
+                    <tr>
+                        <td rowspan="3"><strong>Present Simple</strong><br>Настоящее простое</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">I/you/we/they + V1<br>he/she/it + V1+s/es</span></td>
+                        <td><span class="example-en">I play football.</span><br><span class="example-ru">Я играю в футбол.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">I/you/we/they + don't + V1<br>he/she/it + doesn't + V1</span></td>
+                        <td><span class="example-en">She doesn't watch TV.</span><br><span class="example-ru">Она не смотрит ТВ.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Do + I/you/we/they + V1?<br>Does + he/she/it + V1?</span></td>
+                        <td><span class="example-en">Do they play games?</span><br><span class="example-ru">Они играют в игры?</span></td>
+                    </tr>
+                    
+                    <!-- Past Simple -->
+                    <tr>
+                        <td rowspan="3"><strong>Past Simple</strong><br>Прошедшее простое</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">Все + V2 / V-ed</span></td>
+                        <td><span class="example-en">I played yesterday.</span><br><span class="example-ru">Я играл вчера.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">Все + didn't + V1</span></td>
+                        <td><span class="example-en">We didn't go to school.</span><br><span class="example-ru">Мы не ходили в школу.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Did + подлежащее + V1?</span></td>
+                        <td><span class="example-en">Did she win the game?</span><br><span class="example-ru">Она выиграла игру?</span></td>
+                    </tr>
+                    
+                    <!-- Future Simple -->
+                    <tr>
+                        <td rowspan="3"><strong>Future Simple</strong><br>Будущее простое</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">Все + will + V1</span></td>
+                        <td><span class="example-en">I will play tomorrow.</span><br><span class="example-ru">Я буду играть завтра.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">Все + won't + V1</span></td>
+                        <td><span class="example-en">He won't come to the party.</span><br><span class="example-ru">Он не придёт на вечеринку.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Will + подлежащее + V1?</span></td>
+                        <td><span class="example-en">Will they help us?</span><br><span class="example-ru">Они нам помогут?</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="signals">
+                <div class="signals-title">🔔 Сигнальные слова:</div>
+                <span class="signal-word">Present: every day, always, usually, often, sometimes, never</span><br>
+                <span class="signal-word">Past: yesterday, last week, last year, ago, in 2020</span><br>
+                <span class="signal-word">Future: tomorrow, next week, next year, soon, later</span>
+            </div>
+        </div>
+
+        <!-- CONTINUOUS TENSES -->
+        <div class="tense-section" data-groups="continuous" data-times="present,past,future">
+            <h2 class="section-title">🔵 Continuous — Продолженные времена</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="form-col">Форма</th>
+                        <th class="formula-col">Формула</th>
+                        <th class="example-col">Пример</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Present Continuous -->
+                    <tr>
+                        <td rowspan="3"><strong>Present Continuous</strong><br>Настоящее продолженное</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">I + am + V-ing<br>he/she/it + is + V-ing<br>you/we/they + are + V-ing</span></td>
+                        <td><span class="example-en">I am playing now.</span><br><span class="example-ru">Я играю сейчас.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">I'm not + V-ing<br>he/she/it + isn't + V-ing<br>you/we/they + aren't + V-ing</span></td>
+                        <td><span class="example-en">She isn't watching TV.</span><br><span class="example-ru">Она не смотрит ТВ.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Am I + V-ing?<br>Is he/she/it + V-ing?<br>Are you/we/they + V-ing?</span></td>
+                        <td><span class="example-en">Are they playing games?</span><br><span class="example-ru">Они играют в игры?</span></td>
+                    </tr>
+                    
+                    <!-- Past Continuous -->
+                    <tr>
+                        <td rowspan="3"><strong>Past Continuous</strong><br>Прошедшее продолженное</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">I/he/she/it + was + V-ing<br>you/we/they + were + V-ing</span></td>
+                        <td><span class="example-en">I was playing at 5 pm.</span><br><span class="example-ru">Я играл в 5 вечера.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">I/he/she/it + wasn't + V-ing<br>you/we/they + weren't + V-ing</span></td>
+                        <td><span class="example-en">We weren't studying.</span><br><span class="example-ru">Мы не учились.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Was I/he/she/it + V-ing?<br>Were you/we/they + V-ing?</span></td>
+                        <td><span class="example-en">Were you sleeping?</span><br><span class="example-ru">Ты спал?</span></td>
+                    </tr>
+                    
+                    <!-- Future Continuous -->
+                    <tr>
+                        <td rowspan="3"><strong>Future Continuous</strong><br>Будущее продолженное</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">Все + will be + V-ing</span></td>
+                        <td><span class="example-en">I will be playing at 5 pm.</span><br><span class="example-ru">Я буду играть в 5 вечера.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">Все + won't be + V-ing</span></td>
+                        <td><span class="example-en">She won't be waiting.</span><br><span class="example-ru">Она не будет ждать.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Will + подлежащее + be + V-ing?</span></td>
+                        <td><span class="example-en">Will they be working?</span><br><span class="example-ru">Они будут работать?</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="signals">
+                <div class="signals-title">🔔 Сигнальные слова:</div>
+                <span class="signal-word">Present: now, at the moment, right now, today, look!, listen!</span><br>
+                <span class="signal-word">Past: at 5 o'clock, at that moment, while, when</span><br>
+                <span class="signal-word">Future: at this time tomorrow, at 5 pm tomorrow</span>
+            </div>
+        </div>
+
+        <!-- PERFECT TENSES -->
+        <div class="tense-section" data-groups="perfect" data-times="present,past,future">
+            <h2 class="section-title">🟣 Perfect — Совершённые времена</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="form-col">Форма</th>
+                        <th class="formula-col">Формула</th>
+                        <th class="example-col">Пример</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Present Perfect -->
+                    <tr>
+                        <td rowspan="3"><strong>Present Perfect</strong><br>Настоящее совершённое</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">I/you/we/they + have + V3<br>he/she/it + has + V3</span></td>
+                        <td><span class="example-en">I have played before.</span><br><span class="example-ru">Я играл раньше.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">I/you/we/they + haven't + V3<br>he/she/it + hasn't + V3</span></td>
+                        <td><span class="example-en">She hasn't finished yet.</span><br><span class="example-ru">Она ещё не закончила.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Have + I/you/we/they + V3?<br>Has + he/she/it + V3?</span></td>
+                        <td><span class="example-en">Have you ever been to London?</span><br><span class="example-ru">Ты когда-нибудь был в Лондоне?</span></td>
+                    </tr>
+                    
+                    <!-- Past Perfect -->
+                    <tr>
+                        <td rowspan="3"><strong>Past Perfect</strong><br>Прошедшее совершённое</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">Все + had + V3</span></td>
+                        <td><span class="example-en">I had finished before dinner.</span><br><span class="example-ru">Я закончил до ужина.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">Все + hadn't + V3</span></td>
+                        <td><span class="example-en">We hadn't met before.</span><br><span class="example-ru">Мы не встречались раньше.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Had + подлежащее + V3?</span></td>
+                        <td><span class="example-en">Had she left before you came?</span><br><span class="example-ru">Она ушла до твоего прихода?</span></td>
+                    </tr>
+                    
+                    <!-- Future Perfect -->
+                    <tr>
+                        <td rowspan="3"><strong>Future Perfect</strong><br>Будущее совершённое</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">Все + will have + V3</span></td>
+                        <td><span class="example-en">I will have finished by 8 pm.</span><br><span class="example-ru">Я закончу к 8 вечера.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">Все + won't have + V3</span></td>
+                        <td><span class="example-en">They won't have arrived by then.</span><br><span class="example-ru">Они не приедут к тому времени.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Will + подлежащее + have + V3?</span></td>
+                        <td><span class="example-en">Will you have completed it by Monday?</span><br><span class="example-ru">Ты закончишь это к понедельнику?</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="signals">
+                <div class="signals-title">🔔 Сигнальные слова:</div>
+                <span class="signal-word">Present Perfect: already, yet, just, ever, never, since, for</span><br>
+                <span class="signal-word">Past Perfect: before, after, by the time</span><br>
+                <span class="signal-word">Future Perfect: by, by the time, before</span>
+            </div>
+        </div>
+
+        <!-- PERFECT CONTINUOUS -->
+        <div class="tense-section" data-groups="perfect-continuous" data-times="present,past,future">
+            <h2 class="section-title">🟠 Perfect Continuous — Совершённые продолженные</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="form-col">Форма</th>
+                        <th class="formula-col">Формула</th>
+                        <th class="example-col">Пример</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Present Perfect Continuous -->
+                    <tr>
+                        <td rowspan="3"><strong>Present Perfect Continuous</strong><br>Настоящее совершённое продолженное</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">I/you/we/they + have been + V-ing<br>he/she/it + has been + V-ing</span></td>
+                        <td><span class="example-en">I have been playing for 2 hours.</span><br><span class="example-ru">Я играю уже 2 часа.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">I/you/we/they + haven't been + V-ing<br>he/she/it + hasn't been + V-ing</span></td>
+                        <td><span class="example-en">She hasn't been feeling well.</span><br><span class="example-ru">Она неважно себя чувствует.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Have + I/you/we/they + been + V-ing?<br>Has + he/she/it + been + V-ing?</span></td>
+                        <td><span class="example-en">Have they been waiting long?</span><br><span class="example-ru">Они долго ждут?</span></td>
+                    </tr>
+                    
+                    <!-- Past Perfect Continuous -->
+                    <tr>
+                        <td rowspan="3"><strong>Past Perfect Continuous</strong><br>Прошедшее совершённое продолженное</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">Все + had been + V-ing</span></td>
+                        <td><span class="example-en">I had been playing for 2 hours when...</span><br><span class="example-ru">Я играл 2 часа, когда...</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">Все + hadn't been + V-ing</span></td>
+                        <td><span class="example-en">We hadn't been sleeping well.</span><br><span class="example-ru">Мы плохо спали.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Had + подлежащее + been + V-ing?</span></td>
+                        <td><span class="example-en">Had she been working there long?</span><br><span class="example-ru">Она долго там работала?</span></td>
+                    </tr>
+                    
+                    <!-- Future Perfect Continuous -->
+                    <tr>
+                        <td rowspan="3"><strong>Future Perfect Continuous</strong><br>Будущее совершённое продолженное</td>
+                        <td><span class="badge badge-pos">+</span> <span class="formula">Все + will have been + V-ing</span></td>
+                        <td><span class="example-en">I will have been playing for 2 hours.</span><br><span class="example-ru">Я буду играть уже 2 часа.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neg">−</span> <span class="formula">Все + won't have been + V-ing</span></td>
+                        <td><span class="example-en">She won't have been working long.</span><br><span class="example-ru">Она недолго будет работать.</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-q">?</span> <span class="formula">Will + подлежащее + have been + V-ing?</span></td>
+                        <td><span class="example-en">Will they have been living there long?</span><br><span class="example-ru">Они долго будут там жить?</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="signals">
+                <div class="signals-title">🔔 Сигнальные слова:</div>
+                <span class="signal-word">Perfect Continuous: for, since, all day, all week, how long</span>
+            </div>
+        </div>
+
+        <!-- SHORT ANSWERS -->
+        <div class="tense-section">
+            <h2 class="section-title">👍👎 Краткие ответы (Short Answers)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Время</th>
+                        <th>Положительный</th>
+                        <th>Отрицательный</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Present Simple</td>
+                        <td>Yes, I do. / Yes, he does.</td>
+                        <td>No, I don't. / No, he doesn't.</td>
+                    </tr>
+                    <tr>
+                        <td>Past Simple</td>
+                        <td>Yes, I did.</td>
+                        <td>No, I didn't.</td>
+                    </tr>
+                    <tr>
+                        <td>Future Simple</td>
+                        <td>Yes, I will.</td>
+                        <td>No, I won't.</td>
+                    </tr>
+                    <tr>
+                        <td>Present Continuous</td>
+                        <td>Yes, I am. / Yes, he is.</td>
+                        <td>No, I'm not. / No, he isn't.</td>
+                    </tr>
+                    <tr>
+                        <td>Past Continuous</td>
+                        <td>Yes, I was.</td>
+                        <td>No, I wasn't.</td>
+                    </tr>
+                    <tr>
+                        <td>Present Perfect</td>
+                        <td>Yes, I have. / Yes, he has.</td>
+                        <td>No, I haven't. / No, he hasn't.</td>
+                    </tr>
+                    <tr>
+                        <td>Past Perfect</td>
+                        <td>Yes, I had.</td>
+                        <td>No, I hadn't.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- USAGE SUMMARY -->
+        <div class="tense-section">
+            <h2 class="section-title">💡 Когда использовать</h2>
+            <table class="overview-table">
+                <thead>
+                    <tr>
+                        <th>Время</th>
+                        <th>Когда использовать</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tense-name">Present Simple</td>
+                        <td>Привычки, факты, расписания: <em>I play every day.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Past Simple</td>
+                        <td>Завершённые действия в прошлом: <em>I played yesterday.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Future Simple</td>
+                        <td>Предсказания, спонтанные решения: <em>I will help you.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Present Continuous</td>
+                        <td>Действия прямо сейчас: <em>I am playing now.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Past Continuous</td>
+                        <td>Действия в конкретный момент прошлого: <em>I was playing at 5.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Future Continuous</td>
+                        <td>Действия в конкретный момент будущего: <em>I will be playing at 5.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Present Perfect</td>
+                        <td>Опыт в жизни, недавние действия: <em>I have played before.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Past Perfect</td>
+                        <td>Действия до другого прошлого: <em>I had finished before...</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Future Perfect</td>
+                        <td>Действия к моменту в будущем: <em>I will have finished by 8.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Present Perfect Continuous</td>
+                        <td>Действия, начавшиеся в прошлом и продолжающиеся: <em>I have been playing for 2 hours.</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Past Perfect Continuous</td>
+                        <td>Действия до другого прошлого с акцентом на длительность: <em>I had been playing for 2 hours when...</em></td>
+                    </tr>
+                    <tr>
+                        <td class="tense-name">Future Perfect Continuous</td>
+                        <td>Действия к моменту в будущем с акцентом на длительность: <em>I will have been playing for 2 hours.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- VERB FORMS REFERENCE -->
+        <div class="tense-section">
+            <h2 class="section-title">📝 Формы глаголов (V1, V2, V3)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Инфинитив (V1)</th>
+                        <th>Прошедшее (V2)</th>
+                        <th>Причастие (V3)</th>
+                        <th>Перевод</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>be</td><td>was/were</td><td>been</td><td>быть</td></tr>
+                    <tr><td>have</td><td>had</td><td>had</td><td>иметь</td></tr>
+                    <tr><td>do</td><td>did</td><td>done</td><td>делать</td></tr>
+                    <tr><td>go</td><td>went</td><td>gone</td><td>идти</td></tr>
+                    <tr><td>come</td><td>came</td><td>come</td><td>приходить</td></tr>
+                    <tr><td>see</td><td>saw</td><td>seen</td><td>видеть</td></tr>
+                    <tr><td>take</td><td>took</td><td>taken</td><td>брать</td></tr>
+                    <tr><td>give</td><td>gave</td><td>given</td><td>давать</td></tr>
+                    <tr><td>make</td><td>made</td><td>made</td><td>делать</td></tr>
+                    <tr><td>get</td><td>got</td><td>got/gotten</td><td>получать</td></tr>
+                    <tr><td>know</td><td>knew</td><td>known</td><td>знать</td></tr>
+                    <tr><td>think</td><td>thought</td><td>thought</td><td>думать</td></tr>
+                    <tr><td>say</td><td>said</td><td>said</td><td>говорить</td></tr>
+                    <tr><td>tell</td><td>told</td><td>told</td><td>рассказывать</td></tr>
+                    <tr><td>write</td><td>wrote</td><td>written</td><td>писать</td></tr>
+                    <tr><td>read</td><td>read</td><td>read</td><td>читать</td></tr>
+                    <tr><td>eat</td><td>ate</td><td>eaten</td><td>есть</td></tr>
+                    <tr><td>drink</td><td>drank</td><td>drunk</td><td>пить</td></tr>
+                    <tr><td>sleep</td><td>slept</td><td>slept</td><td>спать</td></tr>
+                    <tr><td>run</td><td>ran</td><td>run</td><td>бежать</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align: center; margin-top: 32px; padding: 20px; color: var(--text-muted);">
+            <p>🎯 <strong>Tense Trainer</strong> — Бесплатный тренажёр английских времён</p>
+            <p style="margin-top: 8px;">Практикуйся на <a href="/" style="color: var(--primary);">временаванглийском.рф</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        let activeFilters = {
+            groups: [],
+            times: []
+        };
+
+        document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                const isGroup = ['simple', 'continuous', 'perfect', 'perfect-continuous'].includes(filter);
+                const isTime = ['present', 'past', 'future'].includes(filter);
+                
+                if (isGroup) {
+                    toggleFilter('groups', filter, this);
+                } else if (isTime) {
+                    toggleFilter('times', filter, this);
+                }
+                
+                applyFilters();
+            });
+        });
+
+        function toggleFilter(type, value, btn) {
+            const index = activeFilters[type].indexOf(value);
+            if (index > -1) {
+                activeFilters[type].splice(index, 1);
+                btn.classList.remove('active');
+            } else {
+                activeFilters[type].push(value);
+                btn.classList.add('active');
+            }
+        }
+
+        function applyFilters() {
+            const sections = document.querySelectorAll('.tense-section');
+            
+            sections.forEach(section => {
+                const groups = section.dataset.groups ? section.dataset.groups.split(',') : [];
+                const times = section.dataset.times ? section.dataset.times.split(',') : [];
+                
+                const groupMatch = activeFilters.groups.length === 0 || 
+                    activeFilters.groups.some(f => groups.includes(f));
+                const timeMatch = activeFilters.times.length === 0 || 
+                    activeFilters.times.some(f => times.includes(f));
+                
+                if (groupMatch && timeMatch) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+
+        function clearFilters() {
+            activeFilters = { groups: [], times: [] };
+            document.querySelectorAll('.filter-btn.active').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            applyFilters();
+        }
+    </script>
+    
+    <!-- SEO: Additional Content -->
+    <div class="container" style="margin-top: 40px;">
+        <div class="seo-content" style="background: var(--card); padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow);">
+            <h2 style="color: var(--primary); margin-bottom: 16px;">Как использовать таблицу английских времён</h2>
+            
+            <p style="margin-bottom: 12px;"><strong>1. Выберите время с помощью фильтров.</strong> Нажмите на кнопки "Simple", "Continuous", "Perfect" или "Perfect Continuous", чтобы увидеть только нужную группу времён. Или выберите "Present", "Past", "Future" для фильтрации по времени.</p>
+            
+            <p style="margin-bottom: 12px;"><strong>2. Изучите формулы.</strong> Каждое время представлено с формулами построения для утвердительной (+), отрицательной (−) и вопросительной (?) форм.</p>
+            
+            <p style="margin-bottom: 12px;"><strong>3. Запомните сигнальные слова.</strong> Это слова-маркеры, которые помогают определить, какое время использовать: <em>every day</em> (Present Simple), <em>yesterday</em> (Past Simple), <em>now</em> (Present Continuous) и другие.</p>
+            
+            <p style="margin-bottom: 12px;"><strong>4. Потренируйтесь.</strong> После изучения таблицы переходите к <a href="/" style="color: var(--primary);">тренажёру английских времён</a> для закрепления материала.</p>
+            
+            <h3 style="color: var(--primary); margin: 24px 0 12px;">Часто задаваемые вопросы</h3>
+            
+            <p style="margin-bottom: 8px;"><strong>Сколько времён в английском языке?</strong><br>
+            В английском языке 12 времён: 4 группы (Simple, Continuous, Perfect, Perfect Continuous) × 3 времени (Present, Past, Future).</p>
+            
+            <p style="margin-bottom: 8px;"><strong>С какого времени начинать изучение?</strong><br>
+            Начните с <strong>Present Simple</strong> — это базовое время для привычек и фактов. Затем изучите <strong>Past Simple</strong> и <strong>Future Simple</strong>.</p>
+            
+            <p style="margin-bottom: 8px;"><strong>Что такое сигнальные слова?</strong><br>
+            Это слова, которые указывают на конкретное время: <em>every day, always, usually</em> (Present Simple); <em>yesterday, last week, ago</em> (Past Simple); <em>tomorrow, next year, soon</em> (Future Simple).</p>
+            
+            <p style="margin-top: 16px;"><a href="/" style="display: inline-block; background: var(--primary); color: white; padding: 12px 24px; border-radius: var(--radius-sm); text-decoration: none; font-weight: 500;">▶️ Начать тренировку</a></p>
+        </div>
+        
+        <footer style="text-align: center; margin-top: 32px; padding: 24px; color: var(--text-muted); border-top: 1px solid var(--border);">
+            <p>🎯 <strong>Tense Trainer</strong> — Бесплатный тренажёр английских времён</p>
+            <p style="margin-top: 8px;">По вопросам: <a href="tel:+79055529581" style="color: var(--primary); text-decoration: none;">8 (905) 552-95-81</a></p>
+            <p style="margin-top: 8px; font-size: 0.875rem;">© 2026 временаванглийском.рф</p>
+        </footer>
+    </div>
+</body>
+</html>
