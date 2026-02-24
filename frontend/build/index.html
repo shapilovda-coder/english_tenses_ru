@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Tense Trainer — Бесплатный тренажер английских времён для детей</title>
+    <meta name="title" content="Tense Trainer — Бесплатный тренажер английских времён для детей">
+    <meta name="description" content="Бесплатное приложение для изучения английских времён. Тренировки для детей 10-12 лет: Present Simple, Past Simple, Future Simple и другие. Упражнения, статистика, мотивация.">
+    <meta name="keywords" content="английские времена, изучение английского, тренажер английского, present simple, past simple, future simple, упражнения по английскому, английский для детей">
+    <meta name="author" content="Tense Trainer">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tensetrainer.ru/">
+    <meta property="og:title" content="Tense Trainer — Бесплатный тренажер английских времён">
+    <meta property="og:description" content="Бесплатное приложение для изучения английских времён. Тренировки для детей 10-12 лет.">
+    <meta property="og:image" content="https://tensetrainer.ru/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://tensetrainer.ru/">
+    <meta property="twitter:title" content="Tense Trainer — Бесплатный тренажер английских времён">
+    <meta property="twitter:description" content="Бесплатное приложение для изучения английских времён. Тренировки для детей 10-12 лет.">
+    <meta property="twitter:image" content="https://tensetrainer.ru/og-image.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://tensetrainer.ru/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Tense Trainer",
+        "description": "Бесплатный тренажер английских времён для детей 10-12 лет",
+        "url": "https://tensetrainer.ru/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "RUB"
+        },
+        "audience": {
+            "@type": "EducationalAudience",
+            "educationalRole": "student"
+        }
+    }
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .app-container { max-width: 900px; margin: 0 auto; padding: 16px; }
+        .hidden { display: none !important; }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 0.95rem; }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .theme-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: var(--card);
+            padding: 12px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .nav-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .nav-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-secondary { background: var(--secondary); color: white; }
+        .btn-secondary:hover { background: #059669; }
+        .btn-accent { background: var(--accent); color: white; }
+        .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-sm { padding: 8px 16px; font-size: 0.875rem; }
+        .quick-start {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid var(--accent);
+        }
+        .quick-start h3 { color: #92400e; margin-bottom: 12px; }
+        .preset-btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+        .preset-btn {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid var(--accent);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover { background: var(--accent); color: white; }
+        .checkbox-list { display: grid; gap: 10px; }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        .checkbox-item:hover { border-color: var(--primary-light); }
+        .checkbox-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+        .checkbox-item.checked { border-color: var(--primary); background: #eef2ff; }
+        .tense-name { font-weight: 600; }
+        .tense-desc { font-size: 0.85rem; color: var(--text-muted); }
+        .tense-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .tense-card {
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tense-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .tense-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .formula-box {
+            background: #f0fdf4;
+            border: 2px solid var(--secondary);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin: 12px 0;
+        }
+        .formula-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #bbf7d0;
+        }
+        .formula-row:last-child { border-bottom: none; }
+        .formula-label {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .formula-label.pos { background: var(--secondary); color: white; }
+        .formula-label.neg { background: var(--danger); color: white; }
+        .formula-label.q { background: var(--accent); color: white; }
+        .exercise-container { max-width: 600px; margin: 0 auto; }
+        .progress-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: width 0.3s;
+        }
+        .question-box {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+        .question-type {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e0e7ff;
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        .word-builder {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+            min-height: 50px;
+            padding: 12px;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            border: 2px dashed var(--border);
+        }
+        .word-builder.filled { border-style: solid; border-color: var(--primary); }
+        .word-slot {
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .word-slot:hover { background: #fef3c7; }
+        .options-list { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn {
+            padding: 14px 18px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover { border-color: var(--primary-light); }
+        .option-btn.correct { background: #dcfce7; border-color: var(--secondary); }
+        .option-btn.wrong { background: #fee2e2; border-color: var(--danger); }
+        .option-btn.selected { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.2); }
+        .answer-input {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1.1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+        }
+        .answer-input:focus { outline: none; border-color: var(--primary); }
+        .feedback {
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            margin-top: 16px;
+        }
+        .feedback.correct { background: #dcfce7; border: 2px solid var(--secondary); }
+        .feedback.wrong { background: #fee2e2; border: 2px solid var(--danger); }
+        .feedback-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .feedback.correct .feedback-title { color: #166534; }
+        .feedback.wrong .feedback-title { color: #991b1b; }
+        .hint-box {
+            background: #fef3c7;
+            border: 2px solid var(--accent);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .hint-title { font-weight: 600; color: #92400e; margin-bottom: 8px; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-label { color: var(--text-muted); font-size: 0.9rem; }
+        .stars-display {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .star { font-size: 1.5rem; }
+        .star.earned { color: var(--accent); }
+        .star.empty { color: var(--border); }
+        .week-chart { display: flex; gap: 8px; align-items: flex-end; height: 120px; margin-top: 16px; }
+        .day-bar {
+            flex: 1;
+            background: var(--primary-light);
+            border-radius: 4px 4px 0 0;
+            min-height: 20px;
+            position: relative;
+            transition: all 0.2s;
+        }
+        .day-bar:hover { background: var(--primary); }
+        .day-label {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        .day-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .weak-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #fee2e2;
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+        }
+        .weak-item-icon { font-size: 1.5rem; }
+        .weak-item-text { flex: 1; }
+        .weak-item-count {
+            background: var(--danger);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        .parent-toggle {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .parent-section {
+            background: #f3e8ff;
+            border: 2px solid #a855f7;
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+        .parent-section h4 { color: #7c3aed; margin-bottom: 12px; }
+        .parent-tip {
+            background: white;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+        }
+        .tobe-cheat {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 2px solid #3b82f6;
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .tobe-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+        .tobe-table th, .tobe-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #93c5fd;
+        }
+        .tobe-table th { background: #3b82f6; color: white; }
+        .tobe-table td { background: white; }
+        .result-summary {
+            text-align: center;
+            padding: 30px;
+        }
+        .result-score {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .result-message { font-size: 1.2rem; margin: 16px 0; }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.4rem; }
+            .nav-btn { min-width: 80px; padding: 10px; font-size: 0.8rem; }
+            .tense-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .question-text { font-size: 1rem; }
+        }
+        .flex { display: flex; }
+        .gap-2 { gap: 16px; }
+        .mt-2 { margin-top: 16px; }
+        .mb-2 { margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-top">
+                <div>
+                    <h1>🎯 Tense Trainer — Тренажер английских времён</h1>
+                    <p>Изучаем английские времена легко и весело! Бесплатные упражнения для детей 10-12 лет</p>
+                </div>
+                <button class="theme-toggle" onclick="app.toggleTheme()">🌙</button>
+            </div>
+            <div id="streakDisplay" style="font-size: 0.9rem; opacity: 0.9;"></div>
+        </header>
+
+        <!-- Ad Banner -->
+        <div class="ad-banner" style="background:var(--card);padding:10px;text-align:center;border-radius:var(--radius);margin-bottom:16px;border:1px dashed var(--border);">
+            <p style="color:var(--text-muted);font-size:0.85rem;">📢 Место для рекламы</p>
+            <!-- AdSense ad unit will go here -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                 data-ad-slot="YOUR_AD_SLOT"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <nav class="nav">
+            <button class="nav-btn active" data-view="home" onclick="app.navigate('home')">🏠 Главная</button>
+            <button class="nav-btn" data-view="plan" onclick="app.navigate('plan')">📋 План</button>
+            <button class="nav-btn" data-view="tenses" onclick="app.navigate('tenses')">📚 Времена</button>
+            <button class="nav-btn" data-view="tobe" onclick="app.navigate('tobe')">🔄 To Be</button>
+            <button class="nav-btn" data-view="stats" onclick="app.navigate('stats')">📊 Статистика</button>
+        </nav>
+
+        <div id="view-home" class="view">
+            <div class="card quick-start">
+                <h3>⚡ Быстрый старт</h3>
+                <p>Выбери готовый план:</p>
+                <div class="preset-btns">
+                    <button class="preset-btn" onclick="app.applyPreset('basic')">База: Present + Past</button>
+                    <button class="preset-btn" onclick="app.applyPreset('simple3')">Три простых</button>
+                    <button class="preset-btn" onclick="app.applyPreset('continuous')">Движение</button>
+                    <button class="preset-btn" onclick="app.applyPreset('perfect')">Результат</button>
+                    <button class="preset-btn" onclick="app.applyPreset('mixed')">Смешанный</button>
+                </div>
+                <button class="btn btn-primary" onclick="app.navigate('plan')">Или создай свой план →</button>
+            </div>
+            <div class="card">
+                <h4 class="card-title">📖 Что ты можешь делать:</h4>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li><strong>План на сегодня</strong> — выбери 1-3 времена для тренировки</li>
+                    <li><strong>Все времена</strong> — изучи правила и примеры</li>
+                    <li><strong>To Be Trainer</strong> — потренируй глагол "to be" отдельно</li>
+                    <li><strong>Статистика</strong> — следи за прогрессом и звёздами</li>
+                </ul>
+            </div>
+            <div class="card" id="todayPlanCard" style="display: none;">
+                <h4 class="card-title">✅ Твой план на сегодня:</h4>
+                <div id="todayPlanContent"></div>
+                <button class="btn btn-secondary mt-2" onclick="app.startTraining()">▶️ Начать тренировку</button>
+            </div>
+            <div class="card" id="weakItemsHome" style="display: none;">
+                <h4 class="card-title">⚠️ Слабые места:</h4>
+                <div id="weakItemsHomeContent"></div>
+            </div>
+        </div>
+
+        <div id="view-plan" class="view hidden">
+            <div class="card">
+                <h3 class="card-title">📋 План на сегодня</h3>
+                <p class="mb-2">Выбери до <strong>3 времён</strong>. Не перегружай себя! 🙂</p>
+                <div class="checkbox-list" id="tenseCheckboxes"></div>
+                <div style="margin-top: 16px; padding: 12px; background: var(--bg); border-radius: var(--radius-sm);">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="toBeWarmup" checked>
+                        <span>🔄 Разминка: TO BE (2 минуты)</span>
+                    </label>
+                </div>
+                <div id="planError" class="feedback wrong hidden mt-2">
+                    <div class="feedback-title">⚠️ Слишком много!</div>
+                    <div class="feedback-explanation">Давай не перегружаться 🙂 Выбери до 3 времён.</div>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button class="btn btn-primary" onclick="app.savePlan()">💾 Сохранить план</button>
+                    <button class="btn btn-outline" onclick="app.navigate('home')">Отмена</button>
+                </div>
+            </div>
+            <div class="card" id="currentPlanCard" style="display: none;">
+                <h4>Сохранённый план на <span id="planDate"></span>:</h4>
+                <div id="savedPlanContent"></div>
+                <button class="btn btn-secondary mt-2" onclick="app.startTraining()">▶️ Начать тренировку</button>
+            </div>
+        </div>
+
+        <div id="view-tenses" class="view hidden">
+            <div class="card">
+                <h3 class="card-title">📚 Все английские времена</h3>
+                <p class="mb-2">Нажми на время, чтобы изучить правила:</p>
+                <div class="tense-grid" id="tensesGrid"></div>
+            </div>
+        </div>
+
+        <div id="view-tense-detail" class="view hidden">
+            <div class="card">
+                <button class="btn btn-outline btn-sm mb-2" onclick="app.navigate('tenses')">← Назад</button>
+                <h2 id="detailTitle" class="card-title"></h2>
+                <p id="detailUse" class="mb-2"></p>
+                <div class="formula-box">
+                    <h4 style="margin-bottom: 12px; color: #166534;">📐 Формулы:</h4>
+                    <div id="detailFormulas"></div>
+                </div>
+                <div class="card" style="background: #fef3c7;">
+                    <h4 style="color: #92400e; margin-bottom: 12px;">🔔 Сигнальные слова:</h4>
+                    <div id="detailSignals"></div>
+                </div>
+                <div class="card">
+                    <h4 class="card-title">📝 Примеры:</h4>
+                    <div id="detailExamples"></div>
+                </div>
+                <button class="btn btn-primary" id="trainThisBtn">▶️ Тренироваться</button>
+            </div>
+        </div>
+
+        <div id="view-tobe" class="view hidden">
+            <div class="card">
+                <h3 class="card-title">🔄 To Be Trainer</h3>
+                <p class="mb-2">Глагол <strong>to be</strong> — самый важный! Потренируйся:</p>
+                <div class="tobe-cheat">
+                    <h4>📖 Шпаргалка:</h4>
+                    <table class="tobe-table">
+                        <tr><th></th><th>I</th><th>you/we/they</th><th>he/she/it</th></tr>
+                        <tr><td><strong>Present</strong></td><td>am</td><td>are</td><td>is</td></tr>
+                        <tr><td><strong>Past</strong></td><td>was</td><td>were</td><td>was</td></tr>
+                    </table>
+                    <p style="margin-top: 12px; font-size: 0.9rem;">
+                        💡 <strong>Правило:</strong> I → am, he/she/it → is, you/we/they → are
+                    </p>
+                </div>
+                <div class="flex gap-2 mb-2">
+                    <button class="btn btn-primary" onclick="app.startToBeTraining('quick')">⚡ Быстрая (2 мин)</button>
+                    <button class="btn btn-secondary" onclick="app.startToBeTraining('full')">🎯 Полная (5 мин)</button>
+                </div>
+            </div>
+            <div class="card" id="tobeStatsCard">
+                <h4 class="card-title">📊 Твой прогресс по To Be:</h4>
+                <div id="tobeStatsContent"></div>
+            </div>
+        </div>
+
+        <div id="view-train" class="view hidden">
+            <div class="exercise-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <div class="question-box">
+                    <span class="question-type" id="questionType"></span>
+                    <div class="question-text" id="questionText"></div>
+                    <div id="wordBuilderContainer" class="hidden">
+                        <p class="mb-1">Собери предложение:</p>
+                        <div class="word-builder" id="wordBuilder"></div>
+                        <div class="word-builder" id="wordBank"></div>
+                    </div>
+                    <div id="optionsContainer" class="hidden">
+                        <div class="options-list" id="optionsList"></div>
+                    </div>
+                    <div id="inputContainer" class="hidden">
+                        <input type="text" class="answer-input" id="answerInput" placeholder="Введи ответ...">
+                    </div>
+                    <div id="feedbackBox" class="hidden"></div>
+                    <div id="hintBox" class="hint-box hidden">
+                        <div class="hint-title">💡 Подсказка:</div>
+                        <div id="hintContent"></div>
+                    </div>
+                    <div id="miniCheat" class="tobe-cheat hidden">
+                        <div class="hint-title">📖 Мини-шпаргалка:</div>
+                        <div id="miniCheatContent"></div>
+                    </div>
+                </div>
+                <div class="flex gap-2" id="actionButtons">
+                    <button class="btn btn-primary" id="checkBtn" onclick="app.checkAnswer()">Проверить</button>
+                    <button class="btn btn-outline" id="hintBtn" onclick="app.showHint()">💡 Подсказка</button>
+                    <button class="btn btn-secondary hidden" id="nextBtn" onclick="app.nextQuestion()">Дальше →</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-result" class="view hidden">
+            <div class="card">
+                <div class="result-summary">
+                    <div class="result-score" id="resultScore">0%</div>
+                    <div class="result-message" id="resultMessage"></div>
+                    <div id="resultStars" class="stars-display mb-2"></div>
+                    <div id="resultDetails"></div>
+                </div>
+                <div id="weakItemsResult" class="hidden">
+                    <h4 class="card-title">⚠️ На что обратить внимание:</h4>
+                    <div id="weakItemsList"></div>
+                </div>
+                <div class="flex gap-2 mt-2" style="justify-content: center;">
+                    <button class="btn btn-primary" onclick="app.startTraining()">🔄 Ещё раз</button>
+                    <button class="btn btn-secondary" onclick="app.navigate('plan')">📋 Новый план</button>
+                    <button class="btn btn-outline" onclick="app.navigate('home')">🏠 На главную</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-stats" class="view hidden">
+            <div class="card">
+                <h3 class="card-title">📊 Твоя статистика</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statTotalQuestions">0</div>
+                        <div class="stat-label">Всего вопросов</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statAccuracy">0%</div>
+                        <div class="stat-label">Правильных</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statStars">0</div>
+                        <div class="stat-label">Звёзд</div>
+                        <div class="stars-display" id="starsDisplay"></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statStreak">0</div>
+                        <div class="stat-label">Дней подряд</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h4 class="card-title">📅 Последние 7 дней:</h4>
+                    <div class="week-chart" id="weekChart"></div>
+                </div>
+                <div class="card" id="weakItemsStats">
+                    <h4 class="card-title">⚠️ Слабые места:</h4>
+                    <div id="weakItemsStatsContent"></div>
+                </div>
+                <div class="flex gap-2">
+                    <button class="btn btn-outline" onclick="app.exportStats()">📋 Экспорт статистики</button>
+                    <button class="btn btn-danger btn-sm" onclick="app.resetStats()">Сбросить всё</button>
+                </div>
+            </div>
+
+            <!-- Sidebar Ad -->
+            <div class="card" style="text-align:center;padding:16px;">
+                <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:8px;">📢 Реклама</p>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_AD_SLOT_2"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <div class="parent-toggle">
+                <button class="btn btn-outline btn-sm" onclick="app.toggleParentMode()">👨‍👩‍👧 Для родителей</button>
+            </div>
+            <div id="parentSection" class="parent-section hidden">
+                <h4>👨‍👩‍👧 Советы для родителей</h4>
+                <div class="parent-tip">
+                    <strong>📋 Как составлять план:</strong><br>
+                    Выбирайте максимум 2-3 времени за раз. Лучше учить меньше, но качественно!
+                </div>
+                <div class="parent-tip">
+                    <strong>⏱️ Оптимальное время:</strong><br>
+                    10-15 минут в день — идеально для ребёнка 10-12 лет.
+                </div>
+                <div class="parent-tip">
+                    <strong>💪 Как поддерживать:</strong><br>
+                    Хвалите за попытки, не ругайте за ошибки. Ошибки — это нормально!
+                </div>
+                <div class="parent-tip">
+                    <strong>🎯 Регулярность важнее:</strong><br>
+                    Лучше 10 минут каждый день, чем час раз в неделю.
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+const TENSES_DATA={
+present_simple:{
+id:'present_simple',nameRu:'Present Simple',nameEn:'Настоящее простое',
+useCases:['Для привычек: I play every day','Для фактов: Water boils at 100°','Для расписаний: The train leaves at 5'],
+formulas:{
+affirmative:'I/you/we/they + V1 (I play, I go) | he/she/it + V1+s/es (he plays, he goes)',
+negative:'I/you/we/they + don\'t + V1 (don\'t play/go) | he/she/it + doesn\'t + V1 (doesn\'t play/go)',
+question:'Do + I/you/we/they + V1? (Do you play/go?) | Does + he/she/it + V1? (Does he play/go?)',
+shortAnswers:'Yes, I do. / No, I don\'t. | Yes, he does. / No, he doesn\'t.'},
+signalWords:['every day','always','usually','often','sometimes','never','on Mondays'],
+examples:[
+{en:'I play Minecraft every day.',ru:'Я играю в Майнкрафт каждый день.'},
+{en:'She likes pizza.',ru:'Ей нравится пицца.'},
+{en:'We go to school on Mondays.',ru:'Мы ходим в школу по понедельникам.'},
+{en:'He doesn\'t watch TV.',ru:'Он не смотрит телевизор.'},
+{en:'Do they play football?',ru:'Они играют в футбол?'}],
+templates:{
+wordOrder:[
+{words:['She','plays','games','every','day'],answer:'She plays games every day.'},
+{words:['Do','you','like','pizza','?'],answer:'Do you like pizza?'},
+{words:['He','doesn\'t','watch','TV'],answer:'He doesn\'t watch TV.'}],
+multipleChoice:[
+{question:'I ___ football every day.',options:['play','plays','playing'],answer:'play',hint:'I → без окончания'},
+{question:'She ___ to school.',options:['go','goes','going'],answer:'goes',hint:'She → добавляем -es'}],
+makeQuestion:[
+{sentence:'You play games.',answer:'Do you play games?',hint:'Do + подлежащее + глагол?'},
+{sentence:'He likes pizza.',answer:'Does he like pizza?',hint:'Does + he/she/it + глагол?'}],
+makeNegative:[
+{sentence:'I play games.',answer:'I don\'t play games.',hint:'don\'t для I/you/we/they'},
+{sentence:'She watches TV.',answer:'She doesn\'t watch TV.',hint:'doesn\'t для he/she/it'}],
+fillBlank:[
+{sentence:'We ___ to school every day.',answer:'go',hint:'we → без окончания'},
+{sentence:'___ he like pizza?',answer:'Does',hint:'he → Does'}],
+findError:[
+{sentence:'She don\'t like pizza.',correct:'She doesn\'t like pizza.',hint:'She → doesn\'t'},
+{sentence:'He play games.',correct:'He plays games.',hint:'He → plays'}]
+}},
+past_simple:{
+id:'past_simple',nameRu:'Past Simple',nameEn:'Прошедшее простое',
+useCases:['Для завершённых действий: I played yesterday','Для последовательных действий','Для фактов из прошлого'],
+formulas:{
+affirmative:'Все + V2 (или +ed)',
+negative:'Все + didn\'t + V1',
+question:'Did + подлежащее + V1?',
+shortAnswers:'Yes, I did. / No, I didn\'t.'},
+signalWords:['yesterday','last week','last year','ago','in 2020','then'],
+examples:[
+{en:'I played Minecraft yesterday.',ru:'Я играл в Майнкрафт вчера.'},
+{en:'She went to school last Monday.',ru:'Она пошла в школу в прошлый понедельник.'},
+{en:'We didn\'t watch TV.',ru:'Мы не смотрели телевизор.'},
+{en:'Did they win the game?',ru:'Они выиграли игру?'}],
+templates:{
+wordOrder:[
+{words:['I','played','games','yesterday'],answer:'I played games yesterday.'},
+{words:['Did','you','go','to','school','?'],answer:'Did you go to school?'}],
+multipleChoice:[
+{question:'I ___ to school yesterday.',options:['go','went','gone'],answer:'went',hint:'go → went'},
+{question:'She ___ TV last night.',options:['watch','watched','watching'],answer:'watched',hint:'Правильный глагол → +ed'}],
+makeQuestion:[{sentence:'You played games.',answer:'Did you play games?',hint:'Did + подлежащее + V1?'}],
+makeNegative:[{sentence:'I went to school.',answer:'I didn\'t go to school.',hint:'didn\'t + V1'}],
+fillBlank:[
+{sentence:'We ___ football yesterday.',answer:'played',hint:'Правильный глагол → +ed'},
+{sentence:'___ she go home?',answer:'Did',hint:'Вопрос → Did'}],
+findError:[{sentence:'I didn\'t went to school.',correct:'I didn\'t go to school.',hint:'didn\'t + V1 (не V2!)'}]
+}},
+future_simple:{
+id:'future_simple',nameRu:'Future Simple',nameEn:'Будущее простое',
+useCases:['Для предсказаний: It will rain tomorrow','Для спонтанных решений','Для обещаний'],
+formulas:{
+affirmative:'Все + will + V1 (will play/go)',
+negative:'Все + won\'t + V1 (won\'t play/go)',
+question:'Will + подлежащее + V1? (Will you play/go?)',
+shortAnswers:'Yes, I will. / No, I won\'t.'},
+signalWords:['tomorrow','next week','next year','soon','later','in the future'],
+examples:[
+{en:'I will play Minecraft tomorrow.',ru:'Я буду играть в Майнкрафт завтра.'},
+{en:'She won\'t go to school on Sunday.',ru:'Она не пойдёт в школу в воскресенье.'},
+{en:'Will they win the game?',ru:'Они выиграют игру?'}],
+templates:{
+wordOrder:[
+{words:['I','will','play','tomorrow'],answer:'I will play tomorrow.'},
+{words:['Will','you','go','to','school','?'],answer:'Will you go to school?'}],
+multipleChoice:[
+{question:'I ___ play tomorrow.',options:['will','would','wills'],answer:'will',hint:'will для всех'},
+{question:'She ___ to school.',options:['won\'t go','willn\'t go','not will go'],answer:'won\'t go',hint:'won\'t = will not'}],
+makeQuestion:[{sentence:'You will play games.',answer:'Will you play games?',hint:'Will + подлежащее + V1?'}],
+makeNegative:[{sentence:'I will go to school.',answer:'I won\'t go to school.',hint:'won\'t = will not'}],
+fillBlank:[
+{sentence:'We ___ win the game.',answer:'will',hint:'will для всех'},
+{sentence:'___ they come tomorrow?',answer:'Will',hint:'Вопрос → Will'}],
+findError:[{sentence:'I will plays tomorrow.',correct:'I will play tomorrow.',hint:'will + V1 (без s!)'}]
+}},
+present_continuous:{
+id:'present_continuous',nameRu:'Present Continuous',nameEn:'Настоящее продолженное',
+useCases:['Для действий прямо сейчас','Для временных ситуаций','Для планов в будущем'],
+formulas:{
+affirmative:'I + am + V-ing (am playing/going) | he/she/it + is + V-ing (is playing/going) | you/we/they + are + V-ing (are playing/going)',
+negative:'I\'m not + V-ing (am not playing/going) | he/she/it + isn\'t + V-ing (isn\'t playing/going) | you/we/they + aren\'t + V-ing (aren\'t playing/going)',
+question:'Am I + V-ing? (Am I playing?) | Is he/she/it + V-ing? (Is he playing?) | Are you/we/they + V-ing? (Are you playing?)',
+shortAnswers:'Yes, I am. / No, I\'m not. | Yes, he is. / No, he isn\'t.'},
+signalWords:['now','at the moment','right now','today','look!','listen!'],
+examples:[
+{en:'I am playing Minecraft now.',ru:'Я играю в Майнкрафт сейчас.'},
+{en:'She is watching TV at the moment.',ru:'Она смотрит телевизор прямо сейчас.'},
+{en:'They aren\'t studying.',ru:'Они не учатся.'},
+{en:'Are you playing games?',ru:'Ты играешь в игры?'}],
+templates:{
+wordOrder:[
+{words:['I','am','playing','now'],answer:'I am playing now.'},
+{words:['Are','you','watching','TV','?'],answer:'Are you watching TV?'}],
+multipleChoice:[
+{question:'I ___ playing now.',options:['am','is','are'],answer:'am',hint:'I → am'},
+{question:'She ___ watching TV.',options:['am','is','are'],answer:'is',hint:'she → is'}],
+makeQuestion:[{sentence:'You are playing games.',answer:'Are you playing games?',hint:'Are + подлежащее + V-ing?'}],
+makeNegative:[{sentence:'I am playing games.',answer:'I\'m not playing games.',hint:'I\'m not'}],
+fillBlank:[
+{sentence:'We ___ studying now.',answer:'are',hint:'we → are'},
+{sentence:'___ he sleeping?',answer:'Is',hint:'he → Is'}],
+findError:[{sentence:'He am playing.',correct:'He is playing.',hint:'he → is (не am!)'}]
+}},
+past_continuous:{
+id:'past_continuous',nameRu:'Past Continuous',nameEn:'Прошедшее продолженное',
+useCases:['Для действий в конкретный момент прошлого','Для действий, прерванных другим','Для параллельных действий'],
+formulas:{
+affirmative:'I/he/she/it + was + V-ing (was playing/going) | you/we/they + were + V-ing (were playing/going)',
+negative:'I/he/she/it + wasn\'t + V-ing (wasn\'t playing/going) | you/we/they + weren\'t + V-ing (weren\'t playing/going)',
+question:'Was I/he/she/it + V-ing? (Was he playing?) | Were you/we/they + V-ing? (Were you playing?)',
+shortAnswers:'Yes, I was. / No, I wasn\'t.'},
+signalWords:["at 5 o'clock",'at that moment','while','when'],
+examples:[
+{en:'I was playing Minecraft at 5 pm.',ru:'Я играл в Майнкрафт в 5 вечера.'},
+{en:'She was watching TV when I called.',ru:'Она смотрела телевизор, когда я позвонил.'},
+{en:'They weren\'t studying.',ru:'Они не учились.'},
+{en:'Were you playing games?',ru:'Ты играл в игры?'}],
+templates:{
+wordOrder:[
+{words:['I','was','playing','at','5'],answer:'I was playing at 5.'},
+{words:['Were','you','watching','TV','?'],answer:'Were you watching TV?'}],
+multipleChoice:[
+{question:'I ___ playing at 5.',options:['was','were','am'],answer:'was',hint:'I → was'},
+{question:'They ___ studying.',options:['was','were','are'],answer:'were',hint:'they → were'}],
+makeQuestion:[{sentence:'You were playing games.',answer:'Were you playing games?',hint:'Were + подлежащее + V-ing?'}],
+makeNegative:[{sentence:'I was playing games.',answer:'I wasn\'t playing games.',hint:'wasn\'t'}],
+fillBlank:[
+{sentence:'We ___ playing football.',answer:'were',hint:'we → were'},
+{sentence:'___ he sleeping?',answer:'Was',hint:'he → Was'}],
+findError:[{sentence:'He were playing.',correct:'He was playing.',hint:'he → was (не were!)'}]
+}},
+future_continuous:{
+id:'future_continuous',nameRu:'Future Continuous',nameEn:'Будущее продолженное',
+useCases:['Для действий в конкретный момент будущего','Для запланированных действий'],
+formulas:{
+affirmative:'Все + will be + V-ing (will be playing/going)',
+negative:'Все + won\'t be + V-ing (won\'t be playing/going)',
+question:'Will + подлежащее + be + V-ing? (Will you be playing?)',
+shortAnswers:'Yes, I will. / No, I won\'t.'},
+signalWords:['at this time tomorrow','at 5 pm tomorrow'],
+examples:[
+{en:'I will be playing Minecraft at 5 pm tomorrow.',ru:'Я буду играть в Майнкрафт завтра в 5 вечера.'},
+{en:'She will be waiting for you.',ru:'Она будет ждать тебя.'}],
+templates:{
+wordOrder:[{words:['I','will','be','playing','tomorrow'],answer:'I will be playing tomorrow.'}],
+multipleChoice:[{question:'I ___ be playing tomorrow.',options:['will','would','was'],answer:'will',hint:'will be + V-ing'}],
+makeQuestion:[{sentence:'You will be playing games.',answer:'Will you be playing games?',hint:'Will + подлежащее + be + V-ing?'}],
+makeNegative:[{sentence:'I will be playing games.',answer:'I won\'t be playing games.',hint:'won\'t be'}],
+fillBlank:[{sentence:'We ___ be studying tomorrow.',answer:'will',hint:'will be'}],
+findError:[{sentence:'I will playing tomorrow.',correct:'I will be playing tomorrow.',hint:'will BE + V-ing'}]
+}},
+present_perfect:{
+id:'present_perfect',nameRu:'Present Perfect',nameEn:'Настоящее совершённое',
+useCases:['Для опыта в жизни','Для недавних действий с результатом','Для действий, начавшихся в прошлом'],
+formulas:{
+affirmative:'I/you/we/they + have + V3 (have played/gone) | he/she/it + has + V3 (has played/gone)',
+negative:'I/you/we/they + haven\'t + V3 (haven\'t played/gone) | he/she/it + hasn\'t + V3 (hasn\'t played/gone)',
+question:'Have + I/you/we/they + V3? (Have you played/gone?) | Has + he/she/it + V3? (Has he played/gone?)',
+shortAnswers:'Yes, I have. / No, I haven\'t. | Yes, he has. / No, he hasn\'t.'},
+signalWords:['already','yet','just','ever','never','since','for'],
+examples:[
+{en:'I have played Minecraft before.',ru:'Я играл в Майнкрафт раньше.'},
+{en:'She has just finished homework.',ru:'Она только что закончила домашку.'},
+{en:'They haven\'t won yet.',ru:'Они ещё не выиграли.'},
+{en:'Have you ever been to London?',ru:'Ты когда-нибудь был в Лондоне?'}],
+templates:{
+wordOrder:[
+{words:['I','have','played','before'],answer:'I have played before.'},
+{words:['Has','she','finished','?'],answer:'Has she finished?'}],
+multipleChoice:[
+{question:'I ___ played before.',options:['have','has','had'],answer:'have',hint:'I → have'},
+{question:'She ___ just arrived.',options:['have','has','had'],answer:'has',hint:'she → has'}],
+makeQuestion:[{sentence:'You have played games.',answer:'Have you played games?',hint:'Have + подлежащее + V3?'}],
+makeNegative:[{sentence:'I have played games.',answer:'I haven\'t played games.',hint:'haven\'t'}],
+fillBlank:[
+{sentence:'We ___ finished yet.',answer:'haven\'t',hint:'haven\'t + V3'},
+{sentence:'___ he arrived?',answer:'Has',hint:'he → Has'}],
+findError:[{sentence:'He have played.',correct:'He has played.',hint:'he → has (не have!)'}]
+}},
+past_perfect:{
+id:'past_perfect',nameRu:'Past Perfect',nameEn:'Прошедшее совершённое',
+useCases:['Для действий, завершившихся до другого прошлого','Для причин в прошлом'],
+formulas:{
+affirmative:'Все + had + V3 (had played/gone)',
+negative:'Все + hadn\'t + V3 (hadn\'t played/gone)',
+question:'Had + подлежащее + V3? (Had you played/gone?)',
+shortAnswers:'Yes, I had. / No, I hadn\'t.'},
+signalWords:['before','after','by the time'],
+examples:[
+{en:'I had finished homework before dinner.',ru:'Я закончил домашку до ужина.'},
+{en:'She had never played Minecraft before.',ru:'Она никогда раньше не играла в Майнкрафт.'}],
+templates:{
+wordOrder:[{words:['I','had','finished','before'],answer:'I had finished before.'}],
+multipleChoice:[{question:'I ___ finished before.',options:['had','have','has'],answer:'had',hint:'had + V3'}],
+makeQuestion:[{sentence:'You had played games.',answer:'Had you played games?',hint:'Had + подлежащее + V3?'}],
+makeNegative:[{sentence:'I had played games.',answer:'I hadn\'t played games.',hint:'hadn\'t'}],
+fillBlank:[{sentence:'We ___ left before him.',answer:'had',hint:'had + V3'}],
+findError:[{sentence:'I have finished before he came.',correct:'I had finished before he came.',hint:'Past Perfect → had'}]
+}},
+future_perfect:{
+id:'future_perfect',nameRu:'Future Perfect',nameEn:'Будущее совершённое',
+useCases:['Для действий, завершившихся к моменту в будущем'],
+formulas:{
+affirmative:'Все + will have + V3 (will have played/gone)',
+negative:'Все + won\'t have + V3 (won\'t have played/gone)',
+question:'Will + подлежащее + have + V3? (Will you have played/gone?)',
+shortAnswers:'Yes, I will. / No, I won\'t.'},
+signalWords:['by','by the time','before'],
+examples:[
+{en:'I will have finished homework by 8 pm.',ru:'Я закончу домашку к 8 вечера.'},
+{en:'She will have left before you arrive.',ru:'Она уйдёт до твоего прихода.'}],
+templates:{
+wordOrder:[{words:['I','will','have','finished','by','5'],answer:'I will have finished by 5.'}],
+multipleChoice:[{question:'I ___ have finished by 5.',options:['will','would','was'],answer:'will',hint:'will have + V3'}],
+makeQuestion:[{sentence:'You will have played games.',answer:'Will you have played games?',hint:'Will + подлежащее + have + V3?'}],
+makeNegative:[{sentence:'I will have played games.',answer:'I won\'t have played games.',hint:'won\'t have'}],
+fillBlank:[{sentence:'We ___ have left by then.',answer:'will',hint:'will have'}],
+findError:[{sentence:'I will has finished by 5.',correct:'I will have finished by 5.',hint:'will HAVE + V3'}]
+}}
+};
+
+const TOBE_EXERCISES={
+present:[
+{type:'choose',question:'I ___ happy today.',options:['am','is','are'],correctAnswer:'am',hint:'I → am'},
+{type:'choose',question:'He ___ ready now.',options:['am','is','are'],correctAnswer:'is',hint:'he → is'},
+{type:'choose',question:'She ___ at school today.',options:['am','is','are'],correctAnswer:'is',hint:'she → is'},
+{type:'choose',question:'It ___ big.',options:['am','is','are'],correctAnswer:'is',hint:'it → is'},
+{type:'choose',question:'You ___ kind.',options:['am','is','are'],correctAnswer:'are',hint:'you → are'},
+{type:'choose',question:'We ___ friends now.',options:['am','is','are'],correctAnswer:'are',hint:'we → are'},
+{type:'choose',question:'They ___ here today.',options:['am','is','are'],correctAnswer:'are',hint:'they → are'},
+{type:'fill',question:'I ___ at home now.',correctAnswer:'am',hint:'I → am'},
+{type:'fill',question:'He ___ okay today.',correctAnswer:'is',hint:'he → is'},
+{type:'fill',question:'We ___ ready now.',correctAnswer:'are',hint:'we → are'},
+{type:'question',question:'___ you ready now?',options:['Are','Is','Am'],correctAnswer:'Are',hint:'you → Are'},
+{type:'question',question:'___ he okay today?',options:['Are','Is','Am'],correctAnswer:'Is',hint:'he → Is'},
+{type:'negative',question:'I ___ (not) tired today.',correctAnswer:'am not',hint:'I am not'},
+{type:'negative',question:'He ___ (not) here now.',correctAnswer:'is not',short:"isn't",hint:"He is not / He isn't"},
+{type:'translate',question:'Я дома сейчас.',correctAnswer:'I am at home now',hint:'I am at home now'},
+{type:'translate',question:'Он готов сегодня.',correctAnswer:'He is ready today',hint:'He is ready today'},
+{type:'translate',question:'Мы в школе сейчас.',correctAnswer:'We are at school now',hint:'We are at school now'},
+{type:'translate',question:'Они здесь сегодня.',correctAnswer:'They are here today',hint:'They are here today'}
+],
+past:[
+{type:'choose',question:'I ___ happy yesterday.',options:['was','were'],correctAnswer:'was',hint:'I → was'},
+{type:'choose',question:'He ___ at school yesterday.',options:['was','were'],correctAnswer:'was',hint:'he → was'},
+{type:'choose',question:'They ___ here yesterday.',options:['was','were'],correctAnswer:'were',hint:'they → were'},
+{type:'choose',question:'We ___ friends last year.',options:['was','were'],correctAnswer:'were',hint:'we → were'},
+{type:'fill',question:'She ___ tired yesterday.',correctAnswer:'was',hint:'she → was'},
+{type:'fill',question:'You ___ late yesterday.',correctAnswer:'were',hint:'you → were'},
+{type:'question',question:'___ you there yesterday?',options:['Were','Was'],correctAnswer:'Were',hint:'you → Were'},
+{type:'question',question:'___ he okay yesterday?',options:['Were','Was'],correctAnswer:'Was',hint:'he → Was'},
+{type:'negative',question:'I ___ (not) there yesterday.',correctAnswer:'was not',short:"wasn't",hint:"was not / wasn't"},
+{type:'translate',question:'Я был дома вчера.',correctAnswer:'I was at home yesterday',hint:'I was at home yesterday'},
+{type:'translate',question:'Они были в школе вчера.',correctAnswer:'They were at school yesterday',hint:'They were at school yesterday'}
+]
+};
+
+const state={
+currentView:'home',
+todayPlan:null,
+session:{
+active:false,
+questions:[],
+currentIndex:0,
+correct:0,
+wrong:0,
+consecutiveErrors:0,
+currentTense:null,
+mode:'tenses'
+},
+stats:{
+totalQuestions:0,
+correctAnswers:0,
+stars:0,
+streak:0,
+lastPracticeDate:null,
+dailyStats:{},
+weakItems:{}
+},
+tobeStats:{
+total:0,
+correct:0,
+weakPairs:{}
+}
+};
+
+const storage={
+load(){
+try{
+const plan=localStorage.getItem('tenseTrainer_todayPlan');
+const stats=localStorage.getItem('tenseTrainer_stats');
+const tobe=localStorage.getItem('tenseTrainer_tobeStats');
+const theme=localStorage.getItem('tenseTrainer_theme');
+if(plan)state.todayPlan=JSON.parse(plan);
+if(stats)state.stats=JSON.parse(stats);
+if(tobe)state.tobeStats=JSON.parse(tobe);
+if(theme)document.documentElement.setAttribute('data-theme',theme);
+}catch(e){console.error('Storage load error:',e);}
+},
+save(){
+try{
+localStorage.setItem('tenseTrainer_todayPlan',JSON.stringify(state.todayPlan));
+localStorage.setItem('tenseTrainer_stats',JSON.stringify(state.stats));
+localStorage.setItem('tenseTrainer_tobeStats',JSON.stringify(state.tobeStats));
+}catch(e){console.error('Storage save error:',e);}
+},
+saveTheme(theme){
+localStorage.setItem('tenseTrainer_theme',theme);
+}
+};
+
+const helpers={
+shuffle(array){
+const arr=[...array];
+for(let i=arr.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1));
+[arr[i],arr[j]]=[arr[j],arr[i]];
+}
+return arr;
+},
+pick(array){
+return array[Math.floor(Math.random()*array.length)];
+},
+getToday(){
+return new Date().toISOString().split('T')[0];
+},
+updateStreak(){
+const today=helpers.getToday();
+const last=state.stats.lastPracticeDate;
+if(!last){
+state.stats.streak=1;
+}else if(last!==today){
+const lastDate=new Date(last);
+const todayDate=new Date(today);
+const diffDays=(todayDate-lastDate)/(1000*60*60*24);
+if(diffDays===1){
+state.stats.streak++;
+}else if(diffDays>1){
+state.stats.streak=1;
+}
+}
+state.stats.lastPracticeDate=today;
+},
+addStars(count){
+state.stats.stars+=count;
+},
+recordWeakItem(key,tense){
+if(!state.stats.weakItems[tense])state.stats.weakItems[tense]={};
+if(!state.stats.weakItems[tense][key])state.stats.weakItems[tense][key]=0;
+state.stats.weakItems[tense][key]++;
+},
+recordToBeWeak(subject,correctForm){
+const key=`${subject}→${correctForm}`;
+if(!state.tobeStats.weakPairs[key])state.tobeStats.weakPairs[key]=0;
+state.tobeStats.weakPairs[key]++;
+}
+};
+
+const exerciseGen={
+generateForTense(tenseId,count=10){
+const tense=TENSES_DATA[tenseId];
+const exercises=[];
+const templates=tense.templates;
+const types=['wordOrder','multipleChoice','makeQuestion','makeNegative','fillBlank','findError'];
+for(let i=0;i<count;i++){
+const type=types[i%types.length];
+const templateList=templates[type];
+if(!templateList||templateList.length===0)continue;
+const template=helpers.pick(templateList);
+const exercise=this.createExercise(type,template,tense);
+exercise.tense=tenseId;
+exercises.push(exercise);
+}
+return helpers.shuffle(exercises);
+},
+createExercise(type,template,tense){
+const base={type,tense:tense.id};
+switch(type){
+case'wordOrder':
+return{...base,subtype:'wordOrder',words:helpers.shuffle(template.words),correctAnswer:template.answer,hint:'Собери предложение в правильном порядке'};
+case'multipleChoice':
+return{...base,subtype:'multipleChoice',question:template.question,options:template.options,correctAnswer:template.answer,hint:template.hint};
+case'makeQuestion':
+return{...base,subtype:'makeQuestion',question:`Сделай вопрос: "${template.sentence}"`,correctAnswer:template.answer,hint:template.hint};
+case'makeNegative':
+return{...base,subtype:'makeNegative',question:`Сделай отрицание: "${template.sentence}"`,correctAnswer:template.answer,hint:template.hint};
+case'fillBlank':
+return{...base,subtype:'fillBlank',question:`Вставь пропущенное: "${template.sentence}"`,correctAnswer:template.answer,hint:template.hint};
+case'findError':
+return{...base,subtype:'findError',question:`Найди и исправь ошибку: "${template.sentence}"`,correctAnswer:template.correct,hint:template.hint};
+default:
+return base;
+}
+},
+generateToBe(count=10){
+const exercises=[];
+const present=helpers.shuffle([...TOBE_EXERCISES.present]).slice(0,Math.ceil(count/2));
+const past=helpers.shuffle([...TOBE_EXERCISES.past]).slice(0,Math.floor(count/2));
+[...present,...past].forEach(ex=>{
+exercises.push({...ex,type:'tobe',tense:'tobe'});
+});
+return helpers.shuffle(exercises);
+}
+};
+
+const renderers={
+home(){
+const planCard=document.getElementById('todayPlanCard');
+const planContent=document.getElementById('todayPlanContent');
+const weakCard=document.getElementById('weakItemsHome');
+const weakContent=document.getElementById('weakItemsHomeContent');
+const streakDisplay=document.getElementById('streakDisplay');
+if(state.stats.streak>0){
+streakDisplay.innerHTML=`🔥 Дней подряд: <strong>${state.stats.streak}</strong>`;
+}else{
+streakDisplay.innerHTML='Начни учиться сегодня! 🚀';
+}
+if(state.todayPlan&&state.todayPlan.date===helpers.getToday()){
+planCard.style.display='block';
+const tenses=state.todayPlan.tenses.map(t=>TENSES_DATA[t].nameRu).join(', ');
+const tobe=state.todayPlan.toBeWarmup?' + To Be разминка':'';
+planContent.innerHTML=`<p><strong>${tenses}</strong>${tobe}</p>`;
+}else{
+planCard.style.display='none';
+}
+const weakItems=Object.entries(state.stats.weakItems);
+if(weakItems.length>0){
+weakCard.style.display='block';
+weakContent.innerHTML=weakItems.slice(0,3).map(([tense,items])=>{
+const tenseName=TENSES_DATA[tense]?.nameRu||tense;
+const itemList=Object.entries(items).sort((a,b)=>b[1]-a[1]).slice(0,2);
+return`<p>• <strong>${tenseName}</strong>: ${itemList.map(([k,v])=>`${k} (${v})`).join(', ')}</p>`;
+}).join('');
+}else{
+weakCard.style.display='none';
+}
+},
+plan(){
+const container=document.getElementById('tenseCheckboxes');
+const savedPlanCard=document.getElementById('currentPlanCard');
+const planDate=document.getElementById('planDate');
+const savedContent=document.getElementById('savedPlanContent');
+container.innerHTML=Object.values(TENSES_DATA).map(tense=>`
+<label class="checkbox-item" data-tense="${tense.id}">
+<input type="checkbox" value="${tense.id}" onchange="app.onTenseCheckbox(this)">
+<div>
+<div class="tense-name">${tense.nameRu}</div>
+<div class="tense-desc">${tense.nameEn}</div>
+</div>
+</label>
+`).join('');
+if(state.todayPlan&&state.todayPlan.date===helpers.getToday()){
+savedPlanCard.style.display='block';
+planDate.textContent=state.todayPlan.date;
+const tenses=state.todayPlan.tenses.map(t=>TENSES_DATA[t]?.nameRu||t).join(', ');
+const tobe=state.todayPlan.toBeWarmup?'<p>🔄 To Be разминка: <strong>да</strong></p>':'';
+savedContent.innerHTML=`<p>📚 Времена: <strong>${tenses}</strong></p>${tobe}`;
+state.todayPlan.tenses.forEach(t=>{
+const cb=container.querySelector(`input[value="${t}"]`);
+if(cb){
+cb.checked=true;
+cb.closest('.checkbox-item').classList.add('checked');
+}
+});
+document.getElementById('toBeWarmup').checked=state.todayPlan.toBeWarmup;
+}else{
+savedPlanCard.style.display='none';
+}
+},
+tenses(){
+const grid=document.getElementById('tensesGrid');
+grid.innerHTML=Object.values(TENSES_DATA).map(tense=>`
+<div class="tense-card" onclick="app.showTenseDetail('${tense.id}')">
+<h4>${tense.nameRu}</h4>
+<p style="color:var(--text-muted);margin-bottom:8px;">${tense.nameEn}</p>
+<p class="example">${tense.examples[0].en}</p>
+</div>
+`).join('');
+},
+tenseDetail(tenseId){
+const tense=TENSES_DATA[tenseId];
+document.getElementById('detailTitle').textContent=`${tense.nameRu} — ${tense.nameEn}`;
+document.getElementById('detailUse').innerHTML=tense.useCases.map(u=>`• ${u}`).join('<br>');
+document.getElementById('detailFormulas').innerHTML=`
+<div class="formula-row"><span class="formula-label pos">+</span><span>${tense.formulas.affirmative}</span></div>
+<div class="formula-row"><span class="formula-label neg">−</span><span>${tense.formulas.negative}</span></div>
+<div class="formula-row"><span class="formula-label q">?</span><span>${tense.formulas.question}</span></div>
+<div class="formula-row" style="background:#fef3c7;border-radius:4px;padding:8px;"><span style="margin-right:8px;">👍/👎</span><span>${tense.formulas.shortAnswers}</span></div>
+`;
+document.getElementById('detailSignals').innerHTML=tense.signalWords.map(w=>`<span style="display:inline-block;padding:4px 12px;background:white;border-radius:20px;margin:4px;font-size:0.9rem;">${w}</span>`).join('');
+document.getElementById('detailExamples').innerHTML=tense.examples.map(ex=>`
+<div style="padding:12px;background:var(--bg);border-radius:var(--radius-sm);margin-bottom:8px;">
+<p style="font-weight:500;">${ex.en}</p>
+<p style="color:var(--text-muted);font-size:0.9rem;">${ex.ru}</p>
+</div>
+`).join('');
+document.getElementById('trainThisBtn').onclick=()=>{
+app.startTraining([tenseId]);
+};
+},
+stats(){
+document.getElementById('statTotalQuestions').textContent=state.stats.totalQuestions;
+const accuracy=state.stats.totalQuestions>0?Math.round((state.stats.correctAnswers/state.stats.totalQuestions)*100):0;
+document.getElementById('statAccuracy').textContent=accuracy+'%';
+document.getElementById('statStars').textContent=state.stats.stars;
+document.getElementById('statStreak').textContent=state.stats.streak;
+const starsDisplay=document.getElementById('starsDisplay');
+const starCount=Math.min(state.stats.stars,10);
+starsDisplay.innerHTML=Array(10).fill(0).map((_,i)=>`<span class="star ${i<starCount?'earned':'empty'}">★</span>`).join('');
+const weekChart=document.getElementById('weekChart');
+const days=[];
+for(let i=6;i>=0;i--){
+const d=new Date();
+d.setDate(d.getDate()-i);
+days.push(d.toISOString().split('T')[0]);
+}
+const maxVal=Math.max(...days.map(d=>state.stats.dailyStats[d]?.total||0),1);
+weekChart.innerHTML=days.map(date=>{
+const stat=state.stats.dailyStats[date];
+const val=stat?stat.total:0;
+const height=Math.max((val/maxVal)*100,10);
+const dayName=new Date(date).toLocaleDateString('ru',{weekday:'short'});
+return`<div class="day-bar" style="height:${height}%" title="${val} вопросов"><span class="day-value">${val}</span><span class="day-label">${dayName}</span></div>`;
+}).join('');
+const weakContent=document.getElementById('weakItemsStatsContent');
+const weakItems=Object.entries(state.stats.weakItems);
+if(weakItems.length>0){
+weakContent.innerHTML=weakItems.map(([tense,items])=>{
+const tenseName=TENSES_DATA[tense]?.nameRu||tense;
+const itemList=Object.entries(items).sort((a,b)=>b[1]-a[1]).slice(0,3);
+return`<div class="weak-item"><span class="weak-item-icon">⚠️</span><div class="weak-item-text"><strong>${tenseName}</strong><div>${itemList.map(([k,v])=>`${k}`).join(', ')}</div></div><span class="weak-item-count">${Object.values(items).reduce((a,b)=>a+b,0)}</span></div>`;
+}).join('');
+}else{
+weakContent.innerHTML='<p style="color:var(--text-muted);">Отлично! Пока нет слабых мест 🎉</p>';
+}
+},
+tobe(){
+const statsContent=document.getElementById('tobeStatsContent');
+const accuracy=state.tobeStats.total>0?Math.round((state.tobeStats.correct/state.tobeStats.total)*100):0;
+statsContent.innerHTML=`<div class="stats-grid" style="margin-bottom:0;"><div class="stat-card"><div class="stat-value">${state.tobeStats.total}</div><div class="stat-label">Всего вопросов</div></div><div class="stat-card"><div class="stat-value">${accuracy}%</div><div class="stat-label">Правильных</div></div></div>`;
+const weakPairs=Object.entries(state.tobeStats.weakPairs);
+if(weakPairs.length>0){
+statsContent.innerHTML+=`<div style="margin-top:16px;"><h5 style="margin-bottom:8px;">⚠️ Частые ошибки:</h5>${weakPairs.sort((a,b)=>b[1]-a[1]).slice(0,3).map(([pair,count])=>`<span style="display:inline-block;padding:4px 12px;background:#fee2e2;border-radius:20px;margin:4px;font-size:0.85rem;">${pair} (${count})</span>`).join('')}</div>`;
+}
+}
+};
+
+const app={
+init(){
+storage.load();
+this.navigate('home');
+},
+navigate(view){
+document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+const viewEl=document.getElementById(`view-${view}`);
+if(viewEl){
+viewEl.classList.remove('hidden');
+document.querySelector(`.nav-btn[data-view="${view}"]`)?.classList.add('active');
+state.currentView=view;
+switch(view){
+case'home':renderers.home();break;
+case'plan':renderers.plan();break;
+case'tenses':renderers.tenses();break;
+case'stats':renderers.stats();break;
+case'tobe':renderers.tobe();break;
+}
+}
+},
+showTenseDetail(tenseId){
+renderers.tenseDetail(tenseId);
+document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+document.getElementById('view-tense-detail').classList.remove('hidden');
+},
+toggleTheme(){
+const current=document.documentElement.getAttribute('data-theme');
+const next=current==='dark'?'light':'dark';
+document.documentElement.setAttribute('data-theme',next);
+storage.saveTheme(next);
+},
+onTenseCheckbox(checkbox){
+const item=checkbox.closest('.checkbox-item');
+const checked=document.querySelectorAll('.checkbox-item.checked').length;
+if(checkbox.checked){
+if(checked>=3){
+checkbox.checked=false;
+document.getElementById('planError').classList.remove('hidden');
+setTimeout(()=>document.getElementById('planError').classList.add('hidden'),3000);
+return;
+}
+item.classList.add('checked');
+}else{
+item.classList.remove('checked');
+}
+},
+applyPreset(preset){
+const presets={
+basic:['present_simple','past_simple'],
+simple3:['present_simple','past_simple','future_simple'],
+continuous:['present_continuous','past_continuous'],
+perfect:['present_perfect','past_perfect'],
+mixed:helpers.shuffle(['present_simple','past_simple','future_simple','present_continuous']).slice(0,2)
+};
+const tenses=presets[preset]||presets.basic;
+this.savePlanWithTenses(tenses,true);
+},
+savePlan(){
+const checkboxes=document.querySelectorAll('#tenseCheckboxes input:checked');
+const tenses=Array.from(checkboxes).map(cb=>cb.value);
+const toBeWarmup=document.getElementById('toBeWarmup').checked;
+if(tenses.length===0){
+alert('Выбери хотя бы одно время!');
+return;
+}
+this.savePlanWithTenses(tenses,toBeWarmup);
+},
+savePlanWithTenses(tenses,toBeWarmup){
+state.todayPlan={
+date:helpers.getToday(),
+tenses:tenses,
+toBeWarmup:toBeWarmup
+};
+storage.save();
+this.navigate('home');
+},
+startTraining(tenses=null){
+const targetTenses=tenses||(state.todayPlan?.tenses);
+if(!targetTenses||targetTenses.length===0){
+alert('Сначала выбери план на сегодня!');
+this.navigate('plan');
+return;
+}
+if(state.todayPlan?.toBeWarmup&&!tenses){
+this.startToBeTraining('quick',()=>{
+this.startTenseTraining(targetTenses);
+});
+}else{
+this.startTenseTraining(targetTenses);
+}
+},
+startTenseTraining(tenses){
+state.session.mode='tenses';
+state.session.questions=[];
+tenses.forEach(tense=>{
+const questions=exerciseGen.generateForTense(tense,10);
+state.session.questions.push(...questions);
+});
+state.session.questions=helpers.shuffle(state.session.questions);
+state.session.currentIndex=0;
+state.session.correct=0;
+state.session.wrong=0;
+state.session.consecutiveErrors=0;
+state.session.active=true;
+helpers.updateStreak();
+this.showQuestion();
+},
+startToBeTraining(mode,callback=null){
+state.session.mode='tobe';
+state.session.questions=exerciseGen.generateToBe(mode==='quick'?8:15);
+state.session.currentIndex=0;
+state.session.correct=0;
+state.session.wrong=0;
+state.session.consecutiveErrors=0;
+state.session.active=true;
+state.session.tobeCallback=callback;
+this.showQuestion();
+},
+showQuestion(){
+if(state.session.currentIndex>=state.session.questions.length){
+this.showResults();
+return;
+}
+const q=state.session.questions[state.session.currentIndex];
+state.session.currentTense=q.tense;
+const progress=((state.session.currentIndex)/state.session.questions.length)*100;
+document.getElementById('progressFill').style.width=progress+'%';
+document.getElementById('feedbackBox').classList.add('hidden');
+document.getElementById('hintBox').classList.add('hidden');
+document.getElementById('miniCheat').classList.add('hidden');
+document.getElementById('checkBtn').classList.remove('hidden');
+document.getElementById('nextBtn').classList.add('hidden');
+document.getElementById('hintBtn').classList.remove('hidden');
+const typeLabels={
+wordOrder:'Собери предложение',
+multipleChoice:'Выбери правильный вариант',
+makeQuestion:'Сделай вопрос',
+makeNegative:'Сделай отрицание',
+fillBlank:'Вставь пропущенное',
+findError:'Исправь ошибку',
+tobe:'To Be'
+};
+document.getElementById('questionType').textContent=typeLabels[q.subtype]||typeLabels[q.type]||'Вопрос';
+document.getElementById('questionText').innerHTML=q.question;
+this.renderExerciseType(q);
+document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+document.getElementById('view-train').classList.remove('hidden');
+},
+renderExerciseType(q){
+document.getElementById('wordBuilderContainer').classList.add('hidden');
+document.getElementById('optionsContainer').classList.add('hidden');
+document.getElementById('inputContainer').classList.add('hidden');
+if(q.subtype==='wordOrder'){
+document.getElementById('wordBuilderContainer').classList.remove('hidden');
+const builder=document.getElementById('wordBuilder');
+const bank=document.getElementById('wordBank');
+builder.innerHTML='';
+builder.classList.remove('filled');
+bank.innerHTML=q.words.map(w=>`<span class="word-slot" data-word="${w}" onclick="app.onWordClick(this)">${w}</span>`).join('');
+}else if(q.subtype==='multipleChoice'||(q.type==='tobe'&&q.options)){
+document.getElementById('optionsContainer').classList.remove('hidden');
+document.getElementById('optionsList').innerHTML=q.options.map(opt=>`<button class="option-btn" data-answer="${opt}" onclick="app.onOptionClick(this)">${opt}</button>`).join('');
+}else{
+document.getElementById('inputContainer').classList.remove('hidden');
+const input=document.getElementById('answerInput');
+input.value='';
+input.focus();
+input.onkeydown=(e)=>{if(e.key==='Enter')this.checkAnswer();};
+}
+},
+onWordClick(el){
+const builder=document.getElementById('wordBuilder');
+const bank=document.getElementById('wordBank');
+if(el.parentElement===bank){
+builder.appendChild(el);
+}else{
+bank.appendChild(el);
+}
+if(builder.children.length>0){
+builder.classList.add('filled');
+}else{
+builder.classList.remove('filled');
+}
+},
+onOptionClick(el){
+document.querySelectorAll('.option-btn').forEach(btn=>btn.classList.remove('selected'));
+el.classList.add('selected');
+},
+checkAnswer(){
+const q=state.session.questions[state.session.currentIndex];
+let userAnswer='';
+if(q.subtype==='wordOrder'){
+const words=Array.from(document.getElementById('wordBuilder').children).map(el=>el.dataset.word);
+userAnswer=words.join(' ');
+}else if(q.subtype==='multipleChoice'||(q.type==='tobe'&&q.options)){
+const selected=document.querySelector('.option-btn.selected');
+userAnswer=selected?selected.dataset.answer:'';
+}else{
+userAnswer=document.getElementById('answerInput').value.trim();
+}
+if(!userAnswer)return;
+// Normalize answers for comparison: lowercase, remove punctuation, extra spaces
+const normalize=(s)=>s.toLowerCase().replace(/[.?!,;:]/g,'').replace(/\s+/g,' ').trim();
+const correct=normalize(userAnswer)===normalize(q.correctAnswer);
+this.showFeedback(correct,q);
+state.stats.totalQuestions++;
+state.tobeStats.total++;
+if(correct){
+state.session.correct++;
+state.stats.correctAnswers++;
+state.tobeStats.correct++;
+state.session.consecutiveErrors=0;
+}else{
+state.session.wrong++;
+state.session.consecutiveErrors++;
+if(q.tense&&q.tense!=='tobe'){
+helpers.recordWeakItem(q.subtype||q.type,q.tense);
+}
+if(q.type==='tobe'){
+const subject=q.question.match(/^(I|you|he|she|it|we|they)\b/i)?.[1];
+if(subject)helpers.recordToBeWeak(subject.toLowerCase(),q.correctAnswer);
+}
+if(state.session.consecutiveErrors>=2&&q.tense){
+this.showMiniCheat(q.tense);
+}
+}
+storage.save();
+document.getElementById('checkBtn').classList.add('hidden');
+document.getElementById('hintBtn').classList.add('hidden');
+document.getElementById('nextBtn').classList.remove('hidden');
+if(q.subtype==='multipleChoice'||(q.type==='tobe'&&q.options)){
+document.querySelectorAll('.option-btn').forEach(btn=>{
+btn.disabled=true;
+if(btn.dataset.answer===q.correctAnswer){
+btn.classList.add('correct');
+}else if(btn.classList.contains('selected')){
+btn.classList.add('wrong');
+}
+});
+}
+},
+showFeedback(correct,q){
+const box=document.getElementById('feedbackBox');
+box.classList.remove('hidden','correct','wrong');
+box.classList.add(correct?'correct':'wrong');
+box.innerHTML=`<div class="feedback-title">${correct?'✅ Правильно!':'❌ Неправильно'}</div><div class="feedback-explanation">${correct?'Молодец! Продолжай в том же духе!':`Правильный ответ: <strong>${q.correctAnswer}</strong>`}${q.hint?`<br><br>💡 ${q.hint}`:''}</div>`;
+},
+showHint(){
+const q=state.session.questions[state.session.currentIndex];
+const box=document.getElementById('hintBox');
+const content=document.getElementById('hintContent');
+box.classList.remove('hidden');
+if(q.hint){
+content.textContent=q.hint;
+}else if(q.tense&&TENSES_DATA[q.tense]){
+const tense=TENSES_DATA[q.tense];
+content.innerHTML=`<strong>${tense.nameRu}:</strong><br>+ ${tense.formulas.affirmative}<br>Сигнальные слова: ${tense.signalWords.slice(0,3).join(', ')}`;
+}else{
+content.textContent='Подумай ещё раз! 💪';
+}
+},
+showMiniCheat(tenseId){
+if(tenseId==='tobe')return;
+const tense=TENSES_DATA[tenseId];
+if(!tense)return;
+const mini=document.getElementById('miniCheat');
+const content=document.getElementById('miniCheatContent');
+mini.classList.remove('hidden');
+content.innerHTML=`<strong>${tense.nameRu}</strong><br>+ ${tense.formulas.affirmative}<br>− ${tense.formulas.negative}<br>? ${tense.formulas.question}`;
+},
+nextQuestion(){
+state.session.currentIndex++;
+this.showQuestion();
+},
+showResults(){
+const total=state.session.questions.length;
+const correct=state.session.correct;
+const percentage=Math.round((correct/total)*100);
+const today=helpers.getToday();
+if(!state.stats.dailyStats[today]){
+state.stats.dailyStats[today]={total:0,correct:0};
+}
+state.stats.dailyStats[today].total+=total;
+state.stats.dailyStats[today].correct+=correct;
+const newStars=Math.floor(correct/10);
+if(newStars>0)helpers.addStars(newStars);
+storage.save();
+document.getElementById('resultScore').textContent=percentage+'%';
+let message='';
+if(percentage>=90)message='Отлично! Ты молодец! 🎉';
+else if(percentage>=70)message='Хороший результат! 👍';
+else if(percentage>=50)message='Неплохо! Продолжай тренироваться! 💪';
+else message='Не сдавайся! Практика поможет! 🚀';
+document.getElementById('resultMessage').textContent=message;
+document.getElementById('resultStars').innerHTML=Array(newStars).fill('⭐').join('');
+document.getElementById('resultDetails').innerHTML=`<p>Правильных: <strong>${correct}</strong> из ${total}</p><p>Звёзд заработано: <strong>${newStars}</strong></p>`;
+const weakDiv=document.getElementById('weakItemsResult');
+const weakList=document.getElementById('weakItemsList');
+const weakItems=Object.entries(state.stats.weakItems);
+if(weakItems.length>0){
+weakDiv.classList.remove('hidden');
+weakList.innerHTML=weakItems.map(([tense,items])=>{
+const tenseName=TENSES_DATA[tense]?.nameRu||tense;
+return`<p>• <strong>${tenseName}</strong> — повтори правила</p>`;
+}).join('');
+}else{
+weakDiv.classList.add('hidden');
+}
+document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+document.getElementById('view-result').classList.remove('hidden');
+if(state.session.mode==='tobe'&&state.session.tobeCallback){
+const callback=state.session.tobeCallback;
+state.session.tobeCallback=null;
+setTimeout(callback,100);
+}
+},
+toggleParentMode(){
+const section=document.getElementById('parentSection');
+section.classList.toggle('hidden');
+},
+exportStats(){
+const data={
+stats:state.stats,
+tobeStats:state.tobeStats,
+exportedAt:new Date().toISOString()
+};
+const json=JSON.stringify(data,null,2);
+navigator.clipboard.writeText(json).then(()=>{
+alert('Статистика скопирована в буфер обмена!');
+});
+},
+resetStats(){
+if(confirm('Точно сбросить всю статистику? Это нельзя отменить!')){
+state.stats={
+totalQuestions:0,
+correctAnswers:0,
+stars:0,
+streak:0,
+lastPracticeDate:null,
+dailyStats:{},
+weakItems:{}
+};
+state.tobeStats={total:0,correct:0,weakPairs:{}};
+storage.save();
+this.navigate('stats');
+}
+}
+};
+
+document.addEventListener('DOMContentLoaded',()=>app.init());
+</script>
+</body>
+</html>
