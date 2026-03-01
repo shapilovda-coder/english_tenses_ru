@@ -1,9 +1,16 @@
 name: Deploy to Production
 
+# ⚠️ ВРЕМЕННО: только ручной запуск (workflow_dispatch)
+# Пока не добавлены secrets в GitHub — автодеплой отключен
+#
+# TODO: после добавления secrets заменить on: на:
+# on:
+#   push:
+#     branches:
+#       - master
+
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:  # только ручной запуск через GitHub UI
 
 jobs:
   deploy-prod:
@@ -24,6 +31,19 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Check secrets exist
+        run: |
+          if [ -z "${{ secrets.RENDER_API_KEY }}" ]; then
+            echo "❌ ERROR: RENDER_API_KEY not set in GitHub Secrets"
+            echo "Add it at: Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+          if [ -z "${{ secrets.RENDER_PROD_SERVICE_ID }}" ]; then
+            echo "❌ ERROR: RENDER_PROD_SERVICE_ID not set in GitHub Secrets"
+            exit 1
+          fi
+          echo "✅ Secrets configured"
 
       - name: Deploy to Render Production
         # Требует RENDER_PROD_SERVICE_ID и RENDER_API_KEY в GitHub Secrets

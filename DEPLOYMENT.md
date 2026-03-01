@@ -1,5 +1,21 @@
 # Git Flow для English Tenses Trainer
 
+## ⚠️ ВАЖНО: Нужно добавить Secrets в GitHub
+
+Перед включением автодеплоя необходимо добавить следующие secrets в GitHub:
+
+**Settings → Secrets and variables → Actions → New repository secret**
+
+| Secret | Значение | Где взять |
+|--------|----------|-----------|
+| `RENDER_API_KEY` | API ключ Render | Render Dashboard → Account Settings → API Keys |
+| `RENDER_PROD_SERVICE_ID` | ID прод-сервиса | Render Dashboard → english-tenses-trainer-prod → Settings |
+| `RENDER_STAGING_SERVICE_ID` | ID staging-сервиса | Render Dashboard → english-tenses-trainer-staging → Settings |
+
+После добавления secrets — раскомментировать `on: push:` в workflow файлах и удалить `workflow_dispatch`.
+
+---
+
 ## Ветки
 
 - `master` — production, деплоится на https://временаванглийском.рф
