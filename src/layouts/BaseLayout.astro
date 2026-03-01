@@ -1,0 +1,74 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "Английские времена — тренажер и таблица с упражнениями | Tense Trainer",
+  description = "Бесплатный тренажер английских времён с таблицей, упражнениями и тестами. Изучай Present Simple, Past Simple, Future Simple, Present Perfect онлайн. Для детей, школьников и начинающих."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title}>
+    <meta name="description" content={description}>
+    <meta name="keywords" content="английские времена, таблица английских времен, тренажер английских времен, упражнения на времена, present simple, past simple, future simple, английский для детей, изучение английского">
+    <meta name="author" content="Tense Trainer">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://временаванглийском.рф/">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content="https://временаванглийском.рф/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://временаванглийском.рф/">
+    <meta property="twitter:title" content="Tense Trainer — Бесплатный тренажер английских времён">
+    <meta property="twitter:description" content={description}>
+    <meta property="twitter:image" content="https://временаванглийском.рф/og-image.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://временаванглийском.рф/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Tense Trainer",
+        "description": "Бесплатный тренажер английских времён для детей 10-12 лет",
+        "url": "https://временаванглийском.рф/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "RUB"
+        },
+        "audience": {
+            "@type": "EducationalAudience",
+            "educationalRole": "student"
+        }
+    }
+    </script>
+
+    <slot name="head" />
+</head>
+<body>
+    <slot />
+</body>
+</html>

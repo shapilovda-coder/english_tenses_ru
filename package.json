@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Tense Trainer — Бесплатный тренажер английских времён",
   "scripts": {
-    "build": "mkdir -p frontend/build && cp src/index.html frontend/build/",
-    "start": "npx serve frontend/build"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "devDependencies": {
-    "serve": "^14.2.0"
+    "@astrojs/check": "^0.9.6",
+    "astro": "^5.18.0",
+    "typescript": "^5.9.3"
   }
 }
