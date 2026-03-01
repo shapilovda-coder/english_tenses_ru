@@ -1,255 +1,521 @@
 {
-  "present_simple": {
-    "id": "present_simple",
-    "nameRu": "Present Simple",
-    "nameEn": "Настоящее простое",
-    "useCases": [
-      "Для привычек: I play every day",
-      "Для фактов: Water boils at 100°",
-      "Для расписаний: The train leaves at 5"
+  "present-simple": {
+    "slug": "present-simple",
+    "name_ru": "Present Simple",
+    "name_en": "Настоящее простое время",
+    "short_intro_ru": "Present Simple — самое важное время в английском. Используется для привычек, фактов и расписаний.",
+    "usage_points_ru": [
+      "Привычки и повторяющиеся действия: I play football every Sunday",
+      "Общие факты и истины: Water boils at 100°C",
+      "Расписания и программы: The train leaves at 5 PM",
+      "Постоянные ситуации: I live in Moscow"
     ],
     "formulas": {
-      "affirmative": "I/you/we/they + V1 (I play, I go) | he/she/it + V1+s/es (he plays, he goes)",
-      "negative": "I/you/we/they + don't + V1 (don't play/go) | he/she/it + doesn't + V1 (doesn't play/go)",
-      "question": "Do + I/you/we/they + V1? (Do you play/go?) | Does + he/she/it + V1? (Does he play/go?)",
-      "shortAnswers": "Yes, I do. / No, I don't. | Yes, he does. / No, he doesn't."
+      "affirmative": "I/you/we/they + V1 | he/she/it + V1+s/es",
+      "negative": "I/you/we/they + don't + V1 | he/she/it + doesn't + V1",
+      "question": "Do + I/you/we/they + V1? | Does + he/she/it + V1?",
+      "short_answers": "Yes, I do. / No, I don't. | Yes, he does. / No, he doesn't."
     },
-    "signalWords": ["every day", "always", "usually", "often", "sometimes", "never", "on Mondays"],
     "examples": [
       { "en": "I play Minecraft every day.", "ru": "Я играю в Майнкрафт каждый день." },
       { "en": "She likes pizza.", "ru": "Ей нравится пицца." },
       { "en": "We go to school on Mondays.", "ru": "Мы ходим в школу по понедельникам." },
       { "en": "He doesn't watch TV.", "ru": "Он не смотрит телевизор." },
       { "en": "Do they play football?", "ru": "Они играют в футбол?" }
-    ]
+    ],
+    "signal_words": ["every day", "always", "usually", "often", "sometimes", "never", "on Mondays", "in the morning"],
+    "common_mistakes_ru": [
+      "Забывать -s для he/she/it: ❌ He play → ✅ He plays",
+      "Использовать Present Continuous для привычек: ❌ I am playing every day → ✅ I play every day",
+      "Путать do/does в вопросах: ❌ Does you play? → ✅ Do you play?"
+    ],
+    "faq_ru": [
+      {
+        "question": "Когда не нужно добавлять -s в 3-м лице?",
+        "answer": "После модальных глаголов (can, must, should) и в отрицаниях/вопросах с do/does: He can play, He doesn't play."
+      },
+      {
+        "question": "Что такое V1, V2, V3?",
+        "answer": "V1 — начальная форма (play), V2 — прошедшее время (played), V3 — причастие (played)."
+      },
+      {
+        "question": "Как отличить Present Simple от Present Continuous?",
+        "answer": "Simple — привычки и факты (every day). Continuous — прямо сейчас (now)."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "She ___ (play) tennis every weekend.", "answer": "plays", "hint": "She → -s" },
+      { "type": "fill", "question": "I ___ (not/like) coffee.", "answer": "don't like", "hint": "I → don't" },
+      { "type": "choice", "question": "___ you speak English?", "options": ["Do", "Does", "Are"], "answer": "Do", "hint": "You → Do" }
+    ],
+    "related_tenses": ["past-simple", "present-continuous", "future-simple"]
   },
-  "past_simple": {
-    "id": "past_simple",
-    "nameRu": "Past Simple",
-    "nameEn": "Прошедшее простое",
-    "useCases": [
-      "Для завершённых действий: I played yesterday",
-      "Для последовательных действий",
-      "Для фактов из прошлого"
+  "past-simple": {
+    "slug": "past-simple",
+    "name_ru": "Past Simple",
+    "name_en": "Прошедшее простое время",
+    "short_intro_ru": "Past Simple используется для завершённых действий в прошлом с конкретным временем.",
+    "usage_points_ru": [
+      "Завершённые действия в прошлом: I visited Paris last year",
+      "Последовательность действий: He woke up, had breakfast and left",
+      "Факты из прошлого: She lived in London as a child"
     ],
     "formulas": {
-      "affirmative": "Все + V2 (или +ed)",
+      "affirmative": "Все + V2 (правильные: +ed, неправильные: 2-я форма)",
       "negative": "Все + didn't + V1",
       "question": "Did + подлежащее + V1?",
-      "shortAnswers": "Yes, I did. / No, I didn't."
+      "short_answers": "Yes, I did. / No, I didn't."
     },
-    "signalWords": ["yesterday", "last week", "last year", "ago", "in 2020", "then"],
     "examples": [
       { "en": "I played Minecraft yesterday.", "ru": "Я играл в Майнкрафт вчера." },
       { "en": "She went to school last Monday.", "ru": "Она пошла в школу в прошлый понедельник." },
       { "en": "We didn't watch TV.", "ru": "Мы не смотрели телевизор." },
       { "en": "Did they win the game?", "ru": "Они выиграли игру?" }
-    ]
+    ],
+    "signal_words": ["yesterday", "last week", "last year", "ago", "in 2020", "then", "in my childhood"],
+    "common_mistakes_ru": [
+      "Использовать V1 вместо V2: ❌ I play yesterday → ✅ I played yesterday",
+      "Добавлять -ed к неправильным глаголам: ❌ I goed → ✅ I went",
+      "Забывать did в вопросах: ❌ You played? → ✅ Did you play?"
+    ],
+    "faq_ru": [
+      {
+        "question": "Как запомнить неправильные глаголы?",
+        "answer": "Группируйте по сходству: sing-sang-sung, begin-began-begun. Используйте карточки."
+      },
+      {
+        "question": "Почему в отрицании и вопросе используется V1?",
+        "answer": "Did уже показывает прошедшее время, поэтому глагол возвращается к V1: didn't go, did he play."
+      },
+      {
+        "question": "Как отличить was/were?",
+        "answer": "Was — I/he/she/it. Were — you/we/they."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "I ___ (visit) my grandma last Sunday.", "answer": "visited", "hint": "Правильный глагол → +ed" },
+      { "type": "fill", "question": "She ___ (go) to the cinema yesterday.", "answer": "went", "hint": "go → went (неправильный)" },
+      { "type": "choice", "question": "___ they watch the movie?", "options": ["Did", "Do", "Does"], "answer": "Did", "hint": "Прошлое → Did" }
+    ],
+    "related_tenses": ["present-simple", "past-continuous", "present-perfect"]
   },
-  "future_simple": {
-    "id": "future_simple",
-    "nameRu": "Future Simple",
-    "nameEn": "Будущее простое",
-    "useCases": [
-      "Для предсказаний: It will rain tomorrow",
-      "Для спонтанных решений",
-      "Для обещаний"
+  "future-simple": {
+    "slug": "future-simple",
+    "name_ru": "Future Simple",
+    "name_en": "Будущее простое время",
+    "short_intro_ru": "Future Simple используется для предсказаний, спонтанных решений и обещаний.",
+    "usage_points_ru": [
+      "Предсказания: It will rain tomorrow",
+      "Спонтанные решения: I'll help you!",
+      "Обещания: I will always love you",
+      "Угрозы/предупреждения: You will regret this!"
     ],
     "formulas": {
-      "affirmative": "Все + will + V1 (will play/go)",
-      "negative": "Все + won't + V1 (won't play/go)",
-      "question": "Will + подлежащее + V1? (Will you play/go?)",
-      "shortAnswers": "Yes, I will. / No, I won't."
+      "affirmative": "Все + will + V1",
+      "negative": "Все + won't + V1",
+      "question": "Will + подлежащее + V1?",
+      "short_answers": "Yes, I will. / No, I won't."
     },
-    "signalWords": ["tomorrow", "next week", "next year", "soon", "later", "in the future"],
     "examples": [
       { "en": "I will play Minecraft tomorrow.", "ru": "Я буду играть в Майнкрафт завтра." },
       { "en": "She won't go to school on Sunday.", "ru": "Она не пойдёт в школу в воскресенье." },
       { "en": "Will they win the game?", "ru": "Они выиграют игру?" }
-    ]
+    ],
+    "signal_words": ["tomorrow", "next week", "next year", "soon", "later", "in the future", "in 2030"],
+    "common_mistakes_ru": [
+      "Добавлять -s после will: ❌ He will plays → ✅ He will play",
+      "Путать will и be going to для планов: I'm going to visit (план) vs It will rain (предсказание)"
+    ],
+    "faq_ru": [
+      {
+        "question": "Что кратче: will или 'll?",
+        "answer": "'ll — краткая форма: I'll, you'll, he'll. В разговорной речи чаще."
+      },
+      {
+        "question": "Future Simple vs be going to?",
+        "answer": "Will — предсказания, спонтанные решения. Be going to — планы, намерения."
+      },
+      {
+        "question": "Когда не используем Future Simple?",
+        "answer": "В придаточных времени (if, when, until) используем Present Simple: I'll call when he arrives."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "I ___ (help) you with homework.", "answer": "will help", "hint": "will + V1" },
+      { "type": "fill", "question": "It ___ (not/rain) tomorrow.", "answer": "won't rain", "hint": "will not = won't" },
+      { "type": "choice", "question": "___ you marry me?", "options": ["Will", "Do", "Are"], "answer": "Will", "hint": "Предложение/обещание → Will" }
+    ],
+    "related_tenses": ["present-simple", "future-continuous", "be-going-to"]
   },
-  "present_continuous": {
-    "id": "present_continuous",
-    "nameRu": "Present Continuous",
-    "nameEn": "Настоящее продолженное",
-    "useCases": [
-      "Для действий прямо сейчас",
-      "Для временных ситуаций",
-      "Для планов в будущем"
+  "present-continuous": {
+    "slug": "present-continuous",
+    "name_ru": "Present Continuous",
+    "name_en": "Настоящее продолженное время",
+    "short_intro_ru": "Present Continuous описывает действия, происходящие прямо сейчас или временные ситуации.",
+    "usage_points_ru": [
+      "Действия прямо сейчас: I am reading a book now",
+      "Временные ситуации: I am living with my parents this month",
+      "Изменяющиеся ситуации: Your English is getting better",
+      "Планы в будущем: I am meeting John tomorrow"
     ],
     "formulas": {
-      "affirmative": "I + am + V-ing (am playing/going) | he/she/it + is + V-ing (is playing/going) | you/we/they + are + V-ing (are playing/going)",
-      "negative": "I'm not + V-ing (am not playing/going) | he/she/it + isn't + V-ing (isn't playing/going) | you/we/they + aren't + V-ing (aren't playing/going)",
-      "question": "Am I + V-ing? (Am I playing?) | Is he/she/it + V-ing? (Is he playing?) | Are you/we/they + V-ing? (Are you playing?)",
-      "shortAnswers": "Yes, I am. / No, I'm not. | Yes, he is. / No, he isn't."
+      "affirmative": "I + am + V-ing | he/she/it + is + V-ing | you/we/they + are + V-ing",
+      "negative": "I'm not / isn't / aren't + V-ing",
+      "question": "Am / Is / Are + подлежащее + V-ing?",
+      "short_answers": "Yes, I am. / No, I'm not. | Yes, he is. / No, he isn't."
     },
-    "signalWords": ["now", "at the moment", "right now", "today", "look!", "listen!"],
     "examples": [
       { "en": "I am playing Minecraft now.", "ru": "Я играю в Майнкрафт сейчас." },
       { "en": "She is watching TV at the moment.", "ru": "Она смотрит телевизор прямо сейчас." },
       { "en": "They aren't studying.", "ru": "Они не учатся." },
       { "en": "Are you playing games?", "ru": "Ты играешь в игры?" }
-    ]
+    ],
+    "signal_words": ["now", "at the moment", "right now", "today", "look!", "listen!", "currently"],
+    "common_mistakes_ru": [
+      "Забывать be: ❌ I playing → ✅ I am playing",
+      "Путать am/is/are: ❌ He are playing → ✅ He is playing",
+      "Двойное -ing: ❌ He is playying → ✅ He is playing (только одно -ing)"
+    ],
+    "faq_ru": [
+      {
+        "question": "Как образуется V-ing?",
+        "answer": "Обычно +ing: play-playing. Если e на конце → drop e: make-making. CVC с ударением → удвоение: run-running."
+      },
+      {
+        "question": "Глаголы, которые нельзя использовать в Continuous?",
+        "answer": "Глаголы состояния: know, like, want, need, love, hate, believe, understand."
+      },
+      {
+        "question": "Present Continuous для будущего?",
+        "answer": "Да, для запланированных действий: I'm meeting him tomorrow (уже договорились)."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "Look! She ___ (dance)!", "answer": "is dancing", "hint": "Look! → сейчас, she → is" },
+      { "type": "fill", "question": "We ___ (not/watch) TV right now.", "answer": "aren't watching", "hint": "We → are + not" },
+      { "type": "choice", "question": "___ you listening?", "options": ["Are", "Do", "Is"], "answer": "Are", "hint": "You → Are" }
+    ],
+    "related_tenses": ["present-simple", "past-continuous", "future-arrangements"]
   },
-  "past_continuous": {
-    "id": "past_continuous",
-    "nameRu": "Past Continuous",
-    "nameEn": "Прошедшее продолженное",
-    "useCases": [
-      "Для действий в конкретный момент прошлого",
-      "Для действий, прерванных другим",
-      "Для параллельных действий"
+  "past-continuous": {
+    "slug": "past-continuous",
+    "name_ru": "Past Continuous",
+    "name_en": "Прошедшее продолженное время",
+    "short_intro_ru": "Past Continuous описывает действия, длившиеся в определённый момент прошлого.",
+    "usage_points_ru": [
+      "Действие в конкретный момент прошлого: At 5 PM I was reading",
+      "Действие, прерванное другим: I was sleeping when the phone rang",
+      "Параллельные действия: While I was cooking, he was watching TV",
+      "Фон для другого действия: The sun was shining, birds were singing"
     ],
     "formulas": {
-      "affirmative": "I/he/she/it + was + V-ing (was playing/going) | you/we/they + were + V-ing (were playing/going)",
-      "negative": "I/he/she/it + wasn't + V-ing (wasn't playing/going) | you/we/they + weren't + V-ing (weren't playing/going)",
-      "question": "Was I/he/she/it + V-ing? (Was he playing?) | Were you/we/they + V-ing? (Were you playing?)",
-      "shortAnswers": "Yes, I was. / No, I wasn't."
+      "affirmative": "I/he/she/it + was + V-ing | you/we/they + were + V-ing",
+      "negative": "wasn't / weren't + V-ing",
+      "question": "Was / Were + подлежащее + V-ing?",
+      "short_answers": "Yes, I was. / No, I wasn't."
     },
-    "signalWords": ["at 5 o'clock", "at that moment", "while", "when"],
     "examples": [
       { "en": "I was playing Minecraft at 5 pm.", "ru": "Я играл в Майнкрафт в 5 вечера." },
       { "en": "She was watching TV when I called.", "ru": "Она смотрела телевизор, когда я позвонил." },
       { "en": "They weren't studying.", "ru": "Они не учились." },
       { "en": "Were you playing games?", "ru": "Ты играл в игры?" }
-    ]
+    ],
+    "signal_words": ["at 5 o'clock", "at that moment", "while", "when", "as", "all evening"],
+    "common_mistakes_ru": [
+      "Путать was/were: ❌ They was playing → ✅ They were playing",
+      "Использовать V2 вместо V-ing: ❌ I was played → ✅ I was playing",
+      "Забывать when для прерывания: ❌ I was sleeping the phone rang → ✅ when the phone rang"
+    ],
+    "faq_ru": [
+      {
+        "question": "Past Continuous vs Past Simple?",
+        "answer": "Continuous — длительное действие (was reading). Simple — точечное (rang)."
+      },
+      {
+        "question": "Можно ли использовать while с Past Simple?",
+        "answer": "While обычно с Continuous: While I was cooking. When — с Simple: when he arrived."
+      },
+      {
+        "question": "Как сказать 'я делал' vs 'я сделал'?",
+        "answer": "I was doing (процесс, неважно закончил ли) vs I did (факт, завершено)."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "At 8 PM I ___ (watch) TV.", "answer": "was watching", "hint": "I → was + V-ing" },
+      { "type": "fill", "question": "They ___ (not/sleep) when I came.", "answer": "weren't sleeping", "hint": "They → were + not" },
+      { "type": "choice", "question": "___ she working?", "options": ["Was", "Were", "Did"], "answer": "Was", "hint": "She → Was" }
+    ],
+    "related_tenses": ["past-simple", "present-continuous", "past-perfect"]
   },
-  "future_continuous": {
-    "id": "future_continuous",
-    "nameRu": "Future Continuous",
-    "nameEn": "Будущее продолженное",
-    "useCases": [
-      "Для действий в конкретный момент будущего",
-      "Для запланированных действий"
+  "future-continuous": {
+    "slug": "future-continuous",
+    "name_ru": "Future Continuous",
+    "name_en": "Будущее продолженное время",
+    "short_intro_ru": "Future Continuous описывает действия, которые будут в процессе в определённый момент будущего.",
+    "usage_points_ru": [
+      "Действие в конкретный момент будущего: At 8 PM tomorrow I'll be flying",
+      "Запланированные действия: I'll be meeting with clients all day",
+      "Вежливый вопрос о планах: Will you be using the car tonight?"
     ],
     "formulas": {
-      "affirmative": "Все + will be + V-ing (will be playing/going)",
-      "negative": "Все + won't be + V-ing (won't be playing/going)",
-      "question": "Will + подлежащее + be + V-ing? (Will you be playing?)",
-      "shortAnswers": "Yes, I will. / No, I won't."
+      "affirmative": "Все + will be + V-ing",
+      "negative": "Все + won't be + V-ing",
+      "question": "Will + подлежащее + be + V-ing?",
+      "short_answers": "Yes, I will. / No, I won't."
     },
-    "signalWords": ["at this time tomorrow", "at 5 pm tomorrow"],
     "examples": [
       { "en": "I will be playing Minecraft at 5 pm tomorrow.", "ru": "Я буду играть в Майнкрафт завтра в 5 вечера." },
       { "en": "She will be waiting for you.", "ru": "Она будет ждать тебя." }
-    ]
+    ],
+    "signal_words": ["at this time tomorrow", "at 5 pm tomorrow", "all day tomorrow", "in the middle of"],
+    "common_mistakes_ru": [
+      "Забывать be: ❌ I will playing → ✅ I will be playing",
+      "Путать с Future Simple для планов"
+    ],
+    "faq_ru": [
+      {
+        "question": "Future Continuous vs Future Simple?",
+        "answer": "Continuous — процесс в момент (I'll be working at 5). Simple — факт (I'll finish it)."
+      },
+      {
+        "question": "Зачем использовать Future Continuous?",
+        "answer": "Для вежливости: 'Will you be using this?' звучит мягче чем 'Will you use this?'"
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "At 10 AM I ___ (work) on the project.", "answer": "will be working", "hint": "will be + V-ing" },
+      { "type": "choice", "question": "This time tomorrow we ___ (fly) to Paris.", "options": ["will be flying", "will fly", "are flying"], "answer": "will be flying", "hint": "Конкретный момент в будущем" }
+    ],
+    "related_tenses": ["future-simple", "present-continuous", "future-perfect"]
   },
-  "present_perfect": {
-    "id": "present_perfect",
-    "nameRu": "Present Perfect",
-    "nameEn": "Настоящее совершённое",
-    "useCases": [
-      "Для опыта в жизни",
-      "Для недавних действий с результатом",
-      "Для действий, начавшихся в прошлом"
+  "present-perfect": {
+    "slug": "present-perfect",
+    "name_ru": "Present Perfect",
+    "name_en": "Настоящее совершённое время",
+    "short_intro_ru": "Present Perfect связывает прошлое с настоящим: опыт, результат, незавершённые периоды.",
+    "usage_points_ru": [
+      "Жизненный опыт: I have visited Paris (в жизни)",
+      "Недавнее действие с результатом: I have lost my keys (сейчас их нет)",
+      "Действие, начавшееся в прошлом и продолжается: I have lived here for 5 years",
+      "Незавершённый период: I have seen two films this week"
     ],
     "formulas": {
-      "affirmative": "I/you/we/they + have + V3 (have played/gone) | he/she/it + has + V3 (has played/gone)",
-      "negative": "I/you/we/they + haven't + V3 (haven't played/gone) | he/she/it + hasn't + V3 (hasn't played/gone)",
-      "question": "Have + I/you/we/they + V3? (Have you played/gone?) | Has + he/she/it + V3? (Has he played/gone?)",
-      "shortAnswers": "Yes, I have. / No, I haven't. | Yes, he has. / No, he hasn't."
+      "affirmative": "I/you/we/they + have + V3 | he/she/it + has + V3",
+      "negative": "haven't / hasn't + V3",
+      "question": "Have / Has + подлежащее + V3?",
+      "short_answers": "Yes, I have. / No, I haven't. | Yes, he has. / No, he hasn't."
     },
-    "signalWords": ["already", "yet", "just", "ever", "never", "since", "for"],
     "examples": [
       { "en": "I have played Minecraft before.", "ru": "Я играл в Майнкрафт раньше." },
       { "en": "She has just finished homework.", "ru": "Она только что закончила домашку." },
       { "en": "They haven't won yet.", "ru": "Они ещё не выиграли." },
       { "en": "Have you ever been to London?", "ru": "Ты когда-нибудь был в Лондоне?" }
-    ]
+    ],
+    "signal_words": ["already", "yet", "just", "ever", "never", "since", "for", "recently", "so far"],
+    "common_mistakes_ru": [
+      "Указание конкретного времени: ❌ I have seen him yesterday → ✅ I saw him yesterday",
+      "Путать have/has: ❌ He have seen → ✅ He has seen",
+      "Использовать V2 вместо V3: ❌ I have saw → ✅ I have seen"
+    ],
+    "faq_ru": [
+      {
+        "question": "Present Perfect vs Past Simple?",
+        "answer": "Perfect — результат/опыт (неважно когда). Simple — конкретное время (yesterday)."
+      },
+      {
+        "question": "Since или for?",
+        "answer": "Since + точка (since 2010, since Monday). For + период (for 2 hours, for 5 years)."
+      },
+      {
+        "question": "Ever и never — где ставить?",
+        "answer": "Ever в вопросах: Have you ever...? Never в утверждениях: I have never..."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "I ___ (never/visit) Paris.", "answer": "have never visited", "hint": "have + never + V3" },
+      { "type": "fill", "question": "She ___ (just/arrive).", "answer": "has just arrived", "hint": "she → has + just + V3" },
+      { "type": "choice", "question": "___ you ever ___ sushi?", "options": ["Have...eaten", "Did...eat", "Do...eat"], "answer": "Have...eaten", "hint": "Ever → Present Perfect" }
+    ],
+    "related_tenses": ["past-simple", "present-perfect-continuous", "past-perfect"]
   },
-  "past_perfect": {
-    "id": "past_perfect",
-    "nameRu": "Past Perfect",
-    "nameEn": "Прошедшее совершённое",
-    "useCases": [
-      "Для действий, завершившихся до другого прошлого",
-      "Для причин в прошлом"
+  "past-perfect": {
+    "slug": "past-perfect",
+    "name_ru": "Past Perfect",
+    "name_en": "Прошедшее совершённое время",
+    "short_intro_ru": "Past Perfect — 'прошедшее в прошлом'. Действие, которое было до другого прошлого.",
+    "usage_points_ru": [
+      "Действие до другого прошлого: When I arrived, he had already left",
+      "Причина в прошлом: I was tired because I hadn't slept",
+      "Желание, не сбывшееся в прошлом: I had hoped to see you"
     ],
     "formulas": {
-      "affirmative": "Все + had + V3 (had played/gone)",
-      "negative": "Все + hadn't + V3 (hadn't played/gone)",
-      "question": "Had + подлежащее + V3? (Had you played/gone?)",
-      "shortAnswers": "Yes, I had. / No, I hadn't."
+      "affirmative": "Все + had + V3",
+      "negative": "hadn't + V3",
+      "question": "Had + подлежащее + V3?",
+      "short_answers": "Yes, I had. / No, I hadn't."
     },
-    "signalWords": ["before", "after", "by the time"],
     "examples": [
       { "en": "I had finished homework before dinner.", "ru": "Я закончил домашку до ужина." },
       { "en": "She had never played Minecraft before.", "ru": "Она никогда раньше не играла в Майнкрафт." }
-    ]
+    ],
+    "signal_words": ["before", "after", "by the time", "when", "already", "just", "never"],
+    "common_mistakes_ru": [
+      "Использовать Present Perfect: ❌ I have finished before he came → ✅ I had finished",
+      "Забывать V3: ❌ I had went → ✅ I had gone"
+    ],
+    "faq_ru": [
+      {
+        "question": "Зачем нужен Past Perfect?",
+        "answer": "Чтобы показать порядок действий в прошлом. Без него: I ate and left (непонятно что раньше)."
+      },
+      {
+        "question": "Past Perfect vs Past Simple?",
+        "answer": "Had done (раньше) → did (потом). Временная линия: had done → did → now."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "When I came, he ___ (leave).", "answer": "had left", "hint": "Он ушёл до того как я пришёл → had + V3" },
+      { "type": "choice", "question": "She ___ never ___ such a film.", "options": ["had...seen", "has...seen", "did...see"], "answer": "had...seen", "hint": "В прошлом → had" }
+    ],
+    "related_tenses": ["past-simple", "present-perfect", "past-perfect-continuous"]
   },
-  "future_perfect": {
-    "id": "future_perfect",
-    "nameRu": "Future Perfect",
-    "nameEn": "Будущее совершённое",
-    "useCases": [
-      "Для действий, завершившихся к моменту в будущем"
+  "future-perfect": {
+    "slug": "future-perfect",
+    "name_ru": "Future Perfect",
+    "name_en": "Будущее совершённое время",
+    "short_intro_ru": "Future Perfect — действие, которое завершится к определённому моменту в будущем.",
+    "usage_points_ru": [
+      "Завершение к моменту: By 2026 I will have graduated",
+      "Предположение о прошлом: He will have forgotten by now"
     ],
     "formulas": {
-      "affirmative": "Все + will have + V3 (will have played/gone)",
-      "negative": "Все + won't have + V3 (won't have played/gone)",
-      "question": "Will + подлежащее + have + V3? (Will you have played/gone?)",
-      "shortAnswers": "Yes, I will. / No, I won't."
+      "affirmative": "Все + will have + V3",
+      "negative": "won't have + V3",
+      "question": "Will + подлежащее + have + V3?",
+      "short_answers": "Yes, I will. / No, I won't."
     },
-    "signalWords": ["by", "by the time", "before"],
     "examples": [
       { "en": "I will have finished homework by 8 pm.", "ru": "Я закончу домашку к 8 вечера." },
       { "en": "She will have left before you arrive.", "ru": "Она уйдёт до твоего прихода." }
-    ]
+    ],
+    "signal_words": ["by", "by the time", "before", "by next week", "by 2030"],
+    "common_mistakes_ru": [
+      "Забывать have: ❌ I will finished → ✅ I will have finished"
+    ],
+    "faq_ru": [
+      {
+        "question": "Future Perfect vs Future Simple?",
+        "answer": "Perfect — завершение к моменту (by 5 PM). Simple — факт (tomorrow)."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "By next year I ___ (learn) 1000 words.", "answer": "will have learned", "hint": "will have + V3" }
+    ],
+    "related_tenses": ["future-simple", "present-perfect", "future-perfect-continuous"]
   },
-  "present_perfect_continuous": {
-    "id": "present_perfect_continuous",
-    "nameRu": "Present Perfect Continuous",
-    "nameEn": "Настоящее совершённое продолженное",
-    "useCases": [
-      "Для действий, начавшихся в прошлом и продолжающихся сейчас",
-      "Для действий с видимым результатом"
+  "present-perfect-continuous": {
+    "slug": "present-perfect-continuous",
+    "name_ru": "Present Perfect Continuous",
+    "name_en": "Настоящее совершённое продолженное время",
+    "short_intro_ru": "Present Perfect Continuous — действие, начавшееся в прошлом, длившееся и продолжающееся сейчас.",
+    "usage_points_ru": [
+      "Действие с длительностью: I have been studying for 3 hours",
+      "Видимый результат: Look! I've been cleaning (потные, уставшие)",
+      "Недавнее действие: Sorry I'm late, I've been talking to a friend"
     ],
     "formulas": {
       "affirmative": "I/you/we/they + have been + V-ing | he/she/it + has been + V-ing",
-      "negative": "I/you/we/they + haven't been + V-ing | he/she/it + hasn't been + V-ing",
-      "question": "Have + I/you/we/they + been + V-ing? | Has + he/she/it + been + V-ing?",
-      "shortAnswers": "Yes, I have. / No, I haven't. | Yes, he has. / No, he hasn't."
+      "negative": "haven't / hasn't been + V-ing",
+      "question": "Have / Has + подлежащее + been + V-ing?",
+      "short_answers": "Yes, I have. / No, I haven't."
     },
-    "signalWords": ["for", "since", "all day", "all week"],
     "examples": [
       { "en": "I have been playing Minecraft for 2 hours.", "ru": "Я играю в Майнкрафт уже 2 часа." },
       { "en": "She has been studying since morning.", "ru": "Она учится с утра." }
-    ]
+    ],
+    "signal_words": ["for", "since", "all day", "all week", "how long"],
+    "common_mistakes_ru": [
+      "Использовать с глаголами состояния: ❌ I have been knowing → ✅ I have known",
+      "Путать с Simple: ❌ I have been knowing him for years → ✅ I have known"
+    ],
+    "faq_ru": [
+      {
+        "question": "Perfect Continuous vs Perfect Simple?",
+        "answer": "Continuous — акцент на длительности (for 2 hours). Simple — результат (3 books read)."
+      },
+      {
+        "question": "Когда НЕ использовать Continuous?",
+        "answer": "С глаголами состояния: know, like, have (обладать), belong."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "I ___ (wait) for 30 minutes!", "answer": "have been waiting", "hint": "have been + V-ing" }
+    ],
+    "related_tenses": ["present-perfect", "present-continuous", "past-perfect-continuous"]
   },
-  "past_perfect_continuous": {
-    "id": "past_perfect_continuous",
-    "nameRu": "Past Perfect Continuous",
-    "nameEn": "Прошедшее совершённое продолженное",
-    "useCases": [
-      "Для действий, длившихся до другого момента в прошлом"
+  "past-perfect-continuous": {
+    "slug": "past-perfect-continuous",
+    "name_ru": "Past Perfect Continuous",
+    "name_en": "Прошедшее совершённое продолженное время",
+    "short_intro_ru": "Past Perfect Continuous — действие, длившееся до другого момента в прошлом.",
+    "usage_points_ru": [
+      "Длительное действие до другого прошлого: I had been waiting for an hour when he arrived",
+      "Причина состояния в прошлом: I was tired because I had been working"
     ],
     "formulas": {
-      "affirmative": "Все + had been + V-ing (had been playing/going)",
-      "negative": "Все + hadn't been + V-ing (hadn't been playing/going)",
-      "question": "Had + подлежащее + been + V-ing? (Had you been playing?)",
-      "shortAnswers": "Yes, I had. / No, I hadn't."
+      "affirmative": "Все + had been + V-ing",
+      "negative": "hadn't been + V-ing",
+      "question": "Had + подлежащее + been + V-ing?",
+      "short_answers": "Yes, I had. / No, I hadn't."
     },
-    "signalWords": ["for", "since", "before"],
     "examples": [
       { "en": "I had been playing for 2 hours before she came.", "ru": "Я играл 2 часа, прежде чем она пришла." }
-    ]
+    ],
+    "signal_words": ["for", "since", "before", "when", "all day"],
+    "common_mistakes_ru": [
+      "Путать с Past Perfect Simple: Continuous — длительность, Simple — завершение"
+    ],
+    "faq_ru": [
+      {
+        "question": "Зачем такое сложное время?",
+        "answer": "Чтобы подчеркнуть длительность: I had been working (долго) vs I had worked (факт)."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "He ___ (work) there for years before he quit.", "answer": "had been working", "hint": "had been + V-ing" }
+    ],
+    "related_tenses": ["past-perfect", "past-continuous", "present-perfect-continuous"]
   },
-  "future_perfect_continuous": {
-    "id": "future_perfect_continuous",
-    "nameRu": "Future Perfect Continuous",
-    "nameEn": "Будущее совершённое продолженное",
-    "useCases": [
-      "Для действий, которые будут длиться к моменту в будущем"
+  "future-perfect-continuous": {
+    "slug": "future-perfect-continuous",
+    "name_ru": "Future Perfect Continuous",
+    "name_en": "Будущее совершённое продолженное время",
+    "short_intro_ru": "Future Perfect Continuous — действие, которое будет длиться к моменту в будущем.",
+    "usage_points_ru": [
+      "Длительность к моменту: By next year I will have been working here for 10 years"
     ],
     "formulas": {
-      "affirmative": "Все + will have been + V-ing (will have been playing/going)",
-      "negative": "Все + won't have been + V-ing (won't have been playing/going)",
-      "question": "Will + подлежащее + have been + V-ing? (Will you have been playing?)",
-      "shortAnswers": "Yes, I will. / No, I won't."
+      "affirmative": "Все + will have been + V-ing",
+      "negative": "won't have been + V-ing",
+      "question": "Will + подлежащее + have been + V-ing?",
+      "short_answers": "Yes, I will. / No, I won't."
     },
-    "signalWords": ["for", "by the time"],
     "examples": [
       { "en": "I will have been playing for 2 hours by 5 pm.", "ru": "Я буду играть уже 2 часа к 5 вечера." }
-    ]
+    ],
+    "signal_words": ["for", "by the time", "by next week"],
+    "common_mistakes_ru": [
+      "Самое сложное время — используется редко, не путать с другими future"
+    ],
+    "faq_ru": [
+      {
+        "question": "Когда это реально нужно?",
+        "answer": "Для акцента на длительности: 'I'll have been studying for 5 years' (всё ещё учусь)."
+      }
+    ],
+    "exercises": [
+      { "type": "fill", "question": "By 2030 I ___ (live) here for 20 years.", "answer": "will have been living", "hint": "will have been + V-ing" }
+    ],
+    "related_tenses": ["future-perfect", "future-continuous", "present-perfect-continuous"]
   }
 }

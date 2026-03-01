@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import tensesData from '../../data/tenses.json';
+
+export function getStaticPaths() {
+  return Object.values(tensesData).map((tense) => ({
+    params: { slug: tense.slug },
+    props: { tense },
+  }));
+}
+
+const { tense } = Astro.props;
+const site = 'https://временаванглийском.рф';
+const canonicalUrl = `${site}/tenses/${tense.slug}/`;
+
+// Получаем связанные времена
+const relatedTenses = tense.related_tenses
+  ?.map((slug) => Object.values(tensesData).find((t) => t.slug === slug))
+  .filter(Boolean) || [];
+
+// JSON-LD для FAQ
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": tense.faq_ru?.map((faq) => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  })) || []
+};
+---
+
+<BaseLayout 
+  title={`${tense.name_ru} (${tense.name_en}) — таблица, формулы, примеры`}
+  description={tense.short_intro_ru}
+  canonicalUrl={canonicalUrl}
+>
+  <link slot="head" rel="stylesheet" href="/src/styles/base.css" />
+  
+  <!-- Open Graph override -->
+  <meta slot="head" property="og:title" content={`${tense.name_ru} — ${tense.name_en}`} />
+  
+  <!-- FAQ JSON-LD -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+  <div class="app-container">
+    <!-- Breadcrumb -->
+    <nav aria-label="Навигация" style="margin: 16px 0;">
+      <a href="/" style="color: var(--primary); text-decoration: none;">← К таблице всех времён</a>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-top">
+        <div>
+          <h1>{tense.name_ru}</h1>
+          <p style="font-size: 1.1rem; opacity: 0.9;">{tense.name_en}</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Intro -->
+    <section class="card">
+      <p style="font-size: 1.1rem; line-height: 1.8;">{tense.short_intro_ru}</p>
+    </section>
+
+    <!-- Usage Points -->
+    <section class="card" aria-labelledby="usage-heading">
+      <h2 id="usage-heading" class="card-title">📋 Когда используется</h2>
+      <ul style="margin-left: 20px; line-height: 2;">
+        {tense.usage_points_ru?.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Formulas -->
+    <section class="card" aria-labelledby="formulas-heading">
+      <h2 id="formulas-heading" class="card-title">📐 Формулы</h2>
+      <div class="formula-box">
+        <div class="formula-row">
+          <span class="formula-label pos">+</span>
+          <span>{tense.formulas.affirmative}</span>
+        </div>
+        <div class="formula-row">
+          <span class="formula-label neg">−</span>
+          <span>{tense.formulas.negative}</span>
+        </div>
+        <div class="formula-row">
+          <span class="formula-label q">?</span>
+          <span>{tense.formulas.question}</span>
+        </div>
+        <div class="formula-row" style="background:#fef3c7;border-radius:4px;padding:8px;">
+          <span style="margin-right:8px;">👍/👎</span>
+          <span>{tense.formulas.short_answers}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Examples -->
+    <section class="card" aria-labelledby="examples-heading">
+      <h2 id="examples-heading" class="card-title">📝 Примеры</h2>
+      {tense.examples.map((example) => (
+        <div class="example-box">
+          <p class="example-en">{example.en}</p>
+          <p class="example-ru">{example.ru}</p>
+        </div>
+      ))}
+    </section>
+
+    <!-- Signal Words -->
+    <section class="card" style="background: #fef3c7;" aria-labelledby="signals-heading">
+      <h2 id="signals-heading" class="card-title">🔔 Сигнальные слова</h2>
+      <div>
+        {tense.signal_words.map((word) => (
+          <span class="signal-word">{word}</span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Common Mistakes -->
+    {tense.common_mistakes_ru && tense.common_mistakes_ru.length > 0 && (
+      <section class="card" aria-labelledby="mistakes-heading">
+        <h2 id="mistakes-heading" class="card-title">⚠️ Типичные ошибки</h2>
+        <ul style="margin-left: 20px; line-height: 2;">
+          {tense.common_mistakes_ru.map((mistake) => (
+            <li>{mistake}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Mini Exercises -->
+    {tense.exercises && tense.exercises.length > 0 && (
+      <section class="card" aria-labelledby="exercises-heading">
+        <h2 id="exercises-heading" class="card-title">✏️ Мини-упражнения</h2>
+        <div id="exercises-container" data-exercises={JSON.stringify(tense.exercises)}>
+          {tense.exercises.map((exercise, index) => (
+            <div class="exercise-item" style="margin-bottom: 20px; padding: 16px; background: var(--bg); border-radius: 8px;">
+              <p style="font-weight: 500; margin-bottom: 12px;">
+                {index + 1}. {exercise.question}
+              </p>
+              {exercise.type === 'choice' && exercise.options && (
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  {exercise.options.map((option) => (
+                    <button 
+                      class="option-btn"
+                      data-answer={option}
+                      data-correct={exercise.answer}
+                      onclick="checkAnswer(this)"
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {exercise.type === 'fill' && (
+                <input 
+                  type="text" 
+                  class="answer-input"
+                  placeholder="Введите ответ..."
+                  data-correct={exercise.answer}
+                  onkeypress="if(event.key==='Enter') checkFill(this)"
+                />
+              )}
+              <p class="hint" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 8px;">
+                💡 {exercise.hint}
+              </p>
+              <p class="feedback" style="display: none; margin-top: 8px; padding: 8px; border-radius: 4px;"></p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- FAQ -->
+    {tense.faq_ru && tense.faq_ru.length > 0 && (
+      <section class="card" aria-labelledby="faq-heading">
+        <h2 id="faq-heading" class="card-title">❓ FAQ</h2>
+        {tense.faq_ru.map((faq, index) => (
+          <details style="margin-bottom: 12px; border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+            <summary style="font-weight: 500; cursor: pointer;">{faq.question}</summary>
+            <p style="margin-top: 12px; line-height: 1.6;">{faq.answer}</p>
+          </details>
+        ))}
+      </section>
+    )}
+
+    <!-- Related Tenses -->
+    {relatedTenses.length > 0 && (
+      <section class="card" aria-labelledby="related-heading">
+        <h2 id="related-heading" class="card-title">🔗 Похожие времена</h2>
+        <div class="tense-grid">
+          {relatedTenses.map((related) => (
+            <a href={`/tenses/${related.slug}/`} class="tense-card" style="text-decoration: none; color: inherit;">
+              <h4>{related.name_ru}</h4>
+              <p style="color:var(--text-muted); font-size:0.9rem;">{related.name_en}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Back to main -->
+    <nav style="margin: 24px 0; text-align: center;">
+      <a href="/" class="btn btn-outline">← К таблице всех времён</a>
+    </nav>
+
+    <footer>
+      <p style="margin:0;font-size:0.875rem">© 2026 Tense Trainer</p>
+    </footer>
+  </div>
+
+  <!-- Exercise JavaScript -->
+  <script is:inline>
+    function checkAnswer(btn) {
+      const container = btn.closest('.exercise-item');
+      const feedback = container.querySelector('.feedback');
+      const correct = btn.dataset.correct;
+      const selected = btn.dataset.answer;
+      
+      // Disable all buttons
+      container.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+      
+      if (selected === correct) {
+        btn.style.background = '#dcfce7';
+        btn.style.borderColor = '#10b981';
+        feedback.textContent = '✅ Правильно!';
+        feedback.style.background = '#dcfce7';
+        feedback.style.color = '#166534';
+      } else {
+        btn.style.background = '#fee2e2';
+        btn.style.borderColor = '#ef4444';
+        feedback.textContent = `❌ Неправильно. Правильный ответ: ${correct}`;
+        feedback.style.background = '#fee2e2';
+        feedback.style.color = '#991b1b';
+        
+        // Highlight correct answer
+        container.querySelector(`[data-answer="${correct}"]`).style.background = '#dcfce7';
+      }
+      
+      feedback.style.display = 'block';
+    }
+    
+    function checkFill(input) {
+      const container = input.closest('.exercise-item');
+      const feedback = container.querySelector('.feedback');
+      const correct = input.dataset.correct.toLowerCase().trim();
+      const value = input.value.toLowerCase().trim();
+      
+      input.disabled = true;
+      
+      if (value === correct) {
+        input.style.borderColor = '#10b981';
+        feedback.textContent = '✅ Правильно!';
+        feedback.style.background = '#dcfce7';
+        feedback.style.color = '#166534';
+      } else {
+        input.style.borderColor = '#ef4444';
+        feedback.textContent = `❌ Неправильно. Правильный ответ: ${input.dataset.correct}`;
+        feedback.style.background = '#fee2e2';
+        feedback.style.color = '#991b1b';
+      }
+      
+      feedback.style.display = 'block';
+    }
+  </script>
+</BaseLayout>

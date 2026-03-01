@@ -5,7 +5,7 @@ import tensesData from '../data/tenses.json';
 const tenses = Object.values(tensesData);
 ---
 
-<BaseLayout>
+<BaseLayout canonicalUrl="https://временаванглийском.рф/">
   <link slot="head" rel="stylesheet" href="/src/styles/base.css" />
   
   <div class="app-container">
@@ -36,21 +36,26 @@ const tenses = Object.values(tensesData);
       
       <div class="tense-grid" role="list">
         {tenses.map((tense) => (
-          <article class="tense-card" role="listitem">
-            <h3>{tense.nameRu}</h3>
-            <p style="color:var(--text-muted);margin-bottom:8px;font-size:0.9rem;">{tense.nameEn}</p>
+          <a 
+            href={`/tenses/${tense.slug}/`} 
+            class="tense-card" 
+            role="listitem"
+            style="text-decoration: none; color: inherit; display: block;"
+          >
+            <h3>{tense.name_ru}</h3>
+            <p style="color:var(--text-muted);margin-bottom:8px;font-size:0.9rem;">{tense.name_en}</p>
             
             <div class="formula-box" style="margin: 12px 0;">
               <div class="formula-row">
                 <span class="formula-label pos">+</span>
-                <span style="font-size:0.85rem;">{tense.formulas.affirmative.substring(0, 60)}...</span>
+                <span style="font-size:0.85rem;">{tense.formulas.affirmative.substring(0, 50)}...</span>
               </div>
             </div>
 
             <div style="margin: 12px 0;">
               <strong style="font-size:0.85rem;">🔔 Сигнальные слова:</strong>
               <div style="margin-top:8px;">
-                {tense.signalWords.slice(0, 4).map((word) => (
+                {tense.signal_words.slice(0, 4).map((word) => (
                   <span class="signal-word">{word}</span>
                 ))}
               </div>
@@ -63,7 +68,11 @@ const tenses = Object.values(tensesData);
                 <p class="example-ru">{tense.examples[0].ru}</p>
               </div>
             </div>
-          </article>
+            
+            <div style="margin-top: 12px; text-align: center;">
+              <span class="btn btn-sm btn-primary" style="display: inline-block;">Подробнее →</span>
+            </div>
+          </a>
         ))}
       </div>
     </section>
@@ -121,7 +130,7 @@ const tenses = Object.values(tensesData);
       </div>
       
       <p style="margin-top: 12px; color: #92400e;">
-        💡 <strong>Совет:</strong> Начните с Present Simple — это самое важное время для начинающих.
+        💡 <strong>Совет:</strong> Начните с <a href="/tenses/present-simple/" style="color: inherit; text-decoration: underline;">Present Simple</a> — это самое важное время для начинающих.
       </p>
     </section>
 

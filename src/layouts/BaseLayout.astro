@@ -2,11 +2,13 @@
 export interface Props {
   title?: string;
   description?: string;
+  canonicalUrl?: string;
 }
 
 const { 
   title = "Английские времена — тренажер и таблица с упражнениями | Tense Trainer",
-  description = "Бесплатный тренажер английских времён с таблицей, упражнениями и тестами. Изучай Present Simple, Past Simple, Future Simple, Present Perfect онлайн. Для детей, школьников и начинающих."
+  description = "Бесплатный тренажер английских времён с таблицей, упражнениями и тестами. Изучай Present Simple, Past Simple, Future Simple, Present Perfect онлайн. Для детей, школьников и начинающих.",
+  canonicalUrl = "https://временаванглийском.рф/"
 } = Astro.props;
 ---
 
@@ -26,20 +28,20 @@ const {
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://временаванглийском.рф/">
+    <meta property="og:url" content={canonicalUrl}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:image" content="https://временаванглийском.рф/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://временаванглийском.рф/">
+    <meta property="twitter:url" content={canonicalUrl}>
     <meta property="twitter:title" content="Tense Trainer — Бесплатный тренажер английских времён">
     <meta property="twitter:description" content={description}>
     <meta property="twitter:image" content="https://временаванглийском.рф/og-image.png">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://временаванглийском.рф/">
+    <link rel="canonical" href={canonicalUrl}>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
