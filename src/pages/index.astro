@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import tensesData from '../data/tenses.json';
+
+const tenses = Object.values(tensesData);
+---
+
+<BaseLayout>
+  <link slot="head" rel="stylesheet" href="/src/styles/base.css" />
+  
+  <div class="app-container">
+    <header class="header">
+      <div class="header-top">
+        <div>
+          <div style="font-size:0.8rem;color:var(--primary-light);font-weight:600;margin-bottom:4px">🌐 временаванглийском.рф</div>
+          <h1>🎯 Tense Trainer — Тренажер английских времён</h1>
+          <p>Изучаем английские времена легко и весело! Бесплатные упражнения для детей 10-12 лет</p>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">🌙</button>
+      </div>
+    </header>
+
+    <nav class="nav" role="navigation" aria-label="Главное меню">
+      <a href="#home" class="nav-btn active">🏠 Главная</a>
+      <a href="#tenses" class="nav-btn">📚 Времена</a>
+      <a href="#tobe" class="nav-btn">🔄 To Be</a>
+    </nav>
+
+    <!-- SEO-контент: Таблица всех времен (видна без JS) -->
+    <section id="tenses" class="card" aria-labelledby="tenses-heading">
+      <h2 id="tenses-heading" class="card-title">📚 Все английские времена</h2>
+      <p style="margin-bottom: 16px; color: var(--text-muted);">
+        Таблица из 12 английских времён с формулами, примерами и сигнальными словами.
+        Нажмите на время, чтобы изучить подробнее.
+      </p>
+      
+      <div class="tense-grid" role="list">
+        {tenses.map((tense) => (
+          <article class="tense-card" role="listitem">
+            <h3>{tense.nameRu}</h3>
+            <p style="color:var(--text-muted);margin-bottom:8px;font-size:0.9rem;">{tense.nameEn}</p>
+            
+            <div class="formula-box" style="margin: 12px 0;">
+              <div class="formula-row">
+                <span class="formula-label pos">+</span>
+                <span style="font-size:0.85rem;">{tense.formulas.affirmative.substring(0, 60)}...</span>
+              </div>
+            </div>
+
+            <div style="margin: 12px 0;">
+              <strong style="font-size:0.85rem;">🔔 Сигнальные слова:</strong>
+              <div style="margin-top:8px;">
+                {tense.signalWords.slice(0, 4).map((word) => (
+                  <span class="signal-word">{word}</span>
+                ))}
+              </div>
+            </div>
+
+            <div style="margin-top: 12px;">
+              <strong style="font-size:0.85rem;">📝 Пример:</strong>
+              <div class="example-box" style="margin-top:8px;">
+                <p class="example-en">{tense.examples[0].en}</p>
+                <p class="example-ru">{tense.examples[0].ru}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- To Be секция -->
+    <section id="tobe" class="card">
+      <h2 class="card-title">🔄 Глагол To Be</h2>
+      
+      <div class="tobe-cheat">
+        <h3>📖 Таблица спряжения To Be</h3>
+        <table class="tobe-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>I</th>
+              <th>you/we/they</th>
+              <th>he/she/it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Present</strong></td>
+              <td>am</td>
+              <td>are</td>
+              <td>is</td>
+            </tr>
+            <tr>
+              <td><strong>Past</strong></td>
+              <td>was</td>
+              <td>were</td>
+              <td>was</td>
+            </tr>
+            <tr>
+              <td><strong>Future</strong></td>
+              <td colspan="3">will be</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top: 12px; font-size: 0.9rem;">
+          💡 <strong>Правило:</strong> I → am, he/she/it → is, you/we/they → are | Future → will be (для всех)
+        </p>
+      </div>
+    </section>
+
+    <!-- Быстрый старт -->
+    <section id="home" class="card quick-start">
+      <h3>⚡ Быстрый старт</h3>
+      <p>Выберите готовый план обучения:</p>
+      
+      <div class="preset-btns">
+        <button class="preset-btn">База: Present + Past</button>
+        <button class="preset-btn">Три простых</button>
+        <button class="preset-btn">Движение</button>
+        <button class="preset-btn">Результат</button>
+      </div>
+      
+      <p style="margin-top: 12px; color: #92400e;">
+        💡 <strong>Совет:</strong> Начните с Present Simple — это самое важное время для начинающих.
+      </p>
+    </section>
+
+    <!-- Для родителей -->
+    <section class="parent-section">
+      <h4>👨‍👩‍👧 Советы для родителей</h4>
+      
+      <div class="parent-tip">
+        <strong>📋 Как составлять план:</strong><br>
+        Выбирайте максимум 2-3 времени за раз. Лучше учить меньше, но качественно!
+      </div>
+      
+      <div class="parent-tip">
+        <strong>⏱️ Оптимальное время:</strong><br>
+        10-15 минут в день — идеально для ребёнка 10-12 лет.
+      </div>
+      
+      <div class="parent-tip">
+        <strong>💪 Как поддерживать:</strong><br>
+        Хвалите за попытки, не ругайте за ошибки. Ошибки — это нормально!
+      </div>
+      
+      <div class="parent-tip">
+        <strong>🎯 Регулярность важнее:</strong><br>
+        Лучше 10 минут каждый день, чем час раз в неделю.
+      </div>
+    </section>
+
+    <footer>
+      <p style="margin:0 0 0.5rem;font-weight:600;color:var(--text)">📧 Реклама на сайте</p>
+      <p style="margin:0 0 0.5rem">Телефон: <a href="tel:+79055529581" style="color:var(--primary);text-decoration:none">+7 (905) 552-95-81</a></p>
+      <p style="margin:0;font-size:0.875rem">© 2026 Tense Trainer — бесплатный тренажёр английских времён</p>
+    </footer>
+  </div>
+
+  <script>
+    // Темная тема
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('tenseTrainer_theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('tenseTrainer_theme', next);
+      });
+    }
+  </script>
+</BaseLayout>
