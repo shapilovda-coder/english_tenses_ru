@@ -1,0 +1,40 @@
+# Render Multi-Environment Configuration
+# 
+# Использование:
+# 1. Prod: автодеплой из master → https://временаванглийском.рф
+# 2. Staging: автодеплой из develop → https://staging-временаванглийском.рф.onrender.com
+#
+# Настройка в Render Dashboard:
+# - Создать два сервиса, указав соответствующие ветки
+# - Для prod подключить кастомный домен временаванглийском.рф
+
+services:
+  # Production — только из master
+  - type: web
+    name: english-tenses-trainer-prod
+    runtime: node
+    branch: master
+    buildCommand: npm ci && npm run build
+    startCommand: npm run preview
+    publishDir: dist
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NODE_ENV
+        value: production
+    domains:
+      - временаванглийском.рф
+
+  # Staging — из develop (или feature/astro-ssg временно)
+  - type: web
+    name: english-tenses-trainer-staging
+    runtime: node
+    branch: develop
+    buildCommand: npm ci && npm run build
+    startCommand: npm run preview
+    publishDir: dist
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NODE_ENV
+        value: staging

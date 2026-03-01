@@ -1,0 +1,35 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/astro-ssg  # временно, пока не влито в develop
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Render Staging
+        # Требует RENDER_STAGING_SERVICE_ID и RENDER_API_KEY в GitHub Secrets
+        run: |
+          echo "Triggering Render staging deploy..."
+          # curl -X POST \
+          #   -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          #   -H "Accept: application/json" \
+          #   https://api.render.com/v1/services/${{ secrets.RENDER_STAGING_SERVICE_ID }}/deploys
