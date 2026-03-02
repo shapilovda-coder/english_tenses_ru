@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/base.css';
 
 const title = "English Tenses Table: Complete Guide to 12 Grammar Tenses";
 const description = "Master all 12 English tenses with our comprehensive table. Learn Present, Past, Future forms with examples, usage rules, and interactive exercises. Free grammar guide.";
@@ -88,7 +89,6 @@ const faq = [
 ---
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
-  <link slot="head" rel="stylesheet" href="/src/styles/base.css" />
   
   <style>
     .tenses-hub {

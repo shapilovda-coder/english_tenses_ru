@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/base.css';
 import tensesData from '../data/tenses.json';
 
 const tenses = Object.values(tensesData);
 ---
 
 <BaseLayout canonicalUrl="https://временаванглийском.рф/">
-  <link slot="head" rel="stylesheet" href="/src/styles/base.css" />
   
   <div class="app-container">
     <header class="header">

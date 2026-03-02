@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/base.css';
 import tensesData from '../../data/tenses.json';
 
 export function getStaticPaths() {
@@ -38,8 +39,6 @@ const faqJsonLd = {
   description={tense.short_intro_ru}
   canonicalUrl={canonicalUrl}
 >
-  <link slot="head" rel="stylesheet" href="/src/styles/base.css" />
-  
   <!-- Open Graph override -->
   <meta slot="head" property="og:title" content={`${tense.name_ru} — ${tense.name_en}`} />
   
