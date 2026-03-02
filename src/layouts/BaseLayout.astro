@@ -10,6 +10,8 @@ const {
   description = "Бесплатный тренажер английских времён с таблицей, упражнениями и тестами. Изучай Present Simple, Past Simple, Future Simple, Present Perfect онлайн. Для детей, школьников и начинающих.",
   canonicalUrl = "https://временаванглийском.рф/"
 } = Astro.props;
+
+const isDev = import.meta.env.PUBLIC_ENV === 'dev' || import.meta.env.DEV;
 ---
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@ const {
     <meta name="description" content={description}>
     <meta name="keywords" content="английские времена, таблица английских времен, тренажер английских времен, упражнения на времена, present simple, past simple, future simple, английский для детей, изучение английского">
     <meta name="author" content="Tense Trainer">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content={isDev ? "noindex, nofollow" : "index, follow"}>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">

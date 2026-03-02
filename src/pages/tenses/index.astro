@@ -1,0 +1,637 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "English Tenses Table: Complete Guide to 12 Grammar Tenses";
+const description = "Master all 12 English tenses with our comprehensive table. Learn Present, Past, Future forms with examples, usage rules, and interactive exercises. Free grammar guide.";
+const canonicalUrl = "/tenses/";
+
+// Tense data for the table
+const tensesTable = {
+  present: {
+    simple: { slug: "present-simple", name: "Present Simple", example: "I work" },
+    continuous: { slug: "present-continuous", name: "Present Continuous", example: "I am working" },
+    perfect: { slug: "present-perfect", name: "Present Perfect", example: "I have worked" },
+    perfectContinuous: { slug: "present-perfect-continuous", name: "Present Perfect Continuous", example: "I have been working" }
+  },
+  past: {
+    simple: { slug: "past-simple", name: "Past Simple", example: "I worked" },
+    continuous: { slug: "past-continuous", name: "Past Continuous", example: "I was working" },
+    perfect: { slug: "past-perfect", name: "Past Perfect", example: "I had worked" },
+    perfectContinuous: { slug: "past-perfect-continuous", name: "Past Perfect Continuous", example: "I had been working" }
+  },
+  future: {
+    simple: { slug: "future-simple", name: "Future Simple", example: "I will work" },
+    continuous: { slug: "future-continuous", name: "Future Continuous", example: "I will be working" },
+    perfect: { slug: "future-perfect", name: "Future Perfect", example: "I will have worked" },
+    perfectContinuous: { slug: "future-perfect-continuous", name: "Future Perfect Continuous", example: "I will have been working" }
+  }
+};
+
+// All tenses list for grouping
+const allTenses = [
+  { group: "Present Tenses", items: [
+    { slug: "present-simple", name: "Present Simple", desc: "Habits & facts" },
+    { slug: "present-continuous", name: "Present Continuous", desc: "Now & temporary" },
+    { slug: "present-perfect", name: "Present Perfect", desc: "Experience & result" },
+    { slug: "present-perfect-continuous", name: "Present Perfect Continuous", desc: "Duration until now" }
+  ]},
+  { group: "Past Tenses", items: [
+    { slug: "past-simple", name: "Past Simple", desc: "Completed actions" },
+    { slug: "past-continuous", name: "Past Continuous", desc: "Interrupted actions" },
+    { slug: "past-perfect", name: "Past Perfect", desc: "Before past event" },
+    { slug: "past-perfect-continuous", name: "Past Perfect Continuous", desc: "Duration before past" }
+  ]},
+  { group: "Future Tenses", items: [
+    { slug: "future-simple", name: "Future Simple", desc: "Predictions & promises" },
+    { slug: "future-continuous", name: "Future Continuous", desc: "At specific moment" },
+    { slug: "future-perfect", name: "Future Perfect", desc: "Completed by future" },
+    { slug: "future-perfect-continuous", name: "Future Perfect Continuous", desc: "Duration until future" }
+  ]}
+];
+
+// Confusing tenses pairs
+const confusingPairs = [
+  { slug: "present-simple-vs-continuous", tenses: ["Present Simple", "Present Continuous"], issue: "Habits vs Now" },
+  { slug: "past-simple-vs-present-perfect", tenses: ["Past Simple", "Present Perfect"], issue: "Finished time vs Experience" },
+  { slug: "past-simple-vs-past-continuous", tenses: ["Past Simple", "Past Continuous"], issue: "Completed vs Interrupted" },
+  { slug: "will-vs-going-to", tenses: ["Will", "Going to"], issue: "Prediction vs Plan" },
+  { slug: "present-perfect-vs-past-perfect", tenses: ["Present Perfect", "Past Perfect"], issue: "Until now vs Before past" }
+];
+
+// FAQ data
+const faq = [
+  {
+    question: "How many English tenses are there?",
+    answer: "English has 12 active tenses: 4 forms (Simple, Continuous, Perfect, Perfect Continuous) × 3 time periods (Present, Past, Future). Each tense has specific usage rules and signal words."
+  },
+  {
+    question: "Which English tense should I learn first?",
+    answer: "Start with Present Simple — it's the most common tense used for daily routines, habits, and general truths. Master it before moving to Past Simple and Future Simple."
+  },
+  {
+    question: "What is the difference between Simple and Continuous?",
+    answer: "Simple tenses describe completed actions, habits, or facts. Continuous tenses describe ongoing, temporary, or interrupted actions happening at a specific moment."
+  },
+  {
+    question: "When should I use Perfect tenses?",
+    answer: "Use Perfect tenses when you need to show connection between two time periods: experience in life (Present Perfect), action before another past event (Past Perfect), or completion by future time (Future Perfect)."
+  },
+  {
+    question: "How can I practice English tenses effectively?",
+    answer: "Practice with time markers (yesterday, now, already), create your own examples, use tense comparison exercises, and apply tenses in real conversations. Our interactive exercises help reinforce each tense pattern."
+  },
+  {
+    question: "What are signal words and why do they matter?",
+    answer: "Signal words (always, yesterday, since, by 2025) indicate which tense to use. Learning them helps you choose the correct tense automatically and understand native speakers better."
+  }
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <link slot="head" rel="stylesheet" href="/src/styles/base.css" />
+  
+  <style>
+    .tenses-hub {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    .intro-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .intro-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    
+    .intro-section .lead {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.7;
+    }
+    
+    .intro-text {
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    
+    .tenses-table-section {
+      margin: 3rem 0;
+    }
+    
+    .tenses-table-section h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.75rem;
+    }
+    
+    .tenses-grid {
+      display: grid;
+      grid-template-columns: 100px repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .grid-header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      font-weight: 600;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .grid-time-label {
+      background: var(--primary-dark);
+      color: white;
+      padding: 1.5rem 1rem;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .grid-cell {
+      background: var(--card);
+      padding: 1.25rem;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    
+    .grid-cell:hover {
+      background: var(--bg);
+      transform: translateY(-2px);
+    }
+    
+    .grid-cell a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .grid-cell .tense-name {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .grid-cell .tense-example {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    
+    .algorithm-section {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .algorithm-section h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .algorithm-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    
+    .step {
+      background: white;
+      padding: 1.25rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      flex: 1;
+      min-width: 200px;
+      max-width: 280px;
+    }
+    
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .step p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    
+    .confusing-section {
+      margin: 3rem 0;
+    }
+    
+    .confusing-section h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .confusing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    
+    .confusing-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+    
+    .confusing-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    .confusing-card .tense-pair {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .confusing-card .issue {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    
+    .all-tenses-section {
+      margin: 3rem 0;
+    }
+    
+    .all-tenses-section h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .tense-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .tense-group {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    
+    .tense-group h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .tense-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .tense-group li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .tense-group a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      border-radius: 6px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s ease;
+    }
+    
+    .tense-group a:hover {
+      background: var(--bg);
+    }
+    
+    .tense-group .tense-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    .faq-section {
+      margin: 3rem 0;
+    }
+    
+    .faq-section h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background: var(--card);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .faq-item summary {
+      padding: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+    
+    .faq-item p {
+      padding: 0 1.25rem 1.25rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .tenses-grid {
+        grid-template-columns: 60px repeat(2, 1fr);
+        font-size: 0.85rem;
+      }
+      
+      .grid-cell .tense-example {
+        display: none;
+      }
+      
+      .intro-section h1 {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+
+  <div class="tenses-hub">
+    <!-- Intro Section -->
+    <section class="intro-section">
+      <h1>English Tenses: Complete Grammar Guide</h1>
+      <p class="lead">
+        Master all 12 English grammar tenses with our comprehensive table, 
+        clear explanations, and interactive examples.
+      </p>
+      
+      <div class="intro-text">
+        <p>
+          <strong>English tenses</strong> are the foundation of clear communication. They allow us to express 
+          when actions happen — whether in the past, present, or future — and how they relate to time. 
+          Understanding tenses is essential for speaking fluently, writing correctly, and understanding 
+          native speakers.
+        </p>
+        <p>
+          This comprehensive guide covers all <strong>12 English tenses</strong>: four aspects 
+          (Simple, Continuous, Perfect, and Perfect Continuous) across three time periods 
+          (Present, Past, and Future). Each tense page includes formation rules, usage examples, 
+          signal words, common mistakes, and interactive exercises.
+        </p>
+        <p>
+          <strong>How to use this page:</strong> Click any tense in the table below to explore 
+          detailed explanations. Start with Present Simple if you're a beginner, or use our 
+          step-by-step algorithm to choose the right tense for any situation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tenses Table -->
+    <section class="tenses-table-section" aria-labelledby="table-heading">
+      <h2 id="table-heading">📊 English Tenses Table</h2>
+      
+      <div class="tenses-grid" role="table" aria-label="English tenses comparison table">
+        <!-- Header row -->
+        <div class="grid-header" role="columnheader"></div>
+        <div class="grid-header" role="columnheader">Simple</div>
+        <div class="grid-header" role="columnheader">Continuous</div>
+        <div class="grid-header" role="columnheader">Perfect</div>
+        <div class="grid-header" role="columnheader">Perfect Continuous</div>
+        
+        <!-- Present row -->
+        <div class="grid-time-label" role="rowheader">Present</div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.present.simple.slug}/`}>
+            <div class="tense-name">{tensesTable.present.simple.name}</div>
+            <div class="tense-example">{tensesTable.present.simple.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.present.continuous.slug}/`}>
+            <div class="tense-name">{tensesTable.present.continuous.name}</div>
+            <div class="tense-example">{tensesTable.present.continuous.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.present.perfect.slug}/`}>
+            <div class="tense-name">{tensesTable.present.perfect.name}</div>
+            <div class="tense-example">{tensesTable.present.perfect.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.present.perfectContinuous.slug}/`}>
+            <div class="tense-name">{tensesTable.present.perfectContinuous.name}</div>
+            <div class="tense-example">{tensesTable.present.perfectContinuous.example}</div>
+          </a>
+        </div>
+        
+        <!-- Past row -->
+        <div class="grid-time-label" role="rowheader">Past</div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.past.simple.slug}/`}>
+            <div class="tense-name">{tensesTable.past.simple.name}</div>
+            <div class="tense-example">{tensesTable.past.simple.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.past.continuous.slug}/`}>
+            <div class="tense-name">{tensesTable.past.continuous.name}</div>
+            <div class="tense-example">{tensesTable.past.continuous.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.past.perfect.slug}/`}>
+            <div class="tense-name">{tensesTable.past.perfect.name}</div>
+            <div class="tense-example">{tensesTable.past.perfect.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.past.perfectContinuous.slug}/`}>
+            <div class="tense-name">{tensesTable.past.perfectContinuous.name}</div>
+            <div class="tense-example">{tensesTable.past.perfectContinuous.example}</div>
+          </a>
+        </div>
+        
+        <!-- Future row -->
+        <div class="grid-time-label" role="rowheader">Future</div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.future.simple.slug}/`}>
+            <div class="tense-name">{tensesTable.future.simple.name}</div>
+            <div class="tense-example">{tensesTable.future.simple.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.future.continuous.slug}/`}>
+            <div class="tense-name">{tensesTable.future.continuous.name}</div>
+            <div class="tense-example">{tensesTable.future.continuous.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.future.perfect.slug}/`}>
+            <div class="tense-name">{tensesTable.future.perfect.name}</div>
+            <div class="tense-example">{tensesTable.future.perfect.example}</div>
+          </a>
+        </div>
+        <div class="grid-cell" role="cell">
+          <a href={`/tenses/${tensesTable.future.perfectContinuous.slug}/`}>
+            <div class="tense-name">{tensesTable.future.perfectContinuous.name}</div>
+            <div class="tense-example">{tensesTable.future.perfectContinuous.example}</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Choose Algorithm -->
+    <section class="algorithm-section" aria-labelledby="algorithm-heading">
+      <h2 id="algorithm-heading">🎯 How to Choose the Correct Tense</h2>
+      
+      <div class="algorithm-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Identify the Time</h3>
+          <p>When does the action happen? Present (now, every day), Past (yesterday, ago), or Future (tomorrow, next week)?</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Check the Aspect</h3>
+          <p>Is it a simple fact, ongoing action, completed result, or duration? Look for signal words.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Look for Keywords</h3>
+          <p>"Every day" → Simple. "Now" → Continuous. "Already" → Perfect. "For 2 hours" → Perfect Continuous.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Check Context</h3>
+          <p>Is there another action? One interrupts another → Continuous + Simple. One before another → Perfect.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <h3>Practice & Verify</h3>
+          <p>Build your sentence and check: Does it match the time and meaning you want to express?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Confusing Tenses -->
+    <section class="confusing-section" aria-labelledby="confusing-heading">
+      <h2 id="confusing-heading">🤔 Most Confusing Tense Pairs</h2>
+      
+      <div class="confusing-grid">
+        {confusingPairs.map((pair) => (
+          <a href={`/tenses/compare/${pair.slug}/`} class="confusing-card">
+            <div class="tense-pair">{pair.tenses.join(" vs ")}</div>
+            <div class="issue">{pair.issue}</div>
+          </a>
+        ))}
+      </div>
+      
+      <p style="text-align: center; margin-top: 1.5rem; color: var(--text-muted);">
+        <em>Comparison pages coming soon — bookmark this guide!</em>
+      </p>
+    </section>
+
+    <!-- All Tenses List -->
+    <section class="all-tenses-section" aria-labelledby="all-tenses-heading">
+      <h2 id="all-tenses-heading">📚 All 12 English Tenses</h2>
+      
+      <div class="tense-groups">
+        {allTenses.map((group) => (
+          <div class="tense-group">
+            <h3>{group.group}</h3>
+            <ul>
+              {group.items.map((tense) => (
+                <li>
+                  <a href={`/tenses/${tense.slug}/`}>
+                    <span>{tense.name}</span>
+                    <span class="tense-desc">{tense.desc}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">❓ Frequently Asked Questions</h2>
+      
+      <div class="faq-list">
+        {faq.map((item, index) => (
+          <details class="faq-item">
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Back to Home -->
+    <nav style="text-align: center; margin: 3rem 0;">
+      <a href="/" class="btn btn-outline">← Back to Home</a>
+    </nav>
+  </div>
+</BaseLayout>
