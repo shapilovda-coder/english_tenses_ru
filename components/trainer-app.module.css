@@ -1,0 +1,524 @@
+.page {
+  padding: 1rem 0 4rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-xl);
+}
+
+.heroText {
+  display: grid;
+  gap: 1rem;
+}
+
+.heroText h1 {
+  font-size: clamp(2.25rem, 5vw, 4.15rem);
+  line-height: 0.96;
+  max-width: 12ch;
+}
+
+.heroText p {
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.heroActions,
+.heroPills,
+.recommendations,
+.filterRow,
+.selectedWrap,
+.modeActions,
+.utilityStats,
+.dashboardStats,
+.resultHero,
+.resultActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.heroAside {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.heroHeader,
+.utilityRow,
+.tableIntro,
+.questionTop,
+.questionFooter,
+.tenseCardTop,
+.sessionCard,
+.overviewRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.heroMiniPanel,
+.utilityCard,
+.trainerSidebar,
+.trainerStage,
+.dashboardCard {
+  border-radius: var(--radius-lg);
+}
+
+.heroMiniPanel {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.heroMiniPanel h3,
+.utilityCard h2,
+.trainerSidebar h2,
+.trainerStage h2,
+.dashboardCard h2 {
+  font-size: clamp(1.35rem, 1.8vw, 1.95rem);
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--navy);
+}
+
+.brandSubline {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.iconButton {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.48);
+  padding: 0.8rem 1rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.themeButton {
+  white-space: nowrap;
+}
+
+.recommendationChip,
+.filterChip,
+.selectedBadge,
+.pickButton,
+.modeCard,
+.optionButton,
+.wordToken {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.recommendationChip,
+.filterChip,
+.selectedBadge {
+  border-radius: 999px;
+  padding: 0.7rem 0.95rem;
+}
+
+.recommendationChipActive,
+.filterChipActive,
+.pickButtonActive,
+.modeCardActive,
+.optionButtonActive {
+  background: var(--navy);
+  color: white;
+  border-color: transparent;
+}
+
+.statPill {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 120px;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.statPill span {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.statPill strong {
+  font-size: 1.15rem;
+}
+
+.utilityRow,
+.trainerLayout,
+.dashboardGrid,
+.resultGrid,
+.placeholderGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.utilityCard,
+.trainerSidebar,
+.trainerStage,
+.dashboardCard {
+  padding: 1.25rem;
+}
+
+.tableIntro {
+  margin-bottom: 1rem;
+  align-items: end;
+}
+
+.filterStack {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.tenseTableWrap {
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+}
+
+.tableDesktop {
+  overflow-x: auto;
+}
+
+.tableMobile {
+  display: none;
+}
+
+.tenseTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1260px;
+}
+
+.tenseTable th,
+.tenseTable td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.9rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.tenseTable th {
+  color: var(--navy);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.tenseTable td strong,
+.tenseCard h3,
+.placeholderCard strong,
+.resultCard strong {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.tenseTable td span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.formCell {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.formCell strong {
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.formCell b {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tableRowActive {
+  background: rgba(20, 58, 82, 0.06);
+}
+
+.pickButton {
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  font-weight: 800;
+}
+
+.trainerLayout {
+  align-items: start;
+}
+
+.trainerSidebar {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.toggleRow {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.toggleRow input {
+  margin-top: 0.2rem;
+}
+
+.modeList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.modeCard {
+  display: grid;
+  gap: 0.35rem;
+  text-align: left;
+  border-radius: 1.1rem;
+  padding: 1rem;
+}
+
+.modeCard span {
+  color: var(--muted);
+}
+
+.tenseMeta dd {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+}
+
+.tenseMeta dd strong {
+  font-size: 0.92rem;
+  color: var(--navy);
+}
+
+.tenseMeta dd span {
+  font-size: 0.92rem;
+}
+
+.tenseMeta dd small {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.modeCardActive span {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.placeholderStage,
+.resultStage,
+.questionStage {
+  display: grid;
+  gap: 1rem;
+}
+
+.placeholderStage {
+  min-height: 520px;
+  align-content: center;
+}
+
+.placeholderCard,
+.resultCard,
+.questionCard,
+.clueBox,
+.feedbackBox,
+.currentMeta,
+.sessionCard {
+  border-radius: 1.1rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.placeholderCard,
+.resultCard,
+.sessionCard {
+  padding: 1rem;
+}
+
+.questionTop {
+  align-items: center;
+}
+
+.progressInfo {
+  min-width: 180px;
+}
+
+.progressBar {
+  margin-top: 0.55rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: rgba(20, 58, 82, 0.1);
+  overflow: hidden;
+}
+
+.progressBarValue {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--gold));
+}
+
+.questionCard {
+  padding: 1.2rem;
+}
+
+.questionPrompt {
+  font-size: 1.03rem;
+  font-weight: 700;
+}
+
+.clueBox,
+.feedbackBox,
+.currentMeta {
+  padding: 1rem;
+}
+
+.clueBox strong,
+.feedbackBox strong,
+.currentMeta strong,
+.resultHero strong,
+.overviewMetric strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.optionsList,
+.wordActions,
+.recentSessions,
+.overviewList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.optionButton,
+.wordToken {
+  text-align: left;
+  border-radius: 1rem;
+  padding: 0.9rem 1rem;
+  font-weight: 700;
+}
+
+.optionButton {
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.wordOrderBox {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.wordResult {
+  border: 1px dashed var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+  min-height: 88px;
+}
+
+.feedbackCorrect {
+  border-color: rgba(31, 141, 104, 0.28);
+  background: rgba(31, 141, 104, 0.12);
+}
+
+.feedbackWrong {
+  border-color: rgba(196, 72, 72, 0.28);
+  background: rgba(196, 72, 72, 0.09);
+}
+
+.resultHero {
+  gap: 1rem;
+}
+
+.resultHero > div {
+  flex: 1;
+  min-width: 120px;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.resultHero strong {
+  font-size: 2rem;
+}
+
+.dashboardCard {
+  display: grid;
+  gap: 1rem;
+}
+
+.sessionCard,
+.overviewRow {
+  align-items: center;
+}
+
+.overviewMetric {
+  min-width: 100px;
+  text-align: right;
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .utilityRow,
+  .trainerLayout,
+  .dashboardGrid,
+  .resultGrid,
+  .placeholderGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tableDesktop {
+    display: none;
+  }
+
+  .tableMobile {
+    display: grid;
+    gap: 0.9rem;
+    padding: 1rem;
+  }
+
+  .tenseCard {
+    border-radius: 1.2rem;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.38);
+    padding: 1rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .tenseCard p {
+    color: var(--muted);
+  }
+
+  .tenseMeta {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .tenseMeta dt {
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--navy);
+    margin-bottom: 0.2rem;
+  }
+
+  .tenseMeta dd {
+    margin: 0;
+  }
+}

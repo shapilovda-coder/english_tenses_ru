@@ -1,0 +1,35 @@
+.footer {
+  padding: 0 0 2rem;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-xl);
+}
+
+.inner p {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  max-width: 55ch;
+}
+
+.links {
+  display: grid;
+  gap: 0.8rem;
+  align-content: center;
+  justify-items: start;
+}
+
+.links a {
+  font-weight: 700;
+  color: var(--navy);
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+}

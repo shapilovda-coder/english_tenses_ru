@@ -1,12 +1,25 @@
 {
   "name": "english_tenses_ru",
-  "version": "1.0.0",
-  "description": "Tense Trainer — Бесплатный тренажер английских времён",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Tense Trainer 2.0 — тренажер английских времен для школьников и начинающих",
   "scripts": {
-    "build": "mkdir -p frontend/build && cp src/index.html frontend/build/",
-    "start": "npx serve frontend/build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "^16.2.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "serve": "^14.2.0"
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "eslint": "^9.38.0",
+    "eslint-config-next": "^16.2.4",
+    "typescript": "^6.0.3"
   }
 }
