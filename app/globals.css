@@ -68,6 +68,33 @@ button {
   cursor: pointer;
 }
 
+button:disabled { cursor: default; opacity: .65; transform: none; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.consent-banner { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); width: min(760px, calc(100% - 2rem)); z-index: 50; background: var(--surface-strong); border: 1px solid var(--line); box-shadow: var(--shadow); border-radius: 1rem; padding: 1rem; display: grid; gap: .8rem; font-size: .9rem; }
+.consent-banner div,.hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+.consent-banner a { text-decoration: underline; }
+.topic-section { border-radius: var(--radius-lg); padding: clamp(1rem, 3vw, 2rem); }
+.topic-section h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); }
+.topic-section h3 { font-size: 1.35rem; margin-top: 1rem; }
+.topic-section p + p { margin-top: .8rem; }
+.topic-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.topic-link { padding: 1.3rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface-strong); display: grid; gap: .5rem; }
+.topic-link:hover { border-color: var(--teal); }
+.topic-link strong { font-size: 1.1rem; }
+.topic-link span { color: var(--muted); }
+.topic-breadcrumbs { display: flex; flex-wrap: wrap; gap: .6rem; padding: 1.3rem 0; font-size: .9rem; color: var(--muted); }
+.topic-title { font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1.08; max-width: 25ch; margin: .8rem 0 1rem; }
+.topic-section a:not(.topic-link) { text-decoration: underline; text-underline-offset: 3px; }
+.rule-table-wrap { overflow-x: auto; }
+.rule-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .95rem; }
+.rule-table th,.rule-table td { text-align: left; vertical-align: top; padding: .85rem; border-bottom: 1px solid var(--line); }
+.rule-table th { color: var(--muted); }
+.faq-item { padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.faq-item summary { cursor: pointer; font-weight: 700; }
+.faq-item p { margin-top: .7rem; }
+@media (max-width: 750px) { .topic-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { transition: none !important; } }
+
 h1,
 h2,
 h3,

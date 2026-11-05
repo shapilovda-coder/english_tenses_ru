@@ -1,9 +1,11 @@
 "use client";
 
-import { startTransition, useEffect, useMemo, useState, useDeferredValue } from "react";
+import { startTransition, useEffect, useMemo, useState, useDeferredValue, useRef, useSyncExternalStore } from "react";
 
 import { tenseFamilies, tenseMap, tensePeriods, tenses } from "@/content/tenses";
 import { applySessionResult, buildQuestionSet, defaultProgress, getOverviewStats, getRecommendedTenses, getAccuracy, shuffle } from "@/lib/trainer";
+import { isCorrectAnswer } from "@/lib/answers";
+import { track } from "@/lib/analytics";
 import { readProgress, saveProgress } from "@/lib/storage";
 import type { ExerciseQuestion, StoredProgress, TrainerSelection, TimePeriod, TenseFamily } from "@/lib/types";
 
@@ -20,37 +22,12 @@ const modeOptions: Array<{
   label: string;
   description: string;
 }> = [
-  { id: "quick", label: "Быстрый старт", description: "5–7 вопросов, чтобы быстро проверить себя." },
-  { id: "standard", label: "Обычная тренировка", description: "12 вопросов, чтобы пройти тему глубже." },
+  { id: "quick", label: "Быстрый старт", description: "6 вопросов, чтобы быстро проверить себя." },
+  { id: "standard", label: "Обычная тренировка", description: "До 12 разных вопросов по выбранным темам." },
   { id: "mixed", label: "Смешанная тренировка", description: "Несколько времен в одной сессии." },
   { id: "weak_spots", label: "Слабые места", description: "Повтор самых частых ошибок." },
-  { id: "tobe_warmup", label: "Разминка To be", description: "Короткий блок перед основной практикой." },
+  { id: "tobe_warmup", label: "Разминка To be", description: "12 вопросов на am/is/are/was/were." },
 ];
-
-const auxiliaryChoices = [
-  "am",
-  "is",
-  "are",
-  "was",
-  "were",
-  "be",
-  "been",
-  "have",
-  "has",
-  "had",
-  "do",
-  "does",
-  "did",
-  "will",
-];
-
-function normalize(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[.?!,;:]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 function answerToLabel(question: ExerciseQuestion) {
   switch (question.kind) {
@@ -71,18 +48,6 @@ function answerToLabel(question: ExerciseQuestion) {
   }
 }
 
-function getCorrectness(question: ExerciseQuestion, value: string) {
-  const normalizedValue = normalize(value);
-  if (question.acceptedAnswers && question.acceptedAnswers.length > 0) {
-    return question.acceptedAnswers.some((answer) => normalize(answer) === normalizedValue);
-  }
-  return normalize(question.answer) === normalizedValue;
-}
-
-function uniqueChoices(items: string[]) {
-  return items.filter((item, index, array) => item && array.indexOf(item) === index);
-}
-
 function getFormExample(
   examples: { en: string; ru: string }[],
   type: "affirmative" | "negative" | "question"
@@ -94,35 +59,6 @@ function getFormExample(
   } as const;
 
   return examples[indexMap[type]] ?? examples[0];
-}
-
-function buildSelectableChoices(question: ExerciseQuestion) {
-  if (question.choices && question.choices.length > 0) {
-    return question.choices;
-  }
-
-  if (question.kind === "fill_blank") {
-    const exact = question.acceptedAnswers?.[0] ?? question.answer;
-    const distractors = auxiliaryChoices
-      .filter((choice) => normalize(choice) !== normalize(exact))
-      .slice(0, 3);
-    return shuffle(uniqueChoices([exact, ...distractors])).slice(0, 4);
-  }
-
-  if (question.kind === "error_correction") {
-    const incorrect = question.incorrect ?? question.prompt;
-    const softVariant = question.answer.replace(/\bnot\b/, "").replace(/\s+/g, " ").trim();
-    return shuffle(uniqueChoices([question.answer, incorrect, softVariant])).slice(0, 3);
-  }
-
-  if (question.kind === "transform") {
-    const source = question.source ?? question.prompt;
-    const inverted =
-      source.endsWith("?") ? source.replace(/\?$/, ".") : `${source}?`;
-    return shuffle(uniqueChoices([question.answer, source, inverted])).slice(0, 3);
-  }
-
-  return undefined;
 }
 
 function StatPill({ label, value }: { label: string; value: string | number }) {
@@ -148,12 +84,25 @@ function ThemeToggle({
   );
 }
 
-export function TrainerApp() {
-  const [progress, setProgress] = useState<StoredProgress>(() => readProgress());
+const subscribeHydration = () => () => {};
+const defaultTenseIds = ["present_simple", "past_simple"];
+
+interface TrainerProps {
+  initialTenseIds?: string[];
+  initialMode?: TrainerSelection["mode"];
+  practiceId?: string;
+  compact?: boolean;
+}
+
+export function TrainerApp({ initialTenseIds = defaultTenseIds, initialMode = "quick", practiceId, compact = false }: TrainerProps) {
+  const hydrated = useSyncExternalStore(subscribeHydration, () => true, () => false);
+  const [storedProgress, setProgress] = useState<StoredProgress>(() => readProgress());
+  const progress = hydrated ? storedProgress : defaultProgress;
   const [selection, setSelection] = useState<TrainerSelection>({
-    selectedTenseIds: ["present_simple", "past_simple"],
-    mode: "quick",
-    includeWarmup: true,
+    selectedTenseIds: initialTenseIds,
+    mode: initialMode,
+    includeWarmup: !compact,
+    practiceId,
   });
   const [familyFilter, setFamilyFilter] = useState<"all" | TenseFamily>("all");
   const [periodFilter, setPeriodFilter] = useState<"all" | TimePeriod>("all");
@@ -162,14 +111,26 @@ export function TrainerApp() {
   const [answers, setAnswers] = useState<Record<string, AnswerState>>({});
   const [wordBank, setWordBank] = useState<Record<string, string[]>>({});
   const [sessionFinished, setSessionFinished] = useState(false);
+  const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const [hints, setHints] = useState<Record<string, boolean>>({});
+  const stageRef = useRef<HTMLDivElement>(null);
+  const finishedRef = useRef(false);
+  const Heading = compact ? "h2" : "h1";
 
   const deferredFamilyFilter = useDeferredValue(familyFilter);
   const deferredPeriodFilter = useDeferredValue(periodFilter);
 
   useEffect(() => {
+    if (!hydrated) return;
     saveProgress(progress);
     document.documentElement.dataset.theme = progress.theme;
-  }, [progress]);
+  }, [progress, hydrated]);
+
+  useEffect(() => {
+    if (!activeQuestions.length) return;
+    stageRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    stageRef.current?.focus({ preventScroll: true });
+  }, [activeQuestions, currentIndex, sessionFinished]);
 
   const filteredTenses = useMemo(() => {
     return tenses.filter((tense) => {
@@ -183,7 +144,7 @@ export function TrainerApp() {
   const recommended = useMemo(() => getRecommendedTenses(progress), [progress]);
   const currentQuestion = activeQuestions[currentIndex] ?? null;
   const currentQuestionOptions = useMemo(
-    () => (currentQuestion ? buildSelectableChoices(currentQuestion) : undefined),
+    () => (currentQuestion?.choices ? shuffle(currentQuestion.choices) : undefined),
     [currentQuestion]
   );
   const selectedStats = useMemo(() => {
@@ -249,6 +210,10 @@ export function TrainerApp() {
     setActiveQuestions(nextQuestions);
     setCurrentIndex(0);
     setAnswers({});
+    setDrafts({});
+    setHints({});
+    finishedRef.current = false;
+    track("training_start", { mode, topic: practiceId ?? initialTenseIds.join(","), questions: nextQuestions.length });
     setWordBank(
       Object.fromEntries(
         nextQuestions
@@ -260,6 +225,8 @@ export function TrainerApp() {
   }
 
   function saveSessionAndFinish() {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
     const completed = activeQuestions
       .filter((question) => answers[question.id])
       .map((question) => ({
@@ -270,15 +237,17 @@ export function TrainerApp() {
     const nextProgress = applySessionResult(progress, selection, completed);
     setProgress(nextProgress);
     setSessionFinished(true);
+    track("training_complete", { mode: selection.mode, questions: completed.length, correct: completed.filter((item) => item.correct).length });
   }
 
   function commitAnswer(value: string) {
-    if (!currentQuestion) return;
+    if (!currentQuestion || !value.trim() || answers[currentQuestion.id]) return;
 
-    const correct = getCorrectness(currentQuestion, value);
+    const correct = isCorrectAnswer(currentQuestion, value);
+    track("answer_submit", { kind: currentQuestion.kind, tense: currentQuestion.tenseId, correct: Number(correct), hint: Number(Boolean(hints[currentQuestion.id])) });
     setAnswers((previous) => ({
       ...previous,
-      [currentQuestion.id]: {
+      [currentQuestion.id]: previous[currentQuestion.id] ?? {
         questionId: currentQuestion.id,
         value,
         correct,
@@ -303,6 +272,7 @@ export function TrainerApp() {
   }
 
   function moveWord(questionId: string, word: string) {
+    if (answers[questionId]) return;
     setWordBank((previous) => {
       const current = previous[questionId] ?? [];
       const index = current.findIndex((item) => item === word);
@@ -312,48 +282,29 @@ export function TrainerApp() {
       return { ...previous, [questionId]: next };
     });
 
-    setAnswers((previous) => {
-      const existing = previous[questionId]?.value ?? "";
-      const nextValue = `${existing} ${word}`.trim();
-      const question = activeQuestions.find((item) => item.id === questionId);
-      if (!question) return previous;
-
-      return {
-        ...previous,
-        [questionId]: {
-          questionId,
-          value: nextValue,
-          correct: getCorrectness(question, nextValue),
-        },
-      };
-    });
+    setDrafts((previous) => ({ ...previous, [questionId]: `${previous[questionId] ?? ""} ${word}`.trim() }));
   }
 
   function resetWordOrder(questionId: string) {
     const question = activeQuestions.find((item) => item.id === questionId);
-    if (!question?.words) return;
+    if (!question?.words || answers[questionId]) return;
     setWordBank((previous) => ({ ...previous, [questionId]: shuffle(question.words ?? []) }));
-    setAnswers((previous) => {
-      const next = { ...previous };
-      delete next[questionId];
-      return next;
-    });
+    setDrafts((previous) => ({ ...previous, [questionId]: "" }));
   }
 
   return (
     <div className={styles.page}>
-      <section className={`${styles.hero} glass`}>
+      <section className={`${styles.hero} ${compact ? styles.compactHero : ""} glass`}>
         <div className={styles.heroText}>
-          <span className="eyebrow">12 времен в одной понятной системе</span>
-          <h1>Английские времена: таблица и тренажёр</h1>
+          <span className="eyebrow">{compact ? "Практика с проверкой" : "12 времён в одной понятной системе"}</span>
+          <Heading>{compact ? "Проверь себя на упражнениях" : "Английские времена: таблица и тренажёр"}</Heading>
           <p>
-            Одна страница, где можно увидеть формы `+ / - / ?`, выбрать несколько времён и проверить себя без
-            длинного печатания.
+            Выбери тему, пройди короткую тренировку и разбери ошибки. Результат сохраняется в этом браузере; регистрация не нужна.
           </p>
 
           <div className={styles.heroActions}>
-            <button className="button button-primary" onClick={() => startSession("quick")} type="button">
-              Начать быстрый тест
+            <button className="button button-primary" onClick={() => startSession(initialMode === "tobe_warmup" ? "tobe_warmup" : "quick")} type="button">
+              {compact ? "Начать тренировку" : "Начать быстрый тест"}
             </button>
             <button
               className="button button-outline"
@@ -371,7 +322,7 @@ export function TrainerApp() {
           </div>
         </div>
 
-        <div className={styles.heroAside}>
+        {!compact ? <div className={styles.heroAside}>
           <div className={styles.heroHeader}>
             <div>
               <div className={styles.brand}>временаванглийском.рф</div>
@@ -400,17 +351,17 @@ export function TrainerApp() {
               Взять рекомендованный набор
             </button>
           </div>
-        </div>
+        </div> : null}
       </section>
 
+      {!compact ? <>
       <section className="section">
         <div className={styles.utilityRow}>
           <div className={`${styles.utilityCard} glass`}>
             <span className="eyebrow">Как пользоваться</span>
             <h2>Сначала смотри таблицу, потом тренируй выбранные времена</h2>
             <p>
-              Главное отличие этой версии: не нужно уходить на десятки страниц. Таблица, теория, выбор тем и
-              сама тренировка собраны в одном рабочем экране.
+              Начни с привычек и действий сейчас, затем переходи к прошлому и сравнению времён. В короткой сессии удобно увидеть, какое правило ещё нужно повторить.
             </p>
           </div>
 
@@ -586,6 +537,8 @@ export function TrainerApp() {
         </div>
       </section>
 
+      </> : null}
+
       <section className="section" id="trainer-zone">
         <div className={styles.trainerLayout}>
           <div className={`${styles.trainerSidebar} glass`}>
@@ -643,7 +596,7 @@ export function TrainerApp() {
             </div>
           </div>
 
-          <div className={`${styles.trainerStage} glass`}>
+          <div ref={stageRef} tabIndex={-1} aria-label="Тренировка" className={`${styles.trainerStage} glass`}>
             {!currentQuestion && !sessionFinished ? (
               <div className={styles.placeholderStage}>
                 <span className="eyebrow">Готов к запуску</span>
@@ -695,11 +648,15 @@ export function TrainerApp() {
                         : currentQuestion.prompt}
                   </p>
 
-                  <div className={styles.clueBox}>
-                    <strong>Подсказка</strong>
-                    <p>{currentQuestion.clue}</p>
-                    <p className="muted">Опорная формула: {currentQuestion.pattern}</p>
-                  </div>
+                  {hints[currentQuestion.id] || answers[currentQuestion.id] ? (
+                    <div className={styles.clueBox}>
+                      <strong>{answers[currentQuestion.id] ? "Разбор правила" : "Подсказка"}</strong>
+                      <p>{currentQuestion.clue}</p>
+                    </div>
+                  ) : <button className="button button-outline" type="button" onClick={() => {
+                    setHints((previous) => ({ ...previous, [currentQuestion.id]: true }));
+                    track("hint_open", { tense: currentQuestion.tenseId });
+                  }}>Показать подсказку</button>}
 
                   {currentQuestionOptions ? (
                     <div className={styles.optionsList}>
@@ -710,6 +667,7 @@ export function TrainerApp() {
                             key={choice}
                             className={`${styles.optionButton} ${active ? styles.optionButtonActive : ""}`}
                             onClick={() => commitAnswer(choice)}
+                            disabled={Boolean(answers[currentQuestion.id])}
                             type="button"
                           >
                             {choice}
@@ -723,7 +681,7 @@ export function TrainerApp() {
                     <div className={styles.wordOrderBox}>
                       <div className={styles.wordResult}>
                         <strong>Твоя версия:</strong>
-                        <p>{answers[currentQuestion.id]?.value || "Пока пусто"}</p>
+                        <p>{drafts[currentQuestion.id] || "Пока пусто"}</p>
                       </div>
                       <div className={styles.wordActions}>
                         {(wordBank[currentQuestion.id] ?? []).map((word, index) => (
@@ -731,21 +689,37 @@ export function TrainerApp() {
                             key={`${word}-${index}`}
                             className={styles.wordToken}
                             onClick={() => moveWord(currentQuestion.id, word)}
+                            disabled={Boolean(answers[currentQuestion.id])}
                             type="button"
                           >
                             {word}
                           </button>
                         ))}
                       </div>
-                      <button className="button button-outline" onClick={() => resetWordOrder(currentQuestion.id)} type="button">
+                      <button className="button button-outline" onClick={() => resetWordOrder(currentQuestion.id)} disabled={Boolean(answers[currentQuestion.id])} type="button">
                         Сбросить порядок
                       </button>
                     </div>
                   ) : null}
 
+                  {!currentQuestionOptions && currentQuestion.kind !== "word_order" ? (
+                    <form onSubmit={(event) => { event.preventDefault(); commitAnswer(drafts[currentQuestion.id] ?? ""); }} className={styles.answerForm}>
+                      <label htmlFor="answer-input">{currentQuestion.kind === "fill_blank" ? "Пропущенная форма" : "Предложение целиком"}</label>
+                      <input id="answer-input" autoComplete="off" autoCapitalize="off" spellCheck={false}
+                        value={drafts[currentQuestion.id] ?? ""} disabled={Boolean(answers[currentQuestion.id])}
+                        onChange={(event) => setDrafts((previous) => ({ ...previous, [currentQuestion.id]: event.target.value }))}
+                        placeholder={currentQuestion.kind === "fill_blank" ? "Впиши пропуск" : "Напиши полную форму предложения"} />
+                      <button className="button button-primary" type="submit" disabled={Boolean(answers[currentQuestion.id]) || !drafts[currentQuestion.id]?.trim()}>Проверить ответ</button>
+                    </form>
+                  ) : null}
+                  {currentQuestion.kind === "word_order" && !answers[currentQuestion.id] ? (
+                    <button className="button button-primary" type="button" disabled={(wordBank[currentQuestion.id]?.length ?? 0) > 0}
+                      onClick={() => commitAnswer(drafts[currentQuestion.id] ?? "")}>Проверить предложение</button>
+                  ) : null}
+
                   {answers[currentQuestion.id] ? (
                     <div
-                      className={`${styles.feedbackBox} ${
+                      role="status" aria-live="polite" className={`${styles.feedbackBox} ${
                         answers[currentQuestion.id].correct ? styles.feedbackCorrect : styles.feedbackWrong
                       }`}
                     >
@@ -756,7 +730,7 @@ export function TrainerApp() {
                           : `Правильный ответ: ${currentQuestion.answer}`}
                       </p>
                       <p className="muted">
-                        Пример: {currentQuestion.example.en} — {currentQuestion.example.ru}
+                        Пример: {currentQuestion.example.en}
                       </p>
                     </div>
                   ) : null}
@@ -789,7 +763,7 @@ export function TrainerApp() {
                 <div className={styles.resultHero}>
                   <div>
                     <strong>{sessionSummary.accuracy}%</strong>
-                    <span>точность за сессию</span>
+                    <span>точность с первой попытки</span>
                   </div>
                   <div>
                     <strong>{sessionSummary.correct}</strong>
@@ -804,7 +778,7 @@ export function TrainerApp() {
                 <div className={styles.resultGrid}>
                   <div className={styles.resultCard}>
                     <strong>Какие времена были в сессии</strong>
-                    <p>{selection.selectedTenseIds.map((tenseId) => tenseMap[tenseId]?.nameRu).join(", ") || "Разминка To be"}</p>
+                    <p>{selection.mode === "tobe_warmup" ? "Разминка To be" : [...new Set(activeQuestions.filter((q) => q.tenseId !== "tobe_warmup").map((q) => q.tenseName))].join(", ")}</p>
                   </div>
                   <div className={styles.resultCard}>
                     <strong>Что повторить дальше</strong>

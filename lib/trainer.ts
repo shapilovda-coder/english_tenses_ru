@@ -1,5 +1,6 @@
 import { tenseMap, tenses } from "@/content/tenses";
 import { toBeWarmupQuestions } from "@/content/tobe-warmup";
+import { comparisonPractice } from "@/content/practice";
 import type {
   ExerciseQuestion,
   ExerciseTemplate,
@@ -35,7 +36,7 @@ export function shuffle<T>(items: T[]) {
 }
 
 export function clampSelectedTenses(selectedTenseIds: string[]) {
-  return selectedTenseIds.slice(0, MAX_SELECTED);
+  return [...new Set(selectedTenseIds)].filter((id) => tenseMap[id]).slice(0, MAX_SELECTED);
 }
 
 function templateToQuestion(tense: TenseDefinition, template: ExerciseTemplate, seed: number): ExerciseQuestion {
@@ -44,12 +45,8 @@ function templateToQuestion(tense: TenseDefinition, template: ExerciseTemplate, 
     tenseId: tense.id,
     tenseName: tense.nameRu,
     kind: template.kind,
-    prompt:
-      template.kind === "error_correction"
-        ? template.incorrect
-        : template.kind === "transform"
-          ? template.source
-          : template.prompt,
+    prompt: template.prompt,
+    instruction: template.prompt,
     clue: template.clue,
     pattern: template.pattern,
     example: tense.examples[seed % tense.examples.length],
@@ -68,16 +65,6 @@ function templateToQuestion(tense: TenseDefinition, template: ExerciseTemplate, 
   };
 }
 
-function selectTemplates(tense: TenseDefinition, count: number) {
-  const pool = shuffle(tense.exerciseTemplates);
-  const questions: ExerciseQuestion[] = [];
-  for (let index = 0; index < count; index += 1) {
-    const template = pool[index % pool.length];
-    questions.push(templateToQuestion(tense, template, index));
-  }
-  return questions;
-}
-
 function getWeakPatterns(progress: StoredProgress, tenseIds: string[]) {
   return tenseIds
     .flatMap((tenseId) => {
@@ -93,43 +80,34 @@ function getWeakPatterns(progress: StoredProgress, tenseIds: string[]) {
 }
 
 export function buildQuestionSet(selection: TrainerSelection, progress: StoredProgress) {
+  if (selection.mode === "tobe_warmup") return shuffle(toBeWarmupQuestions).slice(0, 12);
+
   const selected = clampSelectedTenses(selection.selectedTenseIds);
-  const activeTenses =
-    selection.mode === "weak_spots"
-      ? getWeakPatterns(progress, tenses.map((tense) => tense.id))
-          .map((item) => item.tenseId)
-          .filter((value, index, array) => array.indexOf(value) === index)
-          .slice(0, MAX_SELECTED)
-      : selected;
+  const active = selected.length ? selected : ["present_simple", "past_simple"];
+  const limit = selection.mode === "quick" ? 6 : selection.mode === "standard" ? 12 : selection.mode === "weak_spots" ? 8 : 10;
+  const allQuestions = tenses.flatMap((tense) => tense.exerciseTemplates.map((template, index) => templateToQuestion(tense, template, index)));
+  const topicPool = comparisonPractice[selection.practiceId ?? ""];
+  let pool = topicPool ?? allQuestions.filter((q) => active.includes(q.tenseId));
 
-  const fallbackTenses = activeTenses.length > 0 ? activeTenses : ["present_simple", "past_simple"];
-  const questionsPerTense =
-    selection.mode === "quick" || selection.mode === "tobe_warmup"
-      ? 2
-      : selection.mode === "standard"
-        ? 3
-        : 2;
+  if (selection.mode === "weak_spots") {
+    const weak = getWeakPatterns(progress, tenses.map((tense) => tense.id)).filter((item) => item.count > 0);
+    const matches = [...allQuestions, ...Object.values(comparisonPractice).flat()].filter((q) =>
+      weak.some((item) => item.tenseId === q.tenseId && item.pattern === q.pattern));
+    if (matches.length) pool = matches;
+    return shuffle(pool).slice(0, limit);
+  }
 
-  const generated = fallbackTenses.flatMap((tenseId) =>
-    selectTemplates(tenseMap[tenseId], questionsPerTense)
-  );
-
-  const withWarmup = selection.includeWarmup
-    ? [...shuffle(toBeWarmupQuestions).slice(0, 2), ...generated]
-    : generated;
-
-  const limit =
-    selection.mode === "quick"
-      ? 6
-      : selection.mode === "standard"
-        ? 12
-        : selection.mode === "weak_spots"
-          ? 8
-          : selection.mode === "tobe_warmup"
-            ? 4
-            : 10;
-
-  return shuffle(withWarmup).slice(0, limit);
+  const warmup = selection.includeWarmup && !topicPool ? shuffle(toBeWarmupQuestions).slice(0, 2) : [];
+  // Round-robin avoids dropping a selected tense from a short mixed session.
+  const groups = active.map((id) => shuffle(pool.filter((q) => q.tenseId === id)));
+  const chosen: ExerciseQuestion[] = [];
+  while (chosen.length < limit - warmup.length && groups.some((group) => group.length)) {
+    for (const group of groups) {
+      const question = group.pop();
+      if (question && chosen.length < limit - warmup.length) chosen.push(question);
+    }
+  }
+  return [...warmup, ...shuffle(chosen)];
 }
 
 export function getAccuracy(correct: number, attempted: number) {
@@ -138,7 +116,8 @@ export function getAccuracy(correct: number, attempted: number) {
 }
 
 export function getTodayDateKey() {
-  return new Date().toISOString().slice(0, 10);
+  const date = new Date();
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
 function updateStreak(progress: StoredProgress) {
@@ -190,10 +169,6 @@ export function applySessionResult(
   const weakPatterns = new Set<string>();
 
   answers.forEach(({ question, correct }) => {
-    if (question.tenseId === "tobe_warmup") {
-      return;
-    }
-
     const tenseProgress = ensureTenseProgress(next, question.tenseId);
     tenseProgress.attempted += 1;
     next.totalQuestions += 1;
@@ -202,16 +177,19 @@ export function applySessionResult(
       tenseProgress.correct += 1;
       next.totalCorrect += 1;
       totalCorrectInSession += 1;
+      if (tenseProgress.mistakes[question.pattern]) {
+        tenseProgress.mistakes[question.pattern] = Math.max(0, tenseProgress.mistakes[question.pattern] - 1);
+      }
     } else {
       tenseProgress.mistakes[question.pattern] = (tenseProgress.mistakes[question.pattern] ?? 0) + 1;
       weakPatterns.add(question.pattern);
     }
   });
 
-  const selectedTenseIds = clampSelectedTenses(selection.selectedTenseIds);
+  const selectedTenseIds = [...new Set(answers.map(({question}) => question.tenseId))].filter((id) => id !== "tobe_warmup");
   next.lastPracticedTenseIds = selectedTenseIds;
 
-  const attempted = answers.filter((answer) => answer.question.tenseId !== "tobe_warmup").length;
+  const attempted = answers.length;
   const session: SessionResult = {
     id: `${Date.now()}`,
     date: new Date().toISOString(),
@@ -245,7 +223,7 @@ export function getOverviewStats(progress: StoredProgress) {
       attempted: stat?.attempted ?? 0,
       accuracy: getAccuracy(stat?.correct ?? 0, stat?.attempted ?? 0),
       weakPattern:
-        Object.entries(stat?.mistakes ?? {}).sort((left, right) => right[1] - left[1])[0]?.[0] ??
+        Object.entries(stat?.mistakes ?? {}).filter(([, count]) => count > 0).sort((left, right) => right[1] - left[1])[0]?.[0] ??
         null,
     };
   });

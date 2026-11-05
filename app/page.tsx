@@ -1,4 +1,6 @@
 import { SiteFooter } from "@/components/site-footer";
+import { SiteNav } from "@/components/site-nav";
+import { TopicLinks } from "@/components/topic-links";
 import { TrainerApp } from "@/components/trainer-app";
 
 const faqSchema = {
@@ -52,6 +54,8 @@ const appSchema = {
   },
 };
 
+export const metadata = { alternates: { canonical: "/" } };
+
 export default function HomePage() {
   return (
     <>
@@ -65,8 +69,17 @@ export default function HomePage() {
       />
       <main>
         <div className="shell">
+          <SiteNav />
           <TrainerApp />
         </div>
+
+        <section className="section">
+          <div className="shell topic-section glass">
+            <h2>Упражнения по темам</h2>
+            <p className="muted" style={{ margin: "1rem 0" }}>Начни с одного времени или выбери смешанную практику на разницу между ними.</p>
+            <TopicLinks />
+          </div>
+        </section>
 
         <section className="section">
           <div className="shell">
@@ -78,7 +91,7 @@ export default function HomePage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "1.1fr 0.9fr",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
                   gap: "1rem",
                   marginTop: "1rem",
                 }}
@@ -101,8 +114,7 @@ export default function HomePage() {
                     закреплять его в практике.
                   </p>
                   <p className="muted">
-                    Для SEO это тоже полезно: поисковик видит на странице не только интерфейс, но и настоящий
-                    учебный контент — таблицу, объяснения, FAQ и упражнения.
+                    Подсказка доступна по запросу. После ответа можно увидеть объяснение, а точность сохраняется по первой попытке — так проще заметить, какое правило пока не закрепилось.
                   </p>
                 </div>
               </div>
@@ -110,6 +122,9 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="section"><div className="shell topic-section glass"><h2>Вопросы о тренажёре</h2>
+          {faqSchema.mainEntity.map((item) => <details className="faq-item" key={item.name}><summary>{item.name}</summary><p>{item.acceptedAnswer.text}</p></details>)}
+        </div></section>
         <SiteFooter />
       </main>
     </>
