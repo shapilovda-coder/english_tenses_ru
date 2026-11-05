@@ -46,7 +46,7 @@ export default async function TopicPage({ params }: { params: Promise<{ slug: st
         <h1 className="topic-title">{topic.heading}</h1>
         <p>{topic.intro}</p>
       </header>
-      <TrainerApp initialTenseIds={topic.tenseIds} initialMode={topic.mode} practiceId={topic.practiceId} compact />
+      <TrainerApp key={topic.slug} initialTenseIds={topic.tenseIds} initialMode={topic.mode} practiceId={topic.practiceId} compact />
       <section className="topic-section glass section" aria-labelledby="short-rule">
         <h2 id="short-rule">Правило перед следующей попыткой</h2>
         {topic.rules.map((rule) => <div key={rule.heading}><h3>{rule.heading}</h3><p>{rule.text}</p></div>)}
