@@ -50,3 +50,23 @@ export const toBeWarmupQuestions: ExerciseQuestion[] = [
     acceptedAnswers: ["were"],
   },
 ];
+
+const moreToBe: [string, string, string[], string][] = [
+  ["You ___ my best friend.", "are", ["am", "are", "is"], "После you в настоящем времени используем are."],
+  ["He ___ not at school today.", "is", ["is", "am", "are"], "После he в настоящем времени используем is."],
+  ["___ she your teacher?", "Is", ["Am", "Is", "Are"], "В вопросе ставим Is перед she."],
+  ["___ you ready for the test?", "Are", ["Is", "Am", "Are"], "В вопросе с you используем Are."],
+  ["My parents ___ at home now.", "are", ["is", "are", "am"], "My parents — множественное число: are."],
+  ["It ___ cold yesterday.", "was", ["is", "was", "were"], "После it в прошлом времени используем was."],
+  ["You ___ late yesterday.", "were", ["was", "are", "were"], "После you в прошлом времени используем were."],
+  ["___ they at the park last Sunday?", "Were", ["Was", "Were", "Are"], "В вопросе о прошлом с they используем Were."],
+  ["She ___ not at the party last night.", "was", ["were", "was", "is"], "После she в прошлом времени используем was."],
+  ["We ___ in the same class last year.", "were", ["was", "were", "are"], "После we в прошлом времени используем were."],
+  ["___ he tired after the match yesterday?", "Was", ["Did", "Was", "Were"], "С be в вопросе не нужен did: Was he tired?"],
+  ["I ___ not hungry right now.", "am", ["is", "are", "am"], "После I в настоящем времени используем am."],
+];
+toBeWarmupQuestions.push(...moreToBe.map(([prompt, answer, choices, clue], index): ExerciseQuestion => ({
+  id: `tobe-extra-${index}`, tenseId: "tobe_warmup", tenseName: "To be: am, is, are, was, were",
+  kind: "multiple_choice", prompt, answer, choices, clue, pattern: clue,
+  example: { en: prompt.replace("___", answer), ru: clue },
+})));

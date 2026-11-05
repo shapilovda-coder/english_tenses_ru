@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 export const metadata = {
+  alternates: { canonical: "/contacts/" },
   title: "Контакты | Tense Trainer",
   description: "Контакты проекта Tense Trainer.",
 };
@@ -6,6 +9,7 @@ export const metadata = {
 export default function ContactsPage() {
   return (
     <main className="shell section">
+      <nav className="topic-breadcrumbs"><Link href="/">← К таблице и тренажёру</Link></nav>
       <div className="glass" style={{ borderRadius: "var(--radius-xl)", padding: "1.4rem" }}>
         <span className="eyebrow">Contacts</span>
         <h1 style={{ fontSize: "clamp(2rem, 4vw, 4rem)", marginTop: "0.8rem" }}>Контакты</h1>

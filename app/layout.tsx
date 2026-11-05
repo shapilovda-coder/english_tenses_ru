@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope, Source_Serif_4 } from "next/font/google";
 
 import "./globals.css";
+import { Analytics } from "@/components/analytics";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -19,6 +20,7 @@ const description =
   "Тренажер английских времен для школьников и начинающих: 12 времен в одной таблице, упражнения, смешанные тренировки и понятные подсказки.";
 
 export const metadata: Metadata = {
+  verification: { yandex: "95ee14007660b878" },
   metadataBase: new URL(siteUrl),
   title,
   description,
@@ -32,9 +34,6 @@ export const metadata: Metadata = {
     "present perfect",
     "past simple"
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title,
     description,
@@ -75,6 +74,7 @@ export default function RootLayout({
     <html lang="ru" suppressHydrationWarning>
       <body className={`${manrope.variable} ${sourceSerif.variable}`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );

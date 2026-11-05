@@ -109,6 +109,7 @@ export interface ExerciseQuestion {
   incorrect?: string;
   answer: string;
   acceptedAnswers?: string[];
+  instruction?: string;
 }
 
 export interface SessionResult {
@@ -144,4 +145,5 @@ export interface TrainerSelection {
   selectedTenseIds: string[];
   mode: "quick" | "standard" | "mixed" | "weak_spots" | "tobe_warmup";
   includeWarmup: boolean;
+  practiceId?: string;
 }

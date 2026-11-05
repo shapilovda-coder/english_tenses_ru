@@ -9,14 +9,15 @@ export function SiteFooter() {
         <div className={`${styles.inner} glass`}>
           <div>
             <span className="eyebrow">Tense Trainer 2.0</span>
-            <h2>Один экран, где можно и понять правило, и сразу себя проверить</h2>
+            <h2>Понятное правило и практика — шаг за шагом</h2>
             <p>
-              Проект сделан как быстрый учебный инструмент: без аккаунтов, без лишней рекламы и без беготни по
-              десяткам страниц.
+              Короткие тренировки по английским временам. Выбирай тему, разбирай ошибки и возвращайся к практике в удобном темпе.
             </p>
           </div>
 
           <div className={styles.links}>
+            <Link href="/">Таблица всех времён</Link>
+            <Link href="/present-simple-vs-present-continuous/">Сравнение времён</Link>
             <Link href="/privacy">Политика конфиденциальности</Link>
             <Link href="/contacts">Контакты</Link>
             <a href="tel:+79055529581">+7 (905) 552-95-81</a>

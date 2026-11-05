@@ -1,6 +1,7 @@
 import type { TenseDefinition } from "@/lib/types";
+import { extraTemplates } from "@/content/practice";
 
-export const tenses: TenseDefinition[] = [
+const baseTenses: TenseDefinition[] = [
   {
     id: "present_simple",
     nameRu: "Present Simple",
@@ -350,6 +351,11 @@ export const tenses: TenseDefinition[] = [
     ],
   },
 ];
+
+export const tenses: TenseDefinition[] = baseTenses.map((tense) => ({
+  ...tense,
+  exerciseTemplates: [...tense.exerciseTemplates, ...(extraTemplates[tense.id] ?? [])],
+}));
 
 export const tenseMap = Object.fromEntries(tenses.map((tense) => [tense.id, tense]));
 

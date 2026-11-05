@@ -2,6 +2,15 @@
   padding: 1rem 0 4rem;
 }
 
+.hero.compactHero { grid-template-columns: 1fr; }
+.compactHero h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.trainerStage { scroll-margin-top: 1rem; }
+.trainerStage:focus { outline: 2px solid var(--teal); outline-offset: 4px; }
+.answerForm { display: grid; gap: .8rem; }
+.answerForm input { min-width: 0; width: 100%; padding: .9rem; border: 1px solid var(--line); border-radius: .75rem; color: var(--text); background: var(--surface-strong); }
+.answerForm label { font-weight: 700; }
+.answerForm button { justify-self: start; }
+
 .hero {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
